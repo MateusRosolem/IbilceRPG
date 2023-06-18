@@ -65,6 +65,8 @@ public class FXMapaController {
             imprimirTexto("-Vocês podem lutar com todas as suas armas físicas, mas eu domino o mundo digital. Cada " +
                     "linha de código que escrevo é um obstáculo intransponível para vocês, presos em um labirinto virtual de vulnerabilidades.");
        // CombatManager combate = new CombatManager();
+
+        //oi
     }
 
     public void imprimirTexto(String texto){
