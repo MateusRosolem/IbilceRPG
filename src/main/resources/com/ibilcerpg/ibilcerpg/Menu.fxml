@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.effect.Lighting?>
+<?import javafx.scene.effect.Shadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="930.0" style="-fx-background-color: black;" styleClass="bodybg2" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ibilcerpg.ibilcerpg.Controllers.FXController">
+   <AnchorPane layoutX="288.0" layoutY="14.0" prefHeight="200.0" prefWidth="200.0">
+      <ImageView fitHeight="213.0" fitWidth="392.0" layoutX="-14.0" pickOnBounds="true" preserveRatio="true">
+         <Image url="@../../../images/logojogo.jpg" />
+      </ImageView>
+   </AnchorPane>
+   <VBox alignment="CENTER" layoutX="451.0" prefHeight="540.0" prefWidth="930.0" spacing="40.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="200.0">
+      <Button fx:id="jogarButton" alignment="CENTER" blendMode="HARD_LIGHT" contentDisplay="CENTER" depthTest="ENABLE" mnemonicParsing="false" onAction="#jogarButtonClick" pickOnBounds="false" prefHeight="80.0" prefWidth="240.0" text="JOGAR" textAlignment="CENTER" textFill="WHITE" textOverrun="WORD_ELLIPSIS">
+         <font>
+            <Font name="8-bit HUD Regular" size="13.0" />
+         </font>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <effect>
+            <Lighting diffuseConstant="1.03" specularConstant="0.13" specularExponent="6.79" surfaceScale="3.15">
+               <bumpInput>
+                  <Shadow />
+               </bumpInput>
+            </Lighting>
+         </effect>
+      </Button>
+      <Button fx:id="creditosButton" blendMode="HARD_LIGHT" mnemonicParsing="false" onAction="#creditosButtonClick" prefHeight="70.0" prefWidth="170.0" text="CREDITOS" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font name="8-bit HUD Regular" size="11.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <effect>
+            <Lighting>
+               <bumpInput>
+                  <Shadow />
+               </bumpInput>
+            </Lighting>
+         </effect>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </Button>
+      <Button fx:id="sairButton" blendMode="HARD_LIGHT" mnemonicParsing="false" onAction="#sairButtonClick" prefHeight="50.0" prefWidth="120.0" text="Sair" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+         <font>
+            <Font name="8-bit HUD Regular" size="13.0" />
+         </font>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <effect>
+            <Lighting diffuseConstant="0.87" specularConstant="0.36" specularExponent="6.24" surfaceScale="1.77">
+               <bumpInput>
+                  <Shadow />
+               </bumpInput>
+            </Lighting>
+         </effect>
+      </Button>
+   </VBox>
+</AnchorPane>

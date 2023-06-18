@@ -1,0 +1,33 @@
+Finalmente você acordou, aqueles veteranos da física te deram uma boa surra.
+
+Não se preocupe, o DCCE é um lugar seguro para nós, nenhum membro de outro curso pode entrar aqui.
+
+Se você realmente tem a ambição salvar a computação, eu serei seu guia.
+
+Antes de tudo, se você for lutar contra qualquer um, provavelmente vai ser jogado pra cá de novo, escolha seus oponentes com sabedoria e obtenha informação antes de entrar numa briga
+
+Agora quero ver do que você é capaz, tem um grupo de Biólogos se escondendo no arboreto e estão chegando perto demais desse prédio pro meu gosto, lide com eles e venha falar comigo.(missao: derrote 3 Biólogos no arboreto)
+    --Derrote mais x estudantes de Biologia e venha falar comigo--
+
+Excelente, você ja provou que sabe lutar, mas não conseguirá chegar longe de mãos vazias.
+
+Habilidades tem efeitos e ataques poderosos que te ajudam em batalha quando não estão em recarga,
+    -vejo que já encontrou uma, equipe-a no inventário e ela poderá ser útil quando mais precisar- //se ja achou a habilidade
+
+    -Vendo daqui, percebi que seus oponentes usavam um tipo de cura na batalha, por que não investiga o arboreto em busca de uma habilidade?- //se nao achou a habilidade
+    
+        -Deve ser isso que estavam usando para se curar, equipe-a no inventario e poderá ser util em batalha- //quando achar a habilidade
+
+Não se ache ainda, sua jogrnada está só começando, para salvar o curso, você deve derrotar pelo menos um membro de cada curso e se proclamar o campeão do IBILCE
+
+Antes de prosseguir deixe-me lhe devolver seu cartão do RU, você deixou cair quando saiu.
+
+Com ele, você tem acesso a um RU por batalha, que pode curar parte da sua vida quando for necessario.
+
+Porém, esperando uma certa quantidade de turnos, você pode ter acesso à XEPA, que aumenta a capacidade de cura.
+
+Mas tome cuidado, se usar seu RU antes de conseguir a XEPA, não poderá usá-la no mesmo combate.
+
+Agora vá, explore o campus por informação, habilidades e aliados, escolha sabiamente seus adversários, e se não souber como prosseguir, volte aqui e vou te dar uma direção.
+
+    *Não perca a esperança ainda, sempre há uma segunda chance* //quando morrer volta ao DCCE

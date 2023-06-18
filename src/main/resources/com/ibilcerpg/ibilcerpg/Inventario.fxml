@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<AnchorPane prefHeight="540.0" prefWidth="930.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/" fx:controller="com.ibilcerpg.ibilcerpg.Controllers.FXInventarioController">
+    <Button fx:id="voltarButton" alignment="CENTER" blendMode="HARD_LIGHT" layoutX="712.0" layoutY="470.0" mnemonicParsing="false" onAction="#voltarButtonClick" prefHeight="50.0" prefWidth="207.0" style="-fx-background-color: black;" text="SAIR" textFill="WHITE">
+        <font>
+            <Font name="8-bit HUD Regular" size="8.0" />
+        </font><effect>
+         <Lighting diffuseConstant="1.7" specularConstant="1.44" specularExponent="9.36" surfaceScale="0.49">
+            <bumpInput>
+               <Shadow />
+            </bumpInput>
+            <light>
+            </light>
+         </Lighting>
+      </effect></Button>
+    <Button fx:id="equiparButton" alignment="CENTER" layoutX="819.0" layoutY="410.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" style="-fx-background-color: black;" text="EQUIPAR" textFill="WHITE">
+        <font>
+            <Font name="8-bit HUD Regular" size="8.0" />
+        </font>
+        <effect>
+         <Lighting diffuseConstant="1.59" specularConstant="0.85" specularExponent="9.36" surfaceScale="1.13">
+            <bumpInput>
+               <Shadow />
+            </bumpInput>
+            <light>
+               <Light.Distant />
+            </light>
+         </Lighting>
+      </effect></Button>
+    <Button fx:id="desequiparButton" alignment="CENTER" layoutX="712.0" layoutY="410.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" style="-fx-background-color: black;" text="DESEQUIPAR" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+        <font>
+            <Font name="8-bit HUD Regular" size="8.0" />
+        </font><effect>
+         <Lighting diffuseConstant="1.59" specularConstant="0.85" specularExponent="9.36" surfaceScale="1.13">
+            <bumpInput>
+               <Shadow />
+            </bumpInput>
+            <light>
+               <Light.Distant />
+            </light>
+         </Lighting>
+      </effect></Button>
+    <TextArea centerShape="false" depthTest="DISABLE" editable="false" focusTraversable="false" layoutY="400.0" mouseTransparent="true" prefHeight="140.0" prefWidth="700.0" style="-fx-control-inner-background:#000000; -fx-font-family: Consolas; -fx-highlight-fill: #ffffff; -fx-highlight-text-fill: #ffffff; -fx-text-fill: #ffffff; " text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&quot; HP: 540000000 MUITO FORTEEEEE" wrapText="true" />
+    <TextArea focusTraversable="false" layoutX="700.0" layoutY="238.0" mouseTransparent="true" prefHeight="162.0" prefWidth="230.0" style="-fx-control-inner-background:#000000; -fx-font-family: Consolas; -fx-highlight-fill: #ffffff; -fx-highlight-text-fill: #ffffff; -fx-text-fill: #ffffff; " text="hp:20, ataque:45, defesa:70" />
+    <TextArea focusTraversable="false" layoutX="700.0" mouseTransparent="true" prefHeight="238.0" prefWidth="230.0" style="-fx-control-inner-background:#000000; -fx-font-family: Consolas; -fx-highlight-fill: #ffffff; -fx-highlight-text-fill: #ffffff; -fx-text-fill: #ffffff; " text="ITENS EQUIPADOS: BLA BLA BLA" />
+    <TableView minHeight="-Infinity" minWidth="-Infinity" prefHeight="401.0" prefWidth="700.0" style="-fx-background-color: black;" AnchorPane.bottomAnchor="139.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="230.0" AnchorPane.topAnchor="0.0">
+      <columns>
+          <TableColumn prefWidth="344.0000365972519" />
+          <TableColumn prefWidth="354.39990234375" resizable="false" />
+      </columns>
+        <columnResizePolicy>
+          <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+        </columnResizePolicy>
+    </TableView>
+   <Separator layoutY="399.0" prefWidth="930.0" />
+   <Separator layoutX="697.0" orientation="VERTICAL" prefHeight="540.0" />
+</AnchorPane>

@@ -1,0 +1,6 @@
+public class RegistrationInvalid extends RuntimeException{
+    public RegistrationInvalid (String error){
+         super(error);
+          JOptionPane.showMessageDialog(null,error, "Error", JOptionPane.ERROR_MESSAGE);
+    }
+}

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.Lighting?>
+<?import javafx.scene.effect.Shadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="540.0" prefWidth="930.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ibilcerpg.ibilcerpg.Controllers.FXCombateController">
+    <AnchorPane layoutX="364.0" layoutY="78.0" prefHeight="200.0" prefWidth="200.0">
+        <effect>
+            <DropShadow height="36.21" radius="17.8975" width="37.38">
+                <color>
+                    <Color red="1.0" green="1.0" blue="1.0" />
+                </color>
+            </DropShadow>
+        </effect>
+        <ImageView fitHeight="200.0" fitWidth="200.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+            <Image url="@../../../images/AleardoManacero.jpg" />
+        </ImageView>
+    </AnchorPane>
+    <ButtonBar layoutX="-1.0" layoutY="465.0" prefHeight="74.0" prefWidth="930.0">
+      <buttons>
+          <HBox alignment="CENTER" prefHeight="74.0" prefWidth="930.0" spacing="30.0">
+              <Button fx:id="atacarButton" blendMode="HARD_LIGHT" mnemonicParsing="false" onAction="#atacarButtonClick" prefHeight="74.0" prefWidth="200.0" style="-fx-background-color: black;" text="ATACAR" textAlignment="CENTER" textFill="WHITE">
+                  <font>
+                      <Font name="8-bit HUD Regular" size="10.0" />
+                  </font>
+                  <effect>
+                      <Lighting specularConstant="0.86" specularExponent="3.85" surfaceScale="1.59">
+                          <bumpInput>
+                              <Shadow />
+                          </bumpInput>
+                      </Lighting>
+                  </effect></Button>
+              <Button fx:id="defenderButton" blendMode="HARD_LIGHT" mnemonicParsing="false" onAction="#defenderButtonClick" prefHeight="74.0" prefWidth="232.5" style="-fx-background-color: black;" text="DEFENDER" textFill="WHITE">
+                  <font>
+                      <Font name="8-bit HUD Regular" size="10.0" />
+                  </font>
+                  <effect>
+                      <Lighting specularConstant="0.86" specularExponent="3.85" surfaceScale="1.59">
+                          <bumpInput>
+                              <Shadow />
+                          </bumpInput>
+                      </Lighting>
+                  </effect></Button>
+              <Button fx:id="habilidadeButton" blendMode="HARD_LIGHT" mnemonicParsing="false" onAction="#habilidadeButtonClick" prefHeight="74.0" prefWidth="232.5" style="-fx-background-color: black;" text="HABILIDADE" textFill="WHITE">
+                  <font>
+                      <Font name="8-bit HUD Regular" size="10.0" />
+                  </font>
+                  <effect>
+                      <Lighting specularConstant="0.86" specularExponent="3.85" surfaceScale="1.59">
+                          <bumpInput>
+                              <Shadow />
+                          </bumpInput>
+                      </Lighting>
+                  </effect></Button>
+              <Button fx:id="itemButton" blendMode="HARD_LIGHT" mnemonicParsing="false" onAction="#itemButtonClick" prefHeight="74.0" prefWidth="232.5" style="-fx-background-color: black;" text="ITEM" textFill="WHITE">
+                  <font>
+                      <Font name="8-bit HUD Regular" size="10.0" />
+                  </font>
+                  <effect>
+                      <Lighting specularConstant="0.86" specularExponent="3.85" surfaceScale="1.59">
+                          <bumpInput>
+                              <Shadow />
+                          </bumpInput>
+                      </Lighting>
+                  </effect></Button>
+          </HBox>
+      </buttons>
+      <padding>
+         <Insets bottom="10.0" right="10.0" />
+      </padding>
+    </ButtonBar>
+    <ProgressBar fx:id="vidaProgressBar" blendMode="HARD_LIGHT" layoutX="303.0" layoutY="40.0" prefHeight="18.0" prefWidth="322.0" progress="1.0" />
+    <TextArea editable="false" focusTraversable="false" layoutX="14.0" layoutY="307.0" mouseTransparent="true" prefHeight="144.0" prefWidth="590.0" style="-fx-control-inner-background:#000000; -fx-font-family: Consolas; -fx-highlight-fill: #ffffff; -fx-highlight-text-fill: #ffffff; -fx-text-fill: #ffffff; " text="O INIMIGO ALEJANDRO">
+      <font>
+         <Font size="15.0" />
+      </font></TextArea>
+    <TextArea editable="false" layoutX="716.0" layoutY="14.0" mouseTransparent="true" prefHeight="294.0" prefWidth="200.0" style="-fx-control-inner-background:#000000; -fx-font-family: Consolas; -fx-highlight-fill: #ffffff; -fx-highlight-text-fill: #ffffff; -fx-text-fill: #ffffff; " text="VIDA:50                           ATAQUE:100   DEFEA:1203123" wrapText="true">
+      <font>
+         <Font size="15.0" />
+      </font></TextArea>
+</AnchorPane>
