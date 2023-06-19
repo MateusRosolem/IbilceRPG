@@ -19,15 +19,18 @@ public class Save extends Player implements Serializable{
 
 
     //Salvar
-    public static void salvar(Player usuario) {
+    public static void salvar(Player jogador) {
         try {
+            if(jogador==null) jogador = new Player();
+            System.out.println(jogador.getNome());
+
             LocalDateTime dateTime = LocalDateTime.now();
             FileOutputStream fileOut = new FileOutputStream("src/main/resources/Saves/Save.obj");
             ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
             objectOut.writeObject(dateTime);
-            objectOut.writeObject(usuario);
+            objectOut.writeObject(jogador);
 
-            FileInputStream fileStream = new FileInputStream("Save.obj");
+            FileInputStream fileStream = new FileInputStream("src/main/resources/Saves/Save.obj");
             ObjectInputStream objStream = new ObjectInputStream(fileStream);
             System.out.println("data data :" + (LocalDateTime) objStream.readObject());
             System.out.println("usuario data: " + (Player) objStream.readObject());
@@ -47,7 +50,7 @@ public class Save extends Player implements Serializable{
     //abrir save
     public static Player carregarSave() {//mandar pra função qual save que quer abrir como parametro
         try {
-            FileInputStream fileIn = new FileInputStream("Save.obj");
+            FileInputStream fileIn = new FileInputStream("src/main/resources/Saves/Save.obj");
             ObjectInputStream objectIn = new ObjectInputStream(fileIn);
 
             LocalDateTime dateTime = (LocalDateTime) objectIn.readObject();

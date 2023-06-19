@@ -30,7 +30,8 @@ public class FXCombateController {
     public ProgressBar playerVidaProgresBar;
     @FXML
     public TextArea caixaDeTexto;
-
+    @FXML
+    public TextArea caixaStatus;
     @FXML
     public Text vidaInimigo;
 
@@ -52,6 +53,13 @@ public class FXCombateController {
         caixaDeTexto.setText(texto);
     }
 
+    public void imprimirStatus(){
+        caixaStatus.setText("Nome:" + jogador.getNome() + "\nExperiencia:" + jogador.getExperiencia()
+                + "\nNivel:" + jogador.getNivel() + "\nAtaque Base:" + jogador.getAtaqueBase() + "\nDefesa Base:" +
+                jogador.getDefesaBase() + "\nVida Atual:" + jogador.getVidaAtual() + "\ntVida Maxima:" + jogador.getVidaMaxima()
+                + "\nVelocidade:" + jogador.getVelocidade());
+    }
+
     public boolean verificarTurno(){
         if(combate.getTurno())
             return true;
@@ -65,8 +73,9 @@ public class FXCombateController {
     @FXML
     protected void atacarButtonClick(){
         if(verificarTurno()) {
-           // jogador.ataque();
-            vidaProgressBarUpdate(vidaProgressBar);
+            // jogador.ataque();
+            // vidaProgressBarUpdate(vidaProgressBar,dano);
+            imprimirStatus();
         }
 
     }
@@ -74,6 +83,7 @@ public class FXCombateController {
     protected void defenderButtonClick(){
         if(verificarTurno()) {
            // jogador.defesa();
+            imprimirStatus();
         }
 
     }
@@ -81,21 +91,23 @@ public class FXCombateController {
     protected void habilidadeButtonClick(){
         if(verificarTurno()) {
             //jogador.habilidade();
-            vidaProgressBarUpdate(playerVidaProgresBar);
+            //vidaProgressBarUpdate(playerVidaProgresBar,dano);
+            imprimirStatus();
         }
     }
     @FXML
     protected void itemButtonClick(){
         if(verificarTurno()) {
-          //  jogador.item();
-            vidaProgressBarUpdate(playerVidaProgresBar);
-    }
+            //  jogador.item();
+            // vidaProgressBarUpdate(playerVidaProgresBar,);
+            imprimirStatus();
+        }
 
     }
     @FXML
-    protected void vidaProgressBarUpdate(ProgressBar ProgressBar){
-        ProgressBar.setProgress(50);
-        vidaInimigo.setText("sim");
+    protected void vidaProgressBarUpdate(ProgressBar ProgressBar,int dano){
+        ProgressBar.setProgress(ProgressBar.getProgress() - dano);
+        vidaInimigo.setText("VIDA: " + dano + "/20");
     }
 
 }

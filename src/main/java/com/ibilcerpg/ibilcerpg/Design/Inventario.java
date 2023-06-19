@@ -1,11 +1,12 @@
 package com.ibilcerpg.ibilcerpg.Design;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import com.ibilcerpg.ibilcerpg.SuperClasses.*;
 import com.ibilcerpg.ibilcerpg.Objetos.*;
 import com.ibilcerpg.ibilcerpg.Personagens.*;
 import com.ibilcerpg.ibilcerpg.SuperClasses.*;
-public class Inventario {
+public class Inventario implements Serializable {
 
     private ArrayList<Habilidade> habilidades = new ArrayList<Habilidade>();
     private Habilidade habilidadeEquipada;
@@ -43,6 +44,10 @@ public class Inventario {
 
     public Inventario(){
         habilidadeEquipada = null;
+    }
+
+    public ArrayList<Habilidade> getHabilidades() {
+        return habilidades;
     }
 
 }
