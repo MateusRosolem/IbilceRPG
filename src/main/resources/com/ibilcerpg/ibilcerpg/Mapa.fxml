@@ -28,12 +28,9 @@
                 <bumpInput>
                     <Shadow />
                 </bumpInput>
-                <light>
-                    <Light.Distant />
-                </light>
             </Lighting>
         </effect></Button>
-    <Button fx:id="irButton" blendMode="HARD_LIGHT" layoutX="785.0" layoutY="422.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="120.0" style="-fx-background-color: black;" text="Ir" textFill="WHITE">
+    <Button fx:id="irButton" blendMode="HARD_LIGHT" layoutX="785.0" layoutY="422.0" mnemonicParsing="false" onAction="#irButtonClick" prefHeight="45.0" prefWidth="120.0" style="-fx-background-color: black;" text="Ir" textFill="WHITE">
         <font>
             <Font name="8-bit HUD Regular" size="8.0" />
         </font>
@@ -42,9 +39,7 @@
                 <bumpInput>
                     <Shadow />
                 </bumpInput>
-                <light>
-                    <Light.Distant />
-                </light>
+
             </Lighting>
         </effect></Button>
     <Button fx:id="salvarButton" blendMode="HARD_LIGHT" layoutX="644.0" layoutY="471.0" mnemonicParsing="false" onAction="#salvarButtonClick" prefHeight="45.0" prefWidth="120.0" style="-fx-background-color: black;" text="Salvar" textFill="WHITE">

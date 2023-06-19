@@ -1,6 +1,8 @@
 package com.ibilcerpg.ibilcerpg.Controllers;
 
 import com.ibilcerpg.ibilcerpg.Main;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,6 +12,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -33,6 +36,11 @@ public class FXSaveController {
     public Button carregarSaveButton;
     @FXML
     public Button voltarButton;
+
+    @FXML
+    private ObservableList<Pane> list = FXCollections.observableArrayList();;
+
+
 
 
     @FXML
