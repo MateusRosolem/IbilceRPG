@@ -2,6 +2,8 @@ package com.ibilcerpg.ibilcerpg.Controllers;
 
 
 
+import com.ibilcerpg.ibilcerpg.Design.CombatManager;
+import com.ibilcerpg.ibilcerpg.Design.Musica;
 import com.ibilcerpg.ibilcerpg.Main;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -11,10 +13,15 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Objects;
+
+import static com.ibilcerpg.ibilcerpg.Main.jogador;
 
 public class FXMapaController {
 
@@ -43,6 +50,9 @@ public class FXMapaController {
     @FXML
     public Button computeiroButton;
 
+    Object botaoPressionado;
+
+    private Musica musica;
 
 //    public void atualizarStatus(ActionEvent event,Player jogador){
 //        Object oi = event.getSource();
@@ -51,22 +61,19 @@ public class FXMapaController {
 
     public void selectedButton(ActionEvent event){
 
-        Object botao = event.getSource();
-        if(botao.equals(tradutorButton))
+        botaoPressionado = event.getSource();
+        if(botaoPressionado.equals(tradutorButton))
             imprimirTexto("-Vocês podem tentar desvendar os segredos da minha língua, mas enquanto decifram palavras," +
                     " eu decifro suas fraquezas, seus planos e seus destinos");
-        if(botao.equals(matematicoButton))
+        if(botaoPressionado.equals(matematicoButton))
             imprimirTexto("-Eu sou a equação impenetrável que desafia a lógica e a razão. Enquanto vocês tentam " +
                     "resolver-me, eu calculo a derrota de vocês em cada movimento");
-        if(botao.equals(biologoButton))
+        if(botaoPressionado.equals(biologoButton))
             imprimirTexto("-Seus esforços são tão frágeis quanto as células que você estuda. Serei o vírus que " +
                     "infectará cada pensamento seu, destruindo a sua ciência com uma evolução imparável.");
-        if(botao.equals(computeiroButton))
+        if(botaoPressionado.equals(computeiroButton))
             imprimirTexto("-Vocês podem lutar com todas as suas armas físicas, mas eu domino o mundo digital. Cada " +
                     "linha de código que escrevo é um obstáculo intransponível para vocês, presos em um labirinto virtual de vulnerabilidades.");
-       // CombatManager combate = new CombatManager();
-
-        //oi
     }
 
     public void imprimirTexto(String texto){
@@ -75,10 +82,16 @@ public class FXMapaController {
     }
 
 
+    public void setarMusica(Musica musica){
+        this.musica=musica;
+        musica.pararMusica(musica.getMusicaMenu());
+        musica.musicaCombate();
+    }
+
     @FXML
     protected void inventarioClickButton(ActionEvent event) throws IOException {
-        Parent inventario = FXMLLoader.load((Main.class.getResource("Inventario.fxml")));
-        Scene inventarioScene = new Scene(inventario);
+        FXMLLoader inventario = new FXMLLoader(Main.class.getResource("Inventario.fxml"));
+        Scene inventarioScene = new Scene(inventario.load());
 
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(inventarioScene);
@@ -98,14 +111,23 @@ public class FXMapaController {
 
     }
 
+    @FXML
     protected void irButtonClick(ActionEvent event)throws IOException{
-        Parent combate = FXMLLoader.load((Main.class.getResource("Combate.fxml")));
-        Scene combateScene = new Scene(combate);
+
+        //CombatManager combateGame = new CombatManager(Main.jogador,Main.adversario);
+        FXMLLoader combate = new FXMLLoader(Main.class.getResource("Combate.fxml"));
+        Scene combateScene = new Scene(combate.load());
+        //combateGame.iniciarCombate();
 
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(combateScene);
         window.setTitle("Combate");
         window.show();
+
+        FXCombateController cont = combate.getController();
+        if(botaoPressionado==null) cont.setarMusica(musica);
+
+
 
     }
 

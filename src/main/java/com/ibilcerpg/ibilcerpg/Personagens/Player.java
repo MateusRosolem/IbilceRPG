@@ -60,28 +60,21 @@ public class Player extends Personagem {
                 setDebuffDano(1f);
                 break;
             case "3":
-                if(getInventario().getHabilidadeEquipada().getEfeito().getT() == "PASSIVA"){
+                if(getInventario().getHabilidadeEquipada().getEfeito().getT() == "PASSIVA") {
                     System.out.println("A habilidade equipada é passiva, não é necessário ativá-la.");
                     return turnoNoCombate();
-                }else{
-                    if(getInventario().getHabilidadeEquipada().checarTempoDeRecarga()){
+                }
+                if(getInventario().getHabilidadeEquipada().checarTempoDeRecarga()){
                         turno.setV(usarHabilidade());
-                    }else{
+                }else{
                         return turnoNoCombate();
-                    }
+                }
                     turno.setT("HABILIDADE");
                     System.out.println(turno.getT() + ": " + getInventario().getHabilidadeEquipada().getNome());
                     acaoPropria(turno);
                     setDebuffDano(1f);
                     break;
                 }
-
-        }
-
-
-
-
-
         // turno.setT("ITEM");
         // turno.setV("EFEITO");//EFEITO DO ITEM
 

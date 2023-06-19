@@ -1,5 +1,6 @@
 package com.ibilcerpg.ibilcerpg.Controllers;
 
+import com.ibilcerpg.ibilcerpg.Design.Musica;
 import com.ibilcerpg.ibilcerpg.Main;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -21,16 +22,27 @@ public class FXController {
     @FXML
     public Button sairButton;
 
+    private Musica musica;
+
+    public void setarMusica(Musica musica){
+        this.musica=musica;
+        musica.musicaMenu();
+    }
+
 
     @FXML
     protected void jogarButtonClick(ActionEvent event) throws IOException{
-        Parent mapa = FXMLLoader.load((Main.class.getResource("Mapa.fxml")));
-        Scene mapaScene = new Scene(mapa);
+        FXMLLoader mapa = new FXMLLoader(Main.class.getResource("Mapa.fxml"));
+        Scene mapaScene = new Scene(mapa.load());
+
 
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
         window.setScene(mapaScene);
         window.setTitle("Mapa");
         window.show();
+
+        FXMapaController cont = mapa.getController();
+        if (cont!=null)cont.setarMusica(musica);
 
     }
 

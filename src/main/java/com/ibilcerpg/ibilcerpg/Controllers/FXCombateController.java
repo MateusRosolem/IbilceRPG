@@ -1,9 +1,12 @@
 package com.ibilcerpg.ibilcerpg.Controllers;
 
 
+import com.ibilcerpg.ibilcerpg.Design.Musica;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.control.TextArea;
+import javafx.scene.text.Text;
 
 public class FXCombateController {
 
@@ -18,10 +21,30 @@ public class FXCombateController {
     @FXML
     public ProgressBar vidaProgressBar;
 
+    public TextArea caixaDeTexto;
+
     @FXML
-    protected void atacarButtonClick(){}
+    public Text vidaInimigo;
+    private Musica musica;
+
+    public void setarMusica(Musica musica){
+        this.musica=musica;
+        musica.pararMusica(musica.getMusicaMenu());
+        musica.musicaCombate();
+
+    }
+
     @FXML
-    protected void defenderButtonClick(){}
+    protected void atacarButtonClick(){
+//        combateGame().getPlayer().
+//
+//        caixaDeTexto.setText(combateGame.imprimirStatus());
+    }
+    @FXML
+    protected void defenderButtonClick(){
+       // combateGame.
+
+    }
     @FXML
     protected void habilidadeButtonClick(){}
     @FXML

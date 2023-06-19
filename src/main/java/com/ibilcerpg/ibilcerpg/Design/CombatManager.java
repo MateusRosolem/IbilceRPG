@@ -24,7 +24,12 @@ public class CombatManager<T extends Inimigo>{
         return adversario;
     }
 
-    public CombatManager(Player jogador, Biologo adversario) {
+
+    public void imprimirStatus(){
+        System.out.println("Vida do jogador: " + jogador.getVidaAtual());
+        System.out.println("Vida do adversario: " + adversario.getVidaAtual());
+        System.out.println("--------------------------------------------------------------------------------------");
+
     }
 
     public void iniciarCombate(){
@@ -34,9 +39,7 @@ public class CombatManager<T extends Inimigo>{
         }
 
         while(jogador.getVivo() && adversario.getVivo()){
-            System.out.println("Vida do jogador: " + jogador.getVidaAtual());
-            System.out.println("Vida do adversario: " + adversario.getVidaAtual());
-            System.out.println("--------------------------------------------------------------------------------------");
+            imprimirStatus();
 
             if(turno){
                 jogador.ativarHabilidadePassiva();
@@ -64,5 +67,8 @@ public class CombatManager<T extends Inimigo>{
         //retornar ao mapa
     }
 
+    public void atacar(){
+
+    }
 
 }
