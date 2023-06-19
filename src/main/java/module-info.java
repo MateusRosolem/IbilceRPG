@@ -1,6 +1,7 @@
 module com.ibilcerpg.ibilcerpg {
     requires javafx.controls;
     requires javafx.fxml;
+    requires jdk.compiler;
     requires javafx.media;
 
 

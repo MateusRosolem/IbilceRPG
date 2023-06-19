@@ -1,12 +1,17 @@
 package com.ibilcerpg.ibilcerpg.Personagens;
 
-import com.ibilcerpg.ibilcerpg.SuperClasses.Acao;
+import com.ibilcerpg.ibilcerpg.SuperClasses.*;
+import com.ibilcerpg.ibilcerpg.Objetos.*;
+import com.ibilcerpg.ibilcerpg.Design.*;
+import com.ibilcerpg.ibilcerpg.SuperClasses.*;
+
 
 public class Biologo extends Inimigo {
     
     public Biologo(){
         super();
         setNome("Biologo");
+        setTag("BIOLOGO");
     }
 
 

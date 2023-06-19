@@ -1,19 +1,22 @@
 package com.ibilcerpg.ibilcerpg.Design;
 
-import com.ibilcerpg.ibilcerpg.Personagens.Biologo;
-import com.ibilcerpg.ibilcerpg.Personagens.Inimigo;
-import com.ibilcerpg.ibilcerpg.Personagens.Player;
-import com.ibilcerpg.ibilcerpg.SuperClasses.Acao;
 
-public class CombatManager<T extends Inimigo>{
-    public Player jogador;
-    public Inimigo adversario;
+import com.ibilcerpg.ibilcerpg.SuperClasses.*;
+import com.ibilcerpg.ibilcerpg.Objetos.*;
+import com.ibilcerpg.ibilcerpg.Personagens.*;
+import com.ibilcerpg.ibilcerpg.SuperClasses.*;
+
+public class CombatManager{
+    private Player jogador;
+    private Inimigo adversario;
     private boolean turno;
     private Acao<String,Object> acao;
 
-    public CombatManager(Player jogador, T adversario) {
+    public CombatManager(Player jogador, Inimigo adversario) {
         this.jogador = jogador;
         this.adversario = adversario;
+
+        iniciarCombate();
     }
 
     public Player getJogador() {
@@ -29,14 +32,19 @@ public class CombatManager<T extends Inimigo>{
         System.out.println("Vida do jogador: " + jogador.getVidaAtual());
         System.out.println("Vida do adversario: " + adversario.getVidaAtual());
         System.out.println("--------------------------------------------------------------------------------------");
-
     }
+  
 
     public void iniciarCombate(){
-        getJogador().getInventario().getHabilidadeEquipada().reiniciarRecarga();
+        jogador.getInventario().getHabilidadeEquipada().reiniciarRecarga();
         if(jogador.getVelocidade() >= adversario.getVelocidade()){
             turno = true;
         }
+        
+        while(jogador.estaVivo() && adversario.estaVivo()){
+            System.out.println("Vida do jogador: " + jogador.getVidaAtual());
+            System.out.println("Vida do adversario: " + adversario.getVidaAtual());
+            System.out.println("--------------------------------------------------------------------------------------");
 
         while(jogador.getVivo() && adversario.getVivo()){
             imprimirStatus();
@@ -45,8 +53,7 @@ public class CombatManager<T extends Inimigo>{
                 jogador.ativarHabilidadePassiva();
                 acao = jogador.turnoNoCombate();
                 adversario.reacaoInimigo(acao);
-                jogador.getInventario().getHabilidadeEquipada().decrementarRecarga();//diminui o tempo de
-                // recarga da habilidada em 1
+                jogador.getInventario().getHabilidadeEquipada().decrementarRecarga();//diminui o tempo de recarga da habilidada em 1
                 turno = false;
             }else{
                 acao = adversario.turnoNoCombate();
@@ -56,16 +63,21 @@ public class CombatManager<T extends Inimigo>{
         }
         jogador.desativarHabilidadePassiva();
 
-        //SE COLOCAR A OPCAO DE CORRER, TEM QUE MUDAR ESSE IF TAMBEM!!!
         if(jogador.getVivo()){
+            System.out.println("--------------------------------------------------------------------------------------");
             System.out.println("JOGADOR VENCEU!!!");
+            jogador.getInventario().adicionarHabilidade(jogador.getMissoes().completarMissao(jogador.getMissoes().atualizarMissoes(adversario)));
             jogador.receberExperiencia(adversario.getExpRecompensa());
         }else{
             System.out.println("Jogador foi eliminado.");
+            jogador.setVidaAtual(jogador.getVidaMaxima());
+            jogador.setVivo(true);
         }
 
         //retornar ao mapa
     }
+    
+    
 
     public void atacar(){
 

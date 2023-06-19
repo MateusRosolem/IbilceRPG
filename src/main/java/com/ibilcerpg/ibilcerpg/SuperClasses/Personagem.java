@@ -1,12 +1,16 @@
 package com.ibilcerpg.ibilcerpg.SuperClasses;
 
+import com.ibilcerpg.ibilcerpg.Personagens.*;
+import com.ibilcerpg.ibilcerpg.Objetos.*;
+import com.ibilcerpg.ibilcerpg.Design.*;
+import com.ibilcerpg.ibilcerpg.SuperClasses.*;
 
 public class Personagem {
     private String nome;
     private boolean vivo;
     private int vidaMaxima;
     private int vidaAtual;
-    private int ataqueBase = 1;
+    private int ataqueBase;
     private int defesaBase;
     private int velocidade;
     private float multiplicadorAtaque;
@@ -27,7 +31,7 @@ public class Personagem {
     }
 
     public int receberDano(float danoPuro){
-
+        
         float dano = danoPuro - ((Float)(getDefesaBase()*getMultiplicadorDefesa()));
         if(dano < 0 ) dano = 0f;
         setVidaAtual(getVidaAtual()-Math.round(dano));
@@ -44,7 +48,7 @@ public class Personagem {
             System.out.println( getNome() + " foi curado em " + Math.round(cura) + " pontos de vida");
             return Math.round(cura);
         }
-
+        
     }
 
     public boolean estaVivo(){
@@ -60,7 +64,7 @@ public class Personagem {
 
 
 
-
+    
     public void setNome(String nome) {
         this.nome = nome;
     }
