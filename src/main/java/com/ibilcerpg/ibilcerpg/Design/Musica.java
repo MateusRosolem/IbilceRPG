@@ -17,10 +17,7 @@ public class Musica {
         musicaMenu.setAutoPlay(true);
     }
 
-    public void setMusica(Media){
 
-
-    }
     public void pararMusica(MediaPlayer musica){
         musica.pause();
     }

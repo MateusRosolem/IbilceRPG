@@ -73,12 +73,12 @@ public class Player extends Personagem{
                     setDebuffDano(1f);
                     break;
                 }
-            case "4":
-                turno.setT("ITEM");
-                turno.setV("EFEITO");//EFEITO DO ITEM
-
-                acaoPropria(turno);
-        }
+//            case "4":
+//                turno.setT("ITEM");
+//                turno.setV("EFEITO");//EFEITO DO ITEM
+//
+//                acaoPropria(turno);
+//        }
 
             
 
