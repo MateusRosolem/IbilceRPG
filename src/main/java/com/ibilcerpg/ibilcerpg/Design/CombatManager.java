@@ -15,8 +15,25 @@ public class CombatManager{
     public CombatManager(Player jogador, Inimigo adversario) {
         this.jogador = jogador;
         this.adversario = adversario;
+
         iniciarCombate();
     }
+
+    public Player getJogador() {
+        return jogador;
+    }
+
+    public Inimigo getAdversario() {
+        return adversario;
+    }
+
+
+    public void imprimirStatus(){
+        System.out.println("Vida do jogador: " + jogador.getVidaAtual());
+        System.out.println("Vida do adversario: " + adversario.getVidaAtual());
+        System.out.println("--------------------------------------------------------------------------------------");
+    }
+  
 
     public void iniciarCombate(){
         jogador.getInventario().getHabilidadeEquipada().reiniciarRecarga();
@@ -28,6 +45,9 @@ public class CombatManager{
             System.out.println("Vida do jogador: " + jogador.getVidaAtual());
             System.out.println("Vida do adversario: " + adversario.getVidaAtual());
             System.out.println("--------------------------------------------------------------------------------------");
+
+        while(jogador.getVivo() && adversario.getVivo()){
+            imprimirStatus();
 
             if(turno){
                 jogador.ativarHabilidadePassiva();
@@ -58,4 +78,9 @@ public class CombatManager{
     }
     
     
+
+    public void atacar(){
+
+    }
+
 }
