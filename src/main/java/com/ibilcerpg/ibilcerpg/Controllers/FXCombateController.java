@@ -65,7 +65,7 @@ public class FXCombateController {
     @FXML
     protected void atacarButtonClick(){
         if(verificarTurno()) {
-           // jogador.ataque();
+            combate.setAcao(jogador.jogadorAtacar());
             vidaProgressBarUpdate(vidaProgressBar);
         }
 
@@ -73,21 +73,21 @@ public class FXCombateController {
     @FXML
     protected void defenderButtonClick(){
         if(verificarTurno()) {
-           // jogador.defesa();
+            combate.setAcao(jogador.jogadorDefender());
         }
 
     }
     @FXML
     protected void habilidadeButtonClick(){
         if(verificarTurno()) {
-            //jogador.habilidade();
+            combate.setAcao(jogador.jogadorHabilidade());
             vidaProgressBarUpdate(playerVidaProgresBar);
         }
     }
     @FXML
     protected void itemButtonClick(){
         if(verificarTurno()) {
-          //  jogador.item();
+            combate.setAcao(jogador.jogadorItem());
             vidaProgressBarUpdate(playerVidaProgresBar);
     }
 

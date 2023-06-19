@@ -75,19 +75,6 @@ public class Inimigo extends Personagem{
             
         }
     }
-
-    public void incrementarContadorTurnos(){
-        setContadorTurnos(getContadorTurnos()+1);
-    }
-
-    public int getContadorTurnos() {
-        return contadorTurnos;
-    }
-
-    public void setContadorTurnos(int contadorTurnos) {
-        this.contadorTurnos = contadorTurnos;
-    }
-
     public int getExpRecompensa() {
         return expRecompensa;
     }

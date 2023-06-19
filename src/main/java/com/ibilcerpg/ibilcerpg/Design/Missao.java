@@ -16,7 +16,7 @@ public class Missao<R extends Item> {
 
 
 
-    
+    private boolean concluida;
     private String nome;
     private int n;
     private int total;
@@ -25,11 +25,13 @@ public class Missao<R extends Item> {
     private String requisitou;
     private R r;
 
-    public Missao(String inimigo, R r, String nome, int n) {
+    public Missao(String inimigo, R r, String nome, int n, String requisitou) {
         this.inimigo = inimigo;
         this.r = r;
         this.nome = nome;
         this.n = n;
+        this.requisitou = requisitou;
+        this.concluida = false;
     }
 
     public int getN() {
@@ -63,5 +65,13 @@ public class Missao<R extends Item> {
 
     public void setRequisitou(String requisitou) {
         this.requisitou = requisitou;
+    }
+
+    public boolean isConcluida() {
+        return concluida;
+    }
+
+    public void setConcluida(boolean concluida) {
+        this.concluida = concluida;
     }
 }

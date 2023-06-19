@@ -17,10 +17,9 @@ public class MissaoManager {
             if(missao.getInimigo() == inimigoDerrotado.getTag()){
                 missao.setN(missao.getN()-1);
                 if(missao.done()) {
-                    System.out.println("A missao " + missao.getNome() + " foi concluída! Retorne à quem a requisitou para coletar a recompensa!");
+                    System.out.println("A missao " + missao.getNome() + " foi concluída! Retorne à " + missao.getRequisitou() +" para coletar a recompensa!");
                     return missao;
                 }
-
             }
         }
         return null;
@@ -30,7 +29,7 @@ public class MissaoManager {
         if(missaoConcluida != null) {
             if (missaoConcluida.done()) {
                 System.out.println("Recompensa resgatada com sucesso! Você recebeu a habilidade " + missaoConcluida.getR().getNome());
-                missoes.remove(missaoConcluida);
+                missaoConcluida.setConcluida(true);
                 return missaoConcluida.getR();
             }
         }
