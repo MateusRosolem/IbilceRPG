@@ -91,7 +91,7 @@
       <font>
          <Font size="15.0" />
       </font></TextArea>
-   <Text fx:id="vidaInimigo" fill="WHITE" layoutX="364.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="VIDA: 50/50" textAlignment="CENTER" wrappingWidth="199.9999999999999">
+   <Text fx:id="vidaInimigo" fill="WHITE" layoutX="364.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="VIDA: 50/50" textAlignment="CENTER" wrappingWidth="200.0">
       <font>
          <Font size="14.0" />
       </font>

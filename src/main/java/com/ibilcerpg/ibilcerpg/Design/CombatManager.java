@@ -19,6 +19,7 @@ public class CombatManager {
         this.jogador = jogador;
         this.adversario = adversario;
         iniciarCombate();
+        novoTurno();
     }
 
     public Player getJogador() {
@@ -42,19 +43,20 @@ public class CombatManager {
         else return false;
     }
 
-    public void novoTurno(FXCombateController UI){
+    public void novoTurno(/*FXCombateController UI*/){
         imprimirStatus();
 
             //turno jogador
             jogador.ativarHabilidadePassiva();
-            //acao = jogador.turnoNoCombate();
+            acao = jogador.turnoNoCombate();
             adversario.reacaoInimigo(acao);
-            UI.vidaProgressBarUpdate(UI.vidaProgressBar);
+            //UI.vidaProgressBarUpdate(UI.vidaProgressBar);
             jogador.getInventario().getHabilidadeEquipada().decrementarRecarga();//diminui o tempo de recarga da habilidada em 1
             jogador.incrementarContadorTurnos();
+        imprimirStatus();
 
         try {
-            Thread.sleep(2000);
+            Thread.sleep(500);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
@@ -62,14 +64,15 @@ public class CombatManager {
         //turno adversario
             acao = adversario.turnoNoCombate();
             jogador.reacaoJogador(acao);
-            UI.vidaProgressBarUpdate(UI.playerVidaProgresBar);
+            //UI.vidaProgressBarUpdate(UI.playerVidaProgresBar);
 
 
 
-            if(!verificarVivos()) finalizarCombate(UI);
+            if(!verificarVivos()) finalizarCombate(/*UI*/);
+            else novoTurno(/*UI*/);
     }
 
-    private void finalizarCombate(FXCombateController UI){
+    private void finalizarCombate(/*FXCombateController */){
         if (jogador.estaVivo()) {
             System.out.println("--------------------------------------------------------------------------------------");
             System.out.println("JOGADOR VENCEU!!!");
@@ -81,11 +84,11 @@ public class CombatManager {
             jogador.setVivo(true);
         }
         jogador.setContadorTurnos(0);
-        try {
-            UI.terminate();
-        } catch (IOException e) {
-
-        }
+//        try {
+//            UI.terminate();
+//        } catch (IOException e) {
+//
+//        }
     }
 
 

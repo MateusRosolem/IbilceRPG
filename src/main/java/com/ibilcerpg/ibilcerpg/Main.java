@@ -37,7 +37,7 @@ public class Main extends Application {
 
 
     public static void main(String[] args){
-        launch();
+        //launch();
 
         Save infos = new Save();
 
@@ -61,7 +61,7 @@ public class Main extends Application {
     public void opcoes(int op, Player jogador){
         switch (op){
             case 1:
-                combate = new CombatManager(jogador, new Biologo());
+                combate = new CombatManager(jogador, new Fisico());
                 break;
             case 2 :
                 combate = new CombatManager(jogador, new Traduteiro());

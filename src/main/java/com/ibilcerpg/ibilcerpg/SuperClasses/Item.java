@@ -4,7 +4,10 @@ import com.ibilcerpg.ibilcerpg.Personagens.*;
 import com.ibilcerpg.ibilcerpg.Objetos.*;
 import com.ibilcerpg.ibilcerpg.Design.*;
 import com.ibilcerpg.ibilcerpg.SuperClasses.*;
-public class Item {
+
+import java.io.Serializable;
+
+public class Item implements Serializable {
     private String nome;
     private String tipo;
 

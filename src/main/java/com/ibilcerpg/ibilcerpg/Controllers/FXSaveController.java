@@ -42,6 +42,9 @@ public class FXSaveController {
     public Button voltarButton;
 
     @FXML
+    public Button jogarButton;
+
+    @FXML
     private ObservableList<Pane> list = FXCollections.observableArrayList();;
 
 
@@ -68,9 +71,9 @@ public class FXSaveController {
             if (jogador == null) {
                 labSingleFile.setText("\nSelected File:" + f.getPath());
             } else {
-                labSingleFile.setText("\nSelected File:" + f.getPath() + "\nNome:" + jogador.getNome() + "\nExperiencia:" + jogador.getExperiencia()
+                labSingleFile.setText("Nome:" + jogador.getNome() + "\nExperiencia:" + jogador.getExperiencia()
                         + "\nNivel:" + jogador.getNivel() + "\nAtaque Base:" + jogador.getAtaqueBase() + "\nDefesa Base:" +
-                        jogador.getDefesaBase() + "\nVida Atual:" + jogador.getVidaAtual() + "\ntVida Maxima:" + jogador.getVidaMaxima()
+                        jogador.getDefesaBase() + "\nVida Atual:" + jogador.getVidaAtual() + "\nVida Maxima:" + jogador.getVidaMaxima()
                         + "\nVelocidade:" + jogador.getVelocidade());
             }
         }
@@ -91,30 +94,21 @@ public class FXSaveController {
         cont.setData(jogador);
     }
 
+    @FXML
+    public void jogarButtonClick(ActionEvent event) throws IOException {
+        FXMLLoader mapa = new FXMLLoader(Main.class.getResource("Mapa.fxml"));
+        Scene mapaScene = new Scene(mapa.load());
 
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+        window.setScene(mapaScene);
+        window.setTitle("Mapa");
+        window.show();
 
-//    public static class ArquivosGUIController {
-//        @FXML
-//        private ListView<Arquivo> listaArquivos;
-//
-//        public void initialize() {
-//            // Diretório a ser exibido
-//            String diretorio = "IBILCErpg/Saves";
-//
-//            try (DirectoryStream<Path> stream = Files.newDirectoryStream(Paths.get(diretorio))) {
-//                for (Path path : stream) {
-//                    if (!Files.isDirectory(path)) {
-//                        String nomeArquivo = path.getFileName().toString();
-//                        String caminhoArquivo = path.toString();
-//                        Arquivo arquivo = new Arquivo(nomeArquivo, caminhoArquivo);
-//                        listaArquivos.getItems().add(arquivo);
-//                    }
-//                }
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//        }
-//    }
+        FXMapaController cont = mapa.getController();
+        cont.setData(jogador);
+
+    }
+
 
 
 }
