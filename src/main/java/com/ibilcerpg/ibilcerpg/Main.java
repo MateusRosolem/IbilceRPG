@@ -2,30 +2,21 @@ package com.ibilcerpg.ibilcerpg;
 import com.ibilcerpg.ibilcerpg.Controllers.FXController;
 import com.ibilcerpg.ibilcerpg.Design.CombatManager;
 import com.ibilcerpg.ibilcerpg.Design.Musica;
-import com.ibilcerpg.ibilcerpg.Personagens.Biologo;
-import com.ibilcerpg.ibilcerpg.Personagens.Player;
-import com.ibilcerpg.ibilcerpg.Personagens.Traduteiro;
+import com.ibilcerpg.ibilcerpg.Design.Save;
+import com.ibilcerpg.ibilcerpg.Personagens.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 
-import java.io.File;
 import java.io.IOException;
+import java.util.Scanner;
 
 public class Main extends Application {
-
-    public static Player jogador = new Player();
-    public static Biologo adversario = new Biologo();
-    Traduteiro adversario2 = new Traduteiro();
-    Traduteiro adversario3 = new Traduteiro();
-    CombatManager combate = new CombatManager(jogador, adversario);
-    CombatManager combate2 = new CombatManager(jogador, adversario2);
-
-
+    private Player jogador;
+    CombatManager combate;
+    private static Scanner input = new Scanner(System.in);
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -39,27 +30,59 @@ public class Main extends Application {
         stage.setResizable(false);
         stage.show();
         FXController cont = fxmlLoader.getController();
-        if (cont!=null) cont.setarMusica(musica);
+        cont.setData(jogador);
+        cont.setarMusica(musica);
 
     }
 
 
     public static void main(String[] args){
         launch();
-        
+
+        Save infos = new Save();
+
+
+        Main main = new Main();
         Player jogador = new Player();
-        Biologo adversario = new Biologo();
-        Traduteiro adversario2 = new Traduteiro();
-        Traduteiro adversario3 = new Traduteiro();
-        CombatManager combate = new CombatManager(jogador, adversario);
-        CombatManager combate2 = new CombatManager(jogador, adversario2);
+        Alejandro coordenador = new Alejandro();
+        jogador.receberMissao(coordenador.primeiraMissao);
+        jogador.receberMissao(coordenador.segundaMissao);
+        jogador.receberMissao(coordenador.terceiraMissao);
 
+        int op = -1;
+        while (op != 0){
+            System.out.println("1 - Biologo , 2 - Tradutor, 3 - Matematico, 4 - inventario");
+            op = input.nextInt();
+            main.opcoes(op,jogador);
+        }
 
+    }
 
+    public void opcoes(int op, Player jogador){
+        switch (op){
+            case 1:
+                combate = new CombatManager(jogador, new Biologo());
+                break;
+            case 2 :
+                combate = new CombatManager(jogador, new Traduteiro());
+                break;
+            case 3:
+                combate = new CombatManager(jogador, new Matematico());
+                break;
+            case 4:
+                jogador.getInventario().printInventario();
+                System.out.println("Escolha qual item quer equipar");
+                int i = input.nextInt();
+                jogador.getInventario().equiparHabilidade(i);
+                break;
+            case 0:
+                System.out.println("Obrigado por jogar.");
+                System.exit(0);
+                break;
+        }
+    }
 
 
     }
 
 
-
-}

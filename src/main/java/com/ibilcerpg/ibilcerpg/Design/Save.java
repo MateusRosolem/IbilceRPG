@@ -15,47 +15,48 @@ import java.nio.file.Files;
 
 public class Save extends Player implements Serializable{
 
+    private Player usuario;
+
 
     //Salvar
-    public void salvar(Player usuario) {
+    public static void salvar(Player usuario) {
         try {
             LocalDateTime dateTime = LocalDateTime.now();
-            FileOutputStream fileOut = new FileOutputStream("Save.obj");
+            FileOutputStream fileOut = new FileOutputStream("src/main/resources/Saves/Save.obj");
             ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
-            objectOut.writeObject(usuario);
             objectOut.writeObject(dateTime);
+            objectOut.writeObject(usuario);
+
+            FileInputStream fileStream = new FileInputStream("Save.obj");
+            ObjectInputStream objStream = new ObjectInputStream(fileStream);
+            System.out.println("data data :" + (LocalDateTime) objStream.readObject());
+            System.out.println("usuario data: " + (Player) objStream.readObject());
+
+
 
             objectOut.close();
             fileOut.close();
-            //System.out.println("Jogo salvo com sucesso.");
+            System.out.println("Jogo salvo com sucesso.");
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
     }
 
     //abrir save
-    public Player carregarSave() {//mandar pra função qual save que quer abrir como parametro
+    public static Player carregarSave() {//mandar pra função qual save que quer abrir como parametro
         try {
             FileInputStream fileIn = new FileInputStream("Save.obj");
             ObjectInputStream objectIn = new ObjectInputStream(fileIn);
 
+            LocalDateTime dateTime = (LocalDateTime) objectIn.readObject();
             Player usuario = (Player) objectIn.readObject();
-            Player player = new Player();//novo jogador que vai receber o save
-            player.setVivo(usuario.getVivo());
-            player.setVidaMaxima(usuario.getVidaMaxima());
-            player.setVidaAtual(usuario.getVidaAtual());
-            player.setAtaqueBase(usuario.getAtaqueBase());
-            player.setDefesaBase(usuario.getDefesaBase());
-            player.setVelocidade(usuario.getVelocidade());
-            player.setMultiplicadorAtaque(usuario.getMultiplicadorAtaque());
-            player.setMultiplicadorDefesa(usuario.getMultiplicadorDefesa());
-            player.setExperiencia(usuario.getExperiencia());
-            player.setNivel(usuario.getNivel());
-            //Printar pra testar
+
 
             objectIn.close();
             fileIn.close();
-            return player;
+            return usuario;
         } catch (ClassNotFoundException | IOException ex) {
             throw new RuntimeException(ex);
         }
