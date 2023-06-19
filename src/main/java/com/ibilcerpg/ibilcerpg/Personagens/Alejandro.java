@@ -11,8 +11,5 @@ public class Alejandro extends Inimigo {
     public Missao<PedacoDePau> segundaMissao = new Missao<PedacoDePau>("TRADUTOR", new PedacoDePau(), "Missão do Inglês", 3, "Alejandro");
     public Missao<DentesDeVampiro> terceiraMissao = new Missao<DentesDeVampiro>("MATEMATICO", new DentesDeVampiro(), "Missão do Phibonacci", 3, "Alejandro");
 
-    public Missao<ErvasMedicinais> getPrimeiraMissao() {
-        return primeiraMissao;
-    }
 
 }
