@@ -14,13 +14,6 @@ import java.util.Objects;
 
 public class Main extends Application {
 
-    Player jogador = new Player();
-    Biologo adversario = new Biologo();
-    Traduteiro adversario2 = new Traduteiro();
-    Traduteiro adversario3 = new Traduteiro();
-    CombatManager combate = new CombatManager(jogador, adversario);
-    CombatManager combate2 = new CombatManager(jogador, adversario2);
-
     @Override
     public void start(Stage stage) throws IOException {
         Font.loadFont(getClass().getResourceAsStream("8_bit_hud.ttf"), 78);
@@ -36,6 +29,14 @@ public class Main extends Application {
 
     public static void main(String[] args){
         launch();
+        
+        Player jogador = new Player();
+        Biologo adversario = new Biologo();
+        Traduteiro adversario2 = new Traduteiro();
+        Traduteiro adversario3 = new Traduteiro();
+        CombatManager combate = new CombatManager(jogador, adversario);
+        CombatManager combate2 = new CombatManager(jogador, adversario2);
+
 
     }
 

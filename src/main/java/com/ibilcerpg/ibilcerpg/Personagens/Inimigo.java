@@ -1,26 +1,23 @@
 package com.ibilcerpg.ibilcerpg.Personagens;
 
-import com.ibilcerpg.ibilcerpg.SuperClasses.Acao;
-import com.ibilcerpg.ibilcerpg.SuperClasses.Personagem;
+import com.ibilcerpg.ibilcerpg.SuperClasses.*;
+import com.ibilcerpg.ibilcerpg.Objetos.*;
+import com.ibilcerpg.ibilcerpg.Design.*;
+import com.ibilcerpg.ibilcerpg.SuperClasses.*;
 
-public class Inimigo extends Personagem {
+
+public class Inimigo extends Personagem{
     private int expRecompensa;
     private int contadorTurnos;
+    private String tag;
 
 
     public Inimigo(){
-        super("Inimigo",true,20,5,2, 5, 1,1,1,1);
+        super("Inimigo",true,20,20,5,2,
+                5, 1,1,1);
         this.expRecompensa = 10;
         this.contadorTurnos = 0;
     }
-
-
-
-    public int getExpRecompensa() {
-        return expRecompensa;
-    }
-
-
 
     @Override
     public int receberDano(float dano){
@@ -44,11 +41,11 @@ public class Inimigo extends Personagem {
         setDebuffDano(1);
         System.out.println(turno.getT());
         return turno;
-    }
+    } 
 
     public void reacaoInimigo(Acao<String,Object> acao){
         switch(acao.getT()){
-            case "ATAQUE":
+            case "ATAQUE": 
                 receberDano((Float)acao.getV());
                 break;
             case "DEFESA":
@@ -73,12 +70,9 @@ public class Inimigo extends Personagem {
                             break;
                     }
                 }
-
+            
                 break;
-            case "ITEM":
-                //n faz nada eu acho
-                break;
-
+            
         }
     }
 
@@ -94,5 +88,23 @@ public class Inimigo extends Personagem {
         this.contadorTurnos = contadorTurnos;
     }
 
+    public int getExpRecompensa() {
+        return expRecompensa;
+    }
 
+    public void setExpRecompensa(int expRecompensa) {
+        this.expRecompensa = expRecompensa;
+    }
+
+    public String getTag() {
+        return tag;
+    }
+
+    public void setTag(String tag) {
+        this.tag = tag;
+    }
+
+    
+
+   
 }

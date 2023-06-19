@@ -1,5 +1,9 @@
 package com.ibilcerpg.ibilcerpg.SuperClasses;
 
+import com.ibilcerpg.ibilcerpg.Personagens.*;
+import com.ibilcerpg.ibilcerpg.Objetos.*;
+import com.ibilcerpg.ibilcerpg.Design.*;
+import com.ibilcerpg.ibilcerpg.SuperClasses.*;
 public class Habilidade extends Item {
     private Acao<String,Object> efeito;
     private int tempoDeRecarga;

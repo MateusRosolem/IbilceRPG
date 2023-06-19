@@ -3,7 +3,7 @@ package com.ibilcerpg.ibilcerpg.Objetos;
 import com.ibilcerpg.ibilcerpg.SuperClasses.Acao;
 import com.ibilcerpg.ibilcerpg.SuperClasses.Habilidade;
 
-public class PedacoDePau extends Habilidade {//habilidade exemplo
+public class PedacoDePau extends Habilidade{//habilidade exemplo
     
     public PedacoDePau(){
         setNome("Pedaço de Pau");
