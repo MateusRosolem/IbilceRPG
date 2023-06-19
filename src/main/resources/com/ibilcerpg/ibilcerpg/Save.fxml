@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.effect.Lighting?>
 <?import javafx.scene.effect.Shadow?>
@@ -12,64 +13,65 @@
 
 <AnchorPane prefHeight="540.0" prefWidth="930.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ibilcerpg.ibilcerpg.Controllers.FXSaveController">
     <HBox alignment="CENTER" layoutY="376.0" prefHeight="164.0" prefWidth="930.0" spacing="100.0">
-        <Button fx:id="voltarButton" alignment="CENTER" blendMode="HARD_LIGHT" mnemonicParsing="false"
-                onAction="#voltarButtonClick" prefHeight="80.0" prefWidth="200.0" text="Voltar" textFill="WHITE">
+        <Button fx:id="voltarButton" alignment="CENTER" blendMode="HARD_LIGHT" mnemonicParsing="false" onAction="#voltarButtonClick" prefHeight="80.0" prefWidth="200.0" text="Voltar" textFill="WHITE">
             <font>
-                <Font name="8-bit HUD Regular" size="12.0"/>
+                <Font name="8-bit HUD Regular" size="12.0" />
             </font>
             <cursor>
-                <Cursor fx:constant="HAND"/>
+                <Cursor fx:constant="HAND" />
             </cursor>
             <effect>
                 <Lighting specularExponent="24.04" surfaceScale="1.04">
                     <bumpInput>
-                        <Shadow/>
+                        <Shadow />
                     </bumpInput>
                 </Lighting>
             </effect>
             <opaqueInsets>
-                <Insets/>
+                <Insets />
             </opaqueInsets>
         </Button>
-        <Button fx:id="carregarSaveButton" alignment="CENTER" blendMode="HARD_LIGHT" mnemonicParsing="false"
-                onAction="#carregarSaveButton" prefHeight="80.0" prefWidth="250.0" text="Carregar Save"
-                textFill="WHITE">
+        <Button fx:id="carregarSaveButton" alignment="CENTER" blendMode="HARD_LIGHT" mnemonicParsing="false" onAction="#carregarSaveButton" prefHeight="80.0" prefWidth="250.0" text="Carregar Save" textFill="WHITE">
             <font>
-                <Font name="8-bit HUD Regular" size="12.0"/>
+                <Font name="8-bit HUD Regular" size="12.0" />
             </font>
             <cursor>
-                <Cursor fx:constant="HAND"/>
+                <Cursor fx:constant="HAND" />
             </cursor>
             <effect>
                 <Lighting specularExponent="24.04" surfaceScale="1.04">
                     <bumpInput>
-                        <Shadow/>
+                        <Shadow />
                     </bumpInput>
                 </Lighting>
             </effect>
             <opaqueInsets>
-                <Insets/>
+                <Insets />
             </opaqueInsets>
         </Button>
-        <Button fx:id="salvarButton" alignment="CENTER" blendMode="HARD_LIGHT" mnemonicParsing="false"
-                onAction="#salvarButton" prefHeight="80.0" prefWidth="200.0" text="Salvar" textFill="WHITE">
+        <Button fx:id="salvarButton" alignment="CENTER" blendMode="HARD_LIGHT" mnemonicParsing="false" onAction="#salvarButton" prefHeight="80.0" prefWidth="200.0" text="Salvar" textFill="WHITE">
             <font>
-                <Font name="8-bit HUD Regular" size="12.0"/>
+                <Font name="8-bit HUD Regular" size="12.0" />
             </font>
             <cursor>
-                <Cursor fx:constant="HAND"/>
+                <Cursor fx:constant="HAND" />
             </cursor>
             <effect>
                 <Lighting specularExponent="24.04" surfaceScale="1.04">
                     <bumpInput>
-                        <Shadow/>
+                        <Shadow />
                     </bumpInput>
                 </Lighting>
             </effect>
             <opaqueInsets>
-                <Insets/>
+                <Insets />
             </opaqueInsets>
         </Button>
     </HBox>
    <ListView layoutX="100.0" layoutY="94.0" prefHeight="200.0" prefWidth="730.0" />
+   <Label fx:id="labSingleFile" alignment="TOP_LEFT" layoutX="100.0" layoutY="94.0" prefHeight="200.0" prefWidth="730.0" text="Stats:" wrapText="true">
+      <font>
+         <Font name="8-bit HUD Regular" size="9.0" />
+      </font>
+   </Label>
 </AnchorPane>

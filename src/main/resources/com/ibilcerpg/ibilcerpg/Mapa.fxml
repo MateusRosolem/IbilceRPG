@@ -73,7 +73,7 @@
       <font>
          <Font size="13.0" />
       </font></TextArea>
-   <Button fx:id="tradutorButton" blendMode="HARD_LIGHT" layoutX="483.0" layoutY="317.0" mnemonicParsing="false" onAction="#selectedButton" prefHeight="45.0" prefWidth="120.0" style="-fx-background-radius: 50; -fx-border-color: yellow; -fx-border-radius: 50;" text="Tradutor">
+   <Button fx:id="traduteiroButton" blendMode="HARD_LIGHT" layoutX="483.0" layoutY="317.0" mnemonicParsing="false" onAction="#selectedButton" prefHeight="45.0" prefWidth="120.0" style="-fx-background-radius: 50; -fx-border-color: yellow; -fx-border-radius: 50;" text="Tradutor">
       <font>
          <Font name="8-bit HUD Regular" size="8.0" />
       </font>

@@ -96,4 +96,5 @@
          <Font size="14.0" />
       </font>
    </Text>
+   <ProgressBar fx:id="playerVidaProgresBar" blendMode="HARD_LIGHT" layoutX="716.0" layoutY="327.0" prefWidth="200.0" progress="1.0" />
 </AnchorPane>
