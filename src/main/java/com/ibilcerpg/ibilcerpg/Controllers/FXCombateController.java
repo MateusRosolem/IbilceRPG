@@ -70,6 +70,14 @@ public class FXCombateController {
     @FXML
     protected void atacarButtonClick(){
             combate.setAcao(jogador.jogadorAtacar());
+            //vidaProgressBarUpdate(vidaProgressBar);
+
+            // jogador.ataque();
+            // vidaProgressBarUpdate(vidaProgressBar,dano);
+            imprimirStatus();
+
+        }
+
             combate.novoTurno(/*this*/);
     }
     @FXML
@@ -82,6 +90,8 @@ public class FXCombateController {
     @FXML
     protected void habilidadeButtonClick(){
             combate.setAcao(jogador.jogadorHabilidade());
+
+            //vidaProgressBarUpdate(playerVidaProgresBar);
             vidaProgressBarUpdate(playerVidaProgresBar);
             combate.novoTurno(/*this*/);
 
@@ -89,6 +99,9 @@ public class FXCombateController {
     @FXML
     protected void itemButtonClick(){
             combate.setAcao(jogador.jogadorItem());
+
+            //vidaProgressBarUpdate(playerVidaProgresBar);
+
             vidaProgressBarUpdate(playerVidaProgresBar);
             combate.novoTurno(/*this*/);
 
@@ -108,8 +121,16 @@ public class FXCombateController {
         window.setTitle("Mapa");
         window.show();
 
+    }
+    //@FXML
+//    protected void vidaProgressBarUpdate(ProgressBar ProgressBar,int dano){
+//        ProgressBar.setProgress(ProgressBar.getProgress() - dano);
+//        vidaInimigo.setText("VIDA: " + dano + "/20");
+//    }
+
+
         FXMapaController cont = mapa.getController();
         cont.setData(jogador);
     }
 
-}
+

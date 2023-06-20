@@ -109,7 +109,6 @@ public class Player extends Personagem implements Serializable {
 
     }
 
-
     /**
      * funcao para testar o combate no terminal
      * @return retorna a acao descrita pelo jogador no terminal
@@ -132,11 +131,7 @@ public class Player extends Personagem implements Serializable {
             case "4":
                 return jogadorItem();
 
-            default:
-                return turnodefault;
         }
-
-//
     }
 
     /**
