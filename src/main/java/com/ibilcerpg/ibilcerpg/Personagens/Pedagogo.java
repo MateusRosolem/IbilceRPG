@@ -3,12 +3,12 @@ package com.ibilcerpg.ibilcerpg.Personagens;
 import com.ibilcerpg.ibilcerpg.SuperClasses.Acao;
 
 
-public class Pedagologo extends Inimigo {
+public class Pedagogo extends Inimigo {
 
-    public Pedagologo(){
+    public Pedagogo(){
         super();
-        setNome("Biologo");
-        setTag("BIOLOGO");
+        setNome("Pedagogo");
+        setTag("PEDAGOGO");
     }
 
 
