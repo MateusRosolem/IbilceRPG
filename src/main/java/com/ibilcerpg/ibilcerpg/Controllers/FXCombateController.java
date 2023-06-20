@@ -3,12 +3,20 @@ package com.ibilcerpg.ibilcerpg.Controllers;
 
 import com.ibilcerpg.ibilcerpg.Design.CombatManager;
 import com.ibilcerpg.ibilcerpg.Design.Musica;
+import com.ibilcerpg.ibilcerpg.Main;
 import com.ibilcerpg.ibilcerpg.Personagens.Player;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextArea;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class FXCombateController {
 
@@ -30,15 +38,11 @@ public class FXCombateController {
     public ProgressBar playerVidaProgresBar;
     @FXML
     public TextArea caixaDeTexto;
-    @FXML
-    public TextArea caixaStatus;
+
     @FXML
     public Text vidaInimigo;
 
-
-
-
-    public void setData(Player jogador,CombatManager combate){
+    public void setData(Player jogador, CombatManager combate){
         this.jogador=jogador;
         this.combate=combate;
     }
@@ -53,13 +57,6 @@ public class FXCombateController {
         caixaDeTexto.setText(texto);
     }
 
-    public void imprimirStatus(){
-        caixaStatus.setText("Nome:" + jogador.getNome() + "\nExperiencia:" + jogador.getExperiencia()
-                + "\nNivel:" + jogador.getNivel() + "\nAtaque Base:" + jogador.getAtaqueBase() + "\nDefesa Base:" +
-                jogador.getDefesaBase() + "\nVida Atual:" + jogador.getVidaAtual() + "\ntVida Maxima:" + jogador.getVidaMaxima()
-                + "\nVelocidade:" + jogador.getVelocidade());
-    }
-
     public boolean verificarTurno(){
         if(combate.getTurno())
             return true;
@@ -72,62 +69,47 @@ public class FXCombateController {
 
     @FXML
     protected void atacarButtonClick(){
-        if(verificarTurno()) {
-
             combate.setAcao(jogador.jogadorAtacar());
-            vidaProgressBarUpdate(vidaProgressBar);
-
-            // jogador.ataque();
-            // vidaProgressBarUpdate(vidaProgressBar,dano);
-            imprimirStatus();
-
-        }
-
+            combate.novoTurno(/*this*/);
     }
     @FXML
     protected void defenderButtonClick(){
-        if(verificarTurno()) {
-
-            combate.setAcao(jogador.jogadorDefender());
-
-           // jogador.defesa();
-            imprimirStatus();
-
-        }
+        combate.setAcao(jogador.jogadorDefender());
+        vidaProgressBarUpdate(playerVidaProgresBar);
+        combate.novoTurno(/*this*/);
 
     }
     @FXML
     protected void habilidadeButtonClick(){
-        if(verificarTurno()) {
-
             combate.setAcao(jogador.jogadorHabilidade());
             vidaProgressBarUpdate(playerVidaProgresBar);
+            combate.novoTurno(/*this*/);
 
-            //jogador.habilidade();
-            //vidaProgressBarUpdate(playerVidaProgresBar,dano);
-            imprimirStatus();
-
-        }
     }
     @FXML
     protected void itemButtonClick(){
-        if(verificarTurno()) {
-
             combate.setAcao(jogador.jogadorItem());
             vidaProgressBarUpdate(playerVidaProgresBar);
-    }
-
-            //  jogador.item();
-            // vidaProgressBarUpdate(playerVidaProgresBar,);
-            imprimirStatus();
-        }
-
+            combate.novoTurno(/*this*/);
 
     }
     @FXML
-    protected void vidaProgressBarUpdate(ProgressBar ProgressBar,int dano){
-        ProgressBar.setProgress(ProgressBar.getProgress() - dano);
-        vidaInimigo.setText("VIDA: " + dano + "/20");
+    public void vidaProgressBarUpdate(ProgressBar ProgressBar){
+        ProgressBar.setProgress((double) combate.getAdversario().getVidaAtual() /combate.getAdversario().getVidaMaxima());
+        vidaInimigo.setText("VIDA: " + combate.getAdversario().getVidaAtual() + "/" + combate.getAdversario().getVidaMaxima());
+    }
+
+    public void terminate() throws IOException {
+        FXMLLoader mapa = new FXMLLoader(Main.class.getResource("Mapa.fxml"));
+        Scene mapaScene = new Scene(mapa.load());
+
+        Stage window = new Stage();
+        window.setScene(mapaScene);
+        window.setTitle("Mapa");
+        window.show();
+
+        FXMapaController cont = mapa.getController();
+        cont.setData(jogador);
     }
 
 }
