@@ -90,7 +90,4 @@ public class Inimigo extends Personagem{
         this.tag = tag;
     }
 
-    
-
-   
 }

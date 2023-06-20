@@ -51,7 +51,7 @@ public class Main extends Application {
 
         int op = -1;
         while (op != 0){
-            System.out.println("1 - Inventario, 2 - Biologo , 3 - Tradutor, 4 - Matematico, 5 - Físico, 6 - Químico");
+            System.out.println("1 - Inventario, 2 - Biologo , 3 - Tradutor, 4 - Matematico, 5 - Físico, 6 - Químico , 9 - checar progresso");
             op = input.nextInt();
             main.opcoes(op,jogador);
         }
@@ -79,7 +79,10 @@ public class Main extends Application {
                 combate = new CombatManager(jogador, new Fisico());
                 break;
             case 6:
-                combate = new CombatManager(jogador, new Químico());
+                combate = new CombatManager(jogador, new Quimico());
+                break;
+            case 9:
+                System.out.println(jogador.checarProgresso());
                 break;
             case 0:
                 System.out.println("Obrigado por jogar.");

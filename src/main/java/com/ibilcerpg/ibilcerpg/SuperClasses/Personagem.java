@@ -14,7 +14,6 @@ public class Personagem implements Serializable {
     private int vidaAtual;
     private int ataqueBase;
     private int defesaBase;
-    private int velocidade;
     private float multiplicadorAtaque;
     private float multiplicadorDefesa;
     private float debuffDano;

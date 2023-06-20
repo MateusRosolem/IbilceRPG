@@ -1,10 +1,9 @@
 package com.ibilcerpg.ibilcerpg.Personagens;
 
 import com.ibilcerpg.ibilcerpg.SuperClasses.Acao;
-import javafx.beans.binding.ObjectExpression;
 
 
-public class Químico extends Inimigo {
+public class Quimico extends Inimigo {
 
     private boolean acidoUsado;
     public Acao<String,Object> acidoCorrosivo(){
@@ -12,7 +11,7 @@ public class Químico extends Inimigo {
         return (new Acao<String,Object>("ACIDO_CORROSIVO","DANO_ACIDO"));
     }
 
-    public Químico(){
+    public Quimico(){
         super();
         setNome("Químico");
         setTag("QUIMICO");

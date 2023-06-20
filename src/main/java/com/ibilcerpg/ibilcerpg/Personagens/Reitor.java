@@ -3,9 +3,9 @@ package com.ibilcerpg.ibilcerpg.Personagens;
 import com.ibilcerpg.ibilcerpg.SuperClasses.Acao;
 
 
-public class Letreiro extends Inimigo {
+public class Reitor extends Inimigo {
 
-    public Letreiro(){
+    public Reitor(){
         super();
         setNome("Biologo");
         setTag("BIOLOGO");
@@ -17,6 +17,4 @@ public class Letreiro extends Inimigo {
     public Acao<String,Object> turnoNoCombate(){
         return super.inimigoAtacar();
     }
-
-
 }

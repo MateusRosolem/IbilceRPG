@@ -1,5 +1,6 @@
 package com.ibilcerpg.ibilcerpg.Personagens;
 
+import com.ibilcerpg.ibilcerpg.Main;
 import com.ibilcerpg.ibilcerpg.SuperClasses.*;
 import com.ibilcerpg.ibilcerpg.Design.*;
 
@@ -18,6 +19,8 @@ public class Player extends Personagem implements Serializable {
     private String efeitoNegativoPassivo = "DEFAULT";
 
     private boolean itemDisponivel;
+
+    private boolean[] cursosDerrotados = new boolean[7];
     
     public Player(){
         super("Jogador",true,0,0,1,1, 1,1,1f);
@@ -29,19 +32,6 @@ public class Player extends Personagem implements Serializable {
         this.setDefesaBase(3 + (getNivel()-1));
         this.setVidaMaxima(10 + 10*getNivel());
         this.setVidaAtual(10 + 10*getNivel());
-    }
-
-    public int getExperiencia() {
-        return experiencia;
-    }
-    public void setExperiencia(int experiencia) {
-        this.experiencia = experiencia;
-    }
-    public int getNivel() {
-        return nivel;
-    }
-    public void setNivel(int nivel) {
-        this.nivel = nivel;
     }
 
     public Acao<String,Object> jogadorAtacar(){
@@ -263,6 +253,30 @@ public class Player extends Personagem implements Serializable {
     public void receberMissao(Missao<? extends Habilidade> missao){
         missoes.adicionarMissao(missao);
     }
+
+    public boolean checarProgresso(Inimigo adversarioDerrotado){
+        if(adversarioDerrotado instanceof Traduteiro) cursosDerrotados[0] = true;
+        if(adversarioDerrotado instanceof Biologo) cursosDerrotados[1] = true;
+        if(adversarioDerrotado instanceof Fisico) cursosDerrotados[2] = true;
+        if(adversarioDerrotado instanceof Quimico) cursosDerrotados[3] = true;
+        if(adversarioDerrotado instanceof EngenheiroDeAlimentos) cursosDerrotados[4] = true;
+        if(adversarioDerrotado instanceof Letreiro) cursosDerrotados[5] = true;
+        if(adversarioDerrotado instanceof Matematico) cursosDerrotados[6] = true;
+
+        for (boolean derrotado :cursosDerrotados) {
+            if(!derrotado) return false;
+        }
+        return true;
+    }
+    public boolean checarProgresso(){
+       for (boolean derrotado :cursosDerrotados) {
+           if(!derrotado) return false;
+       }
+       return true;
+    }
+
+
+
    
     public Inventario getInventario() {
         return inventario;
@@ -292,5 +306,17 @@ public class Player extends Personagem implements Serializable {
     }
     public void setEfeitoNegativoPassivo(String efeitoNegativoPassivo) {
         this.efeitoNegativoPassivo = efeitoNegativoPassivo;
+    }
+    public int getExperiencia() {
+        return experiencia;
+    }
+    public void setExperiencia(int experiencia) {
+        this.experiencia = experiencia;
+    }
+    public int getNivel() {
+        return nivel;
+    }
+    public void setNivel(int nivel) {
+        this.nivel = nivel;
     }
 }

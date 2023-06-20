@@ -74,6 +74,7 @@ public class CombatManager {
             System.out.println("JOGADOR VENCEU!!!");
             jogador.getInventario().adicionarHabilidade(jogador.getMissoes().completarMissao(jogador.getMissoes().atualizarMissoes(adversario)));
             jogador.receberExperiencia(adversario.getExpRecompensa());
+            jogador.checarProgresso(adversario);
         } else {
             System.out.println("Jogador foi eliminado.");
             jogador.setVidaAtual(jogador.getVidaMaxima());
