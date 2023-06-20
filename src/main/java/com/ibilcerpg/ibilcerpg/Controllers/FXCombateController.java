@@ -75,7 +75,7 @@ public class FXCombateController {
         if(verificarTurno()) {
 
             combate.setAcao(jogador.jogadorAtacar());
-            vidaProgressBarUpdate(vidaProgressBar);
+            //vidaProgressBarUpdate(vidaProgressBar);
 
             // jogador.ataque();
             // vidaProgressBarUpdate(vidaProgressBar,dano);
@@ -101,7 +101,7 @@ public class FXCombateController {
         if(verificarTurno()) {
 
             combate.setAcao(jogador.jogadorHabilidade());
-            vidaProgressBarUpdate(playerVidaProgresBar);
+            //vidaProgressBarUpdate(playerVidaProgresBar);
 
             //jogador.habilidade();
             //vidaProgressBarUpdate(playerVidaProgresBar,dano);
@@ -114,7 +114,7 @@ public class FXCombateController {
         if(verificarTurno()) {
 
             combate.setAcao(jogador.jogadorItem());
-            vidaProgressBarUpdate(playerVidaProgresBar);
+            //vidaProgressBarUpdate(playerVidaProgresBar);
     }
 
             //  jogador.item();
@@ -124,10 +124,10 @@ public class FXCombateController {
 
 
     }
-    @FXML
-    protected void vidaProgressBarUpdate(ProgressBar ProgressBar,int dano){
-        ProgressBar.setProgress(ProgressBar.getProgress() - dano);
-        vidaInimigo.setText("VIDA: " + dano + "/20");
-    }
+    //@FXML
+//    protected void vidaProgressBarUpdate(ProgressBar ProgressBar,int dano){
+//        ProgressBar.setProgress(ProgressBar.getProgress() - dano);
+//        vidaInimigo.setText("VIDA: " + dano + "/20");
+//    }
 
-}
+
