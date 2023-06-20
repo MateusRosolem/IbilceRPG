@@ -27,8 +27,6 @@ import java.util.Objects;
 public class FXMapaController {
     private Player jogador;
 
-    Musica musica;
-
     CombatManager combateGame;
 
 
@@ -62,15 +60,12 @@ public class FXMapaController {
 //        status.setText("Nome:" + jogador.getNome() + "\nVida:" + jogador.getVida() + "\n");
 //    }
 
-    public void setData(Player jogador,Musica musica){
+    public void setData(Player jogador){
         this.jogador=jogador;
         caixaDeTexto.setText("Este é o RPG do IBILCE!");
         setStatusPlayer();
 
 
-
-        musica = new Musica();
-        this.musica=musica;
     }
 
     public void setStatusPlayer(){
@@ -116,7 +111,8 @@ public class FXMapaController {
         window.show();
 
         FXInventarioController cont = inventario.getController();
-        cont.setData(jogador,musica);
+        cont.setData(jogador);
+        if(!Musica.estaTocando()) Musica.tocarMusicaMenu();
     }
 
     @FXML
@@ -130,7 +126,8 @@ public class FXMapaController {
         window.show();
 
         FXSaveController cont = save.getController();
-        cont.setData(jogador,musica);
+        cont.setData(jogador);
+        if(!Musica.estaTocando()) Musica.tocarMusicaMenu();
 
     }
 
@@ -153,15 +150,17 @@ public class FXMapaController {
 
         FXMLLoader combate = new FXMLLoader(Main.class.getResource("Combate.fxml"));
         Scene combateScene = new Scene(combate.load());
-
+        Musica.pararMusicaMenu();
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(combateScene);
         window.setTitle("Combate");
         window.show();
 
         FXCombateController cont = combate.getController();
-        cont.setData(jogador,combateGame,musica);
-        musica.pararMusica();
+        cont.setData(jogador,combateGame);
+        Musica.tocarMusicaCombate();
+
+
 
 
     }
@@ -176,6 +175,7 @@ public class FXMapaController {
         window.show();
 
         FXController cont = menu.getController();
-        cont.setData(jogador,musica);
+        cont.setData(jogador);
+        if(!Musica.estaTocando()) Musica.tocarMusicaMenu();
     }
 }

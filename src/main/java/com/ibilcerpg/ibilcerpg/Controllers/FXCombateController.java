@@ -5,7 +5,9 @@ import com.ibilcerpg.ibilcerpg.Design.CombatManager;
 import com.ibilcerpg.ibilcerpg.Design.Musica;
 import com.ibilcerpg.ibilcerpg.Main;
 import com.ibilcerpg.ibilcerpg.Personagens.Player;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -22,7 +24,6 @@ import java.io.IOException;
 public class FXCombateController {
 
     private Player jogador;
-    private Musica musica;
     private CombatManager combate;
 
     @FXML
@@ -44,18 +45,14 @@ public class FXCombateController {
     @FXML
     public Text vidaInimigo;
 
-    public void setData(Player jogador, CombatManager combate,Musica musica){
+    public void setData(Player jogador, CombatManager combate){
         this.jogador=jogador;
         this.combate=combate;
-        playerVidaProgressBar = new ProgressBar(100);
-        inimigoVidaProgressBar = new ProgressBar(100);
 
         vidaInimigo.setText("VIDA: " + combate.getAdversario().getVidaMaxima()+"/"+combate.getAdversario().getVidaMaxima());
         imprimirStatus();
 
-        musica = new Musica();
-        this.musica=musica;
-        musica.setMusica2();
+
 
     }
 
@@ -73,10 +70,10 @@ public class FXCombateController {
 
 
     @FXML
-    protected void atacarButtonClick() {
+    protected void atacarButtonClick(ActionEvent event) {
             if(!combate.verificarVivos()) {
                 try {
-                    terminate();
+                    terminate(event);
                     return;
                 } catch (IOException e) {
                     throw new RuntimeException(e);
@@ -88,7 +85,7 @@ public class FXCombateController {
             imprimirStatus();
         if(!combate.verificarVivos()) {
             try {
-                terminate();
+                terminate(event);
                 return;
             } catch (IOException e) {
                 throw new RuntimeException(e);
@@ -96,10 +93,10 @@ public class FXCombateController {
         }
     }
     @FXML
-    protected void defenderButtonClick(){
+    protected void defenderButtonClick(ActionEvent event){
         if(!combate.verificarVivos()) {
             try {
-                terminate();
+                terminate(event);
                 return;
             } catch (IOException e) {
                 throw new RuntimeException(e);
@@ -111,7 +108,7 @@ public class FXCombateController {
         imprimirStatus();
         if(!combate.verificarVivos()) {
             try {
-                terminate();
+                terminate(event);
                 return;
             } catch (IOException e) {
                 throw new RuntimeException(e);
@@ -120,21 +117,30 @@ public class FXCombateController {
 
     }
     @FXML
-    protected void habilidadeButtonClick(){
+    protected void habilidadeButtonClick(ActionEvent event){
         if(!combate.verificarVivos()) {
             try {
-                terminate();
+                terminate(event);
                 return;
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
         }
+
             combate.setAcao(jogador.jogadorHabilidade());
+            if (combate.getJogador().getInventario().getHabilidadeEquipada().getEfeito().getT() == "PASSIVA") {
+                imprimirTexto("A habilidade equipada é passiva, não é necessário ativá-la.");
+                return;
+            }
+            if (combate.getJogador().getInventario().getHabilidadeEquipada().checarTempoDeRecarga()) {
+                imprimirTexto("A habilidade equipada ainda está em tempo de recarga!");
+                return;
+            }
             combate.novoTurno(this);
             imprimirStatus();
-        if(!combate.verificarVivos()) {
+            if(!combate.verificarVivos()) {
             try {
-                terminate();
+                terminate(event);
                 return;
             } catch (IOException e) {
                 throw new RuntimeException(e);
@@ -142,10 +148,10 @@ public class FXCombateController {
         }
     }
     @FXML
-    protected void itemButtonClick(){
+    protected void itemButtonClick(ActionEvent event){
         if(!combate.verificarVivos()) {
             try {
-                terminate();
+                terminate(event);
                 return;
             } catch (IOException e) {
                 throw new RuntimeException(e);
@@ -156,7 +162,7 @@ public class FXCombateController {
             imprimirStatus();
         if(!combate.verificarVivos()) {
             try {
-                terminate();
+                terminate(event);
                 return;
             } catch (IOException e) {
                 throw new RuntimeException(e);
@@ -164,27 +170,31 @@ public class FXCombateController {
         }
     }
     @FXML
-    public void inimigoVidaProgressBarUpdate(){
-        inimigoVidaProgressBar.setProgress( (double) combate.getAdversario().getVidaAtual() / combate.getAdversario().getVidaMaxima());
-        vidaInimigo.setText("VIDA: "+ combate.getAdversario().getVidaAtual() + "/" + combate.getAdversario().getVidaMaxima());
+    public void inimigoVidaProgressBarUpdate() {
+        if (inimigoVidaProgressBar == null) inimigoVidaProgressBar = new ProgressBar();
+        inimigoVidaProgressBar.setProgress((double) combate.getAdversario().getVidaAtual() / combate.getAdversario().getVidaMaxima());
+        vidaInimigo.setText("VIDA: " + combate.getAdversario().getVidaAtual() + "/" + combate.getAdversario().getVidaMaxima());
     }
 
     @FXML
     public void playerVidaProgressBarUpdate(){
+        if(playerVidaProgressBar == null) playerVidaProgressBar = new ProgressBar();
         playerVidaProgressBar.setProgress((double) combate.getJogador().getVidaAtual() /combate.getJogador().getVidaMaxima());
     }
 
-    public void terminate() throws IOException {
+    public void terminate(ActionEvent event) throws IOException {
         FXMLLoader mapa = new FXMLLoader(Main.class.getResource("Mapa.fxml"));
         Scene mapaScene = new Scene(mapa.load());
 
-        Stage window = new Stage();//nao ta fechando
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
         window.setScene(mapaScene);
         window.setTitle("Mapa");
         window.show();
 
         FXMapaController cont = mapa.getController();
-        cont.setData(jogador,musica);
+        cont.setData(jogador);
+        Musica.tocarMusicaMenu();
+
 
     }
 

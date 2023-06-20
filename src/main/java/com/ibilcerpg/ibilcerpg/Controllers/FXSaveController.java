@@ -32,7 +32,6 @@ public class FXSaveController {
 
     private Player jogador;
     private Save save;
-    private Musica musica;
 
     @FXML
     public Label labSingleFile;
@@ -48,10 +47,9 @@ public class FXSaveController {
     private ObservableList<Pane> list = FXCollections.observableArrayList();;
 
 
-    public void setData(Player jogador,Musica musica){
+    public void setData(Player jogador){
         this.jogador=jogador;
-        musica = new Musica();
-        this.musica=musica;
+
     }
 
     @FXML
@@ -62,7 +60,7 @@ public class FXSaveController {
     @FXML
     public void carregarSaveButton(ActionEvent event) throws IOException {
         Player jogador =Save.carregarSave();
-        setData(jogador,musica);
+        setData(jogador);
 
         FileChooser fileChooser = new FileChooser();
         fileChooser.setInitialDirectory(new File("C:/Users/baron/OneDrive/Área de Trabalho/CODES/3SEM/IbilceRPG/src/main/resources/Saves"));
@@ -93,7 +91,8 @@ public class FXSaveController {
         window.show();
 
         FXController cont = menu.getController();
-        cont.setData(jogador,musica);
+        cont.setData(jogador);
+        if(!Musica.estaTocando()) Musica.tocarMusicaMenu();
     }
 
     @FXML
@@ -107,7 +106,8 @@ public class FXSaveController {
         window.show();
 
         FXMapaController cont = mapa.getController();
-        cont.setData(jogador,musica);
+        cont.setData(jogador);
+        if(!Musica.estaTocando()) Musica.tocarMusicaMenu();
 
     }
 

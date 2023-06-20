@@ -30,7 +30,8 @@ public class Main extends Application {
         stage.setResizable(false);
         stage.show();
         FXController cont = fxmlLoader.getController();
-        cont.setData(jogador,musica);
+        cont.setData(jogador);
+        Musica.tocarMusicaMenu();
 
     }
 

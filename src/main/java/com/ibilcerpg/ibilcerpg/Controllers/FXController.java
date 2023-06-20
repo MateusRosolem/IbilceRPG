@@ -28,15 +28,12 @@ public class FXController {
     @FXML
     public Button sairButton;
 
-    private Musica musica;
 
 
 
-    public void setData(Player jogador, Musica musica){
-        this.jogador=jogador;
-        musica = new Musica();
-        this.musica = musica;
-        musica.setMusica1();
+
+    public void setData(Player jogador) {
+        this.jogador = jogador;
     }
 
 
@@ -51,7 +48,8 @@ public class FXController {
         window.show();
 
         FXMapaController cont = mapa.getController();
-        cont.setData(jogador,musica);
+        cont.setData(jogador);
+        if(!Musica.estaTocando()) Musica.tocarMusicaMenu();
 
     }
 
@@ -66,7 +64,8 @@ public class FXController {
         window.show();
 
         FXCreditosController cont = creditos.getController();
-        cont.setData(jogador,musica);
+        cont.setData(jogador);
+        if(!Musica.estaTocando()) Musica.tocarMusicaMenu();
     }
 
     @FXML

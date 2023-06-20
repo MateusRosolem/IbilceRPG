@@ -9,7 +9,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="930.0" style="-fx-background-color: black;" styleClass=".bodybg2"  xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ibilcerpg.ibilcerpg.Controllers.FXCreditosController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="930.0" style="-fx-background-color: black;" styleClass=".bodybg2" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ibilcerpg.ibilcerpg.Controllers.FXCreditosController">
    <top>
       <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="CREDITOS" textAlignment="CENTER" wrappingWidth="371.0" BorderPane.alignment="CENTER">
          <font>
@@ -18,13 +18,13 @@
       </Text>
    </top>
    <center>
-      <TextArea editable="false" focusTraversable="false" mouseTransparent="true" prefHeight="332.0" prefWidth="930.0" style="-fx-control-inner-background:#000000; -fx-font-family: Consolas; -fx-highlight-fill: #ffffff; -fx-highlight-text-fill: #ffffff; -fx-text-fill: #ffffff; "  text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur elementum dui in convallis sagittis. Pellentesque a consectetur nunc, non tristique magna. Nunc ornare sit amet ligula vel posuere. Nunc pulvinar velit sem, a bibendum velit viverra ac. Fusce ut venenatis est, nec aliquam odio. Vestibulum hendrerit lectus nec massa tristique, id porttitor libero tempus. Morbi ac quam ac felis sagittis vestibulum a ac ante. Donec finibus risus sit amet tortor condimentum, id pulvinar mauris tincidunt. Sed venenatis ultrices blandit. Phasellus eget ante sit amet risus molestie consectetur.Fusce varius tincidunt mauris id tincidunt. Phasellus id quam eu nisi efficitur mollis id id diam. Donec eleifend metus at facilisis iaculis. Suspendisse volutpat tincidunt purus nec malesuada. Suspendisse ut lectus vel libero venenatis facilisis nec et erat. Maecenas eu nisi arcu. Sed felis enim, pellentesque nec lorem id, tincidunt faucibus libero.Maecenas consectetur ornare sapien, sit amet consectetur turpis elementum quis. Fusce a arcu id neque vestibulum blandit eu nec massa. Nulla a erat placerat, suscipit ex quis, iaculis nulla. Aliquam justo dui, finibus ac nulla quis, venenatis rutrum lectus. Phasellus imperdiet est urna, sit amet sollicitudin tortor vestibulum vitae. Fusce blandit risus eget lobortis tristique. Sed dapibus, justo nec rutrum dapibus, magna dolor ultrices justo, non lobortis tellus elit at dui. Ut vitae tincidunt leo, id rhoncus tellus. Donec eget dui enim.Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Nulla id ipsum aliquet, egestas enim eu, suscipit mi. Mauris metus mauris, maximus sed feugiat sit amet, ultricies in felis. Aenean imperdiet mollis dui. Ut pulvinar tincidunt libero eget volutpat. Nunc in interdum lacus. Suspendisse potenti. Ut a diam et nisi viverra fermentum. Donec rutrum elementum nisl non aliquam. Proin pharetra lacus vitae finibus porttitor. Nam euismod risus nec est rhoncus faucibus. Quisque dolor nulla, hendrerit sit amet velit a, euismod scelerisque ipsum. Praesent ac dui massa. Fusce at nulla felis. Etiam eleifend risus a ipsum porttitor placerat tincidunt accumsan ex.Sed quis lobortis lorem, a feugiat quam. Mauris pellentesque tellus id sollicitudin interdum. Nam vitae nunc eget quam rutrum molestie a in enim. Donec sed nibh ex. In urna quam, fermentum in felis in, dictum ultricies massa. Nam pellentesque enim libero. Integer vel mattis lorem." wrapText="true" BorderPane.alignment="CENTER">
+      <TextArea fx:id="texto" editable="false" focusTraversable="false" mouseTransparent="true" prefHeight="332.0" prefWidth="930.0" style="-fx-control-inner-background:#000000; -fx-font-family: Consolas; -fx-highlight-fill: #ffffff; -fx-highlight-text-fill: #ffffff; -fx-text-fill: #ffffff; " text=" " wrapText="true" BorderPane.alignment="CENTER">
          <effect>
             <ColorAdjust contrast="0.45" />
          </effect></TextArea>
    </center>
    <bottom>
-      <Button fx:id="voltarButton" blendMode="HARD_LIGHT" mnemonicParsing="false" onAction="#voltarButtonClick" prefHeight="68.0" prefWidth="147.0" style="-fx-background-color: black;" styleClass="label"  text="Voltar" textAlignment="CENTER" textFill="WHITE" wrapText="true" BorderPane.alignment="CENTER">
+      <Button fx:id="voltarButton" blendMode="HARD_LIGHT" mnemonicParsing="false" onAction="#voltarButtonClick" prefHeight="68.0" prefWidth="147.0" style="-fx-background-color: black;" styleClass="label" text="Voltar" textAlignment="CENTER" textFill="WHITE" wrapText="true" BorderPane.alignment="CENTER">
          <font>
             <Font name="8-bit HUD Regular" size="15.0" />
          </font>
