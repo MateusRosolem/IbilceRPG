@@ -27,16 +27,16 @@ import java.util.Objects;
 public class FXMapaController {
     private Player jogador;
 
+    Musica musica;
+
     CombatManager combateGame;
 
 
 
     @FXML
     public TextArea caixaDeTexto;
-
     @FXML
     public TextArea status;
-
     @FXML
     public Button inventarioButton;
     @FXML
@@ -45,7 +45,6 @@ public class FXMapaController {
     public Button salvarButton;
     @FXML
     public Button sairButton;
-
     @FXML
     public Button traduteiroButton;
     @FXML
@@ -57,15 +56,29 @@ public class FXMapaController {
 
     Object botaoPressionado;
 
-    private Musica musica;
 
 //    public void atualizarStatus(ActionEvent event,Player jogador){
 //        Object oi = event.getSource();
 //        status.setText("Nome:" + jogador.getNome() + "\nVida:" + jogador.getVida() + "\n");
 //    }
 
-    public void setData(Player jogador){
+    public void setData(Player jogador,Musica musica){
         this.jogador=jogador;
+        caixaDeTexto.setText("Este é o RPG do IBILCE!");
+        setStatusPlayer();
+
+
+
+        musica = new Musica();
+        this.musica=musica;
+    }
+
+    public void setStatusPlayer(){
+        if(jogador==null) jogador = new Player();
+        status.setText("Nome:" + jogador.getNome() + "\nExperiencia:" + jogador.getExperiencia()
+                + "\nNivel:" + jogador.getNivel() + "\nAtaque Base:" + jogador.getAtaqueBase() + "\nDefesa Base:" +
+                jogador.getDefesaBase() + "\nVida Atual:" + jogador.getVidaAtual() + "\nVida Maxima:" + jogador.getVidaMaxima()
+                + "\nVelocidade:" + jogador.getVelocidade());
     }
 
     public void selectedButton(ActionEvent event){
@@ -91,11 +104,6 @@ public class FXMapaController {
     }
 
 
-    public void setarMusica(Musica musica){
-        this.musica=musica;
-        musica.pararMusica(musica.getMusicaMenu());
-        musica.musicaCombate();
-    }
 
     @FXML
     protected void inventarioClickButton(ActionEvent event) throws IOException {
@@ -108,7 +116,7 @@ public class FXMapaController {
         window.show();
 
         FXInventarioController cont = inventario.getController();
-        cont.setData(jogador);
+        cont.setData(jogador,musica);
     }
 
     @FXML
@@ -122,7 +130,7 @@ public class FXMapaController {
         window.show();
 
         FXSaveController cont = save.getController();
-        cont.setData(jogador);
+        cont.setData(jogador,musica);
 
     }
 
@@ -133,13 +141,13 @@ public class FXMapaController {
         if(jogador==null) jogador = new Player();
 
         if( botaoPressionado.equals(traduteiroButton) ){
-            combateGame= new CombatManager(jogador, new Traduteiro());
+            combateGame= new CombatManager(jogador, new <Traduteiro>Traduteiro());
         }else if(botaoPressionado.equals(computeiroButton)){
-            combateGame= new CombatManager(jogador, new Alejandro());
+            combateGame= new CombatManager(jogador, new <Alejandro>Alejandro());
         }else if(botaoPressionado.equals(biologoButton)){
-            combateGame= new CombatManager(jogador, new Biologo());
+            combateGame= new CombatManager(jogador, new <Biologo>Biologo());
         }else if(botaoPressionado.equals(matematicoButton)){
-            combateGame= new CombatManager(jogador, new Matematico());
+            combateGame= new CombatManager(jogador, new <Matematico>Matematico());
         }
 
 
@@ -152,10 +160,8 @@ public class FXMapaController {
         window.show();
 
         FXCombateController cont = combate.getController();
-        cont.setData(jogador,combateGame);
-        cont.setarMusica(musica);
-       // combateGame.iniciarCombate();
-
+        cont.setData(jogador,combateGame,musica);
+        musica.pararMusica();
 
 
     }
@@ -170,6 +176,6 @@ public class FXMapaController {
         window.show();
 
         FXController cont = menu.getController();
-        cont.setData(jogador);
+        cont.setData(jogador,musica);
     }
 }

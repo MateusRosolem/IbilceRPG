@@ -55,7 +55,10 @@ public class Personagem implements Serializable {
     }
 
     public boolean estaVivo(){
-        if(getVidaAtual()<=0) setVivo(false);
+        if(getVidaAtual()<=0) {
+            setVivo(false);
+            return false;
+        }
         return vivo;
     }
     public Acao<String,Object> turnoNoCombate(){

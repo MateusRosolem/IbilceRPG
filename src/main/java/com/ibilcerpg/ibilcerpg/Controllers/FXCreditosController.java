@@ -1,5 +1,6 @@
 package com.ibilcerpg.ibilcerpg.Controllers;
 
+import com.ibilcerpg.ibilcerpg.Design.Musica;
 import com.ibilcerpg.ibilcerpg.Main;
 import com.ibilcerpg.ibilcerpg.Personagens.Player;
 import javafx.event.ActionEvent;
@@ -16,13 +17,17 @@ import java.util.Objects;
 
 public class FXCreditosController {
     private Player jogador;
+
+    private Musica musica;
     @FXML
     public Button voltarButton;
 
 
 
-    public void setData(Player jogador){
+    public void setData(Player jogador,Musica musica){
         this.jogador=jogador;
+        musica = new Musica();
+        this.musica=musica;
     }
 
     @FXML
@@ -36,7 +41,7 @@ public class FXCreditosController {
         window.show();
 
         FXController cont = menu.getController();
-        cont.setData(jogador);
+        cont.setData(jogador,musica);
 
     }
 

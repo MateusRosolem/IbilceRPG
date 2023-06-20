@@ -9,24 +9,23 @@ import com.ibilcerpg.ibilcerpg.SuperClasses.*;
 
 import java.io.IOException;
 
-public class CombatManager {
+public class CombatManager<T extends Inimigo>{
     private Player jogador;
-    private Inimigo adversario;
+    private T adversario;
     private boolean turno;
     private Acao<String, Object> acao;
 
-    public CombatManager(Player jogador, Inimigo adversario) {
+    public CombatManager(Player jogador, T adversario) {
         this.jogador = jogador;
         this.adversario = adversario;
         iniciarCombate();
-        novoTurno();
     }
 
     public Player getJogador() {
         return jogador;
     }
 
-    public Inimigo getAdversario() {
+    public T getAdversario() {
         return adversario;
     }
 
@@ -38,22 +37,27 @@ public class CombatManager {
         System.out.println("--------------------------------------------------------------------------------------");
     }
 
-    private boolean verificarVivos(){
+    public boolean verificarVivos(){
         if(jogador.estaVivo() && adversario.estaVivo()) return true;
-        else return false;
+        return false;
     }
 
-    public void novoTurno(/*FXCombateController UI*/){
+    public void novoTurno(FXCombateController UI){
         imprimirStatus();
 
-            //turno jogador
-            jogador.ativarHabilidadePassiva();
-            acao = jogador.turnoNoCombate();
-            adversario.reacaoInimigo(acao);
-            //UI.vidaProgressBarUpdate(UI.vidaProgressBar);
-            jogador.getInventario().getHabilidadeEquipada().decrementarRecarga();//diminui o tempo de recarga da habilidada em 1
-            jogador.incrementarContadorTurnos();
-        imprimirStatus();
+        //turno jogador
+        UI.imprimirTexto("Turno do " + jogador.getNome());
+
+        jogador.ativarHabilidadePassiva();
+        acao = jogador.turnoNoCombate();
+        UI.imprimirTexto(acao.getT()+"\n");
+        adversario.reacaoInimigo(acao);
+        UI.inimigoVidaProgressBarUpdate();
+        jogador.getInventario().getHabilidadeEquipada().decrementarRecarga();//diminui o tempo de recarga da habilidada em 1
+        jogador.incrementarContadorTurnos();
+        UI.imprimirStatus();
+        UI.imprimirTexto(UI.caixaDeTexto.getText() + "Vida do jogador: " + jogador.getVidaAtual() + "\nVida do " +
+                "adversario" + adversario.getVidaAtual());
 
         try {
             Thread.sleep(500);
@@ -61,19 +65,31 @@ public class CombatManager {
             throw new RuntimeException(e);
         }
 
+        if(!verificarVivos()){
+            finalizarCombate(UI);
+            return;
+        }
+        UI.imprimirTexto("Turno do " + adversario.getNome());
         //turno adversario
-            System.out.println("Turno do " + adversario.getNome());
-            acao = adversario.turnoNoCombate();
-            jogador.reacaoJogador(acao);
-            //UI.vidaProgressBarUpdate(UI.playerVidaProgresBar);
+        System.out.println("Turno do " + adversario.getNome());
+        acao = adversario.turnoNoCombate();
+        jogador.reacaoJogador(acao);
+        UI.playerVidaProgressBarUpdate();
 
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        UI.imprimirTexto("Turno do " + jogador.getNome());
 
-
-            if(!verificarVivos()) finalizarCombate(/*UI*/);
-            else novoTurno(/*UI*/);
+        if(!verificarVivos()){
+            finalizarCombate(UI);
+            return;
+        }
     }
 
-    private void finalizarCombate(/*FXCombateController */){
+    private void finalizarCombate(FXCombateController UI){
         if (jogador.estaVivo()) {
             System.out.println("--------------------------------------------------------------------------------------");
             System.out.println("JOGADOR VENCEU!!!");
@@ -85,11 +101,6 @@ public class CombatManager {
             jogador.setVivo(true);
         }
         jogador.setContadorTurnos(0);
-//        try {
-//            UI.terminate();
-//        } catch (IOException e) {
-//
-//        }
     }
 
 

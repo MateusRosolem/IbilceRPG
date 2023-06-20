@@ -14,61 +14,66 @@ public class Player extends Personagem implements Serializable {
     private Inventario inventario;
     private Scanner input = new Scanner(System.in);
     private MissaoManager missoes = new MissaoManager();
-    private Acao<String,Object> turno = new Acao<String,Object>();
-    private Acao<String,Object> turnodefault = new Acao<String,Object>("DEFAULT","DEFAULT");
+    private Acao<String, Object> turno = new Acao<String, Object>();
+    private Acao<String, Object> turnodefault = new Acao<String, Object>("DEFAULT", "DEFAULT");
 
     private boolean itemDisponivel;
-    
-    public Player(){
-        super("Jogador",true,0,0,1,1,
-                10, 1,1,1f);
+
+    public Player() {
+        super("Jogador", true, 0, 0, 1, 1,
+                10, 1, 1, 1f);
         this.setNivel(1);
         this.inventario = new Inventario();
         this.setExperiencia(0);
 
-        this.setAtaqueBase(7 + (getNivel()-1));
-        this.setDefesaBase(3 + (getNivel()-1));
-        this.setVidaMaxima(10 + 10*getNivel());
-        this.setVidaAtual(10 + 10*getNivel());
+        this.setAtaqueBase(7 + (getNivel() - 1));
+        this.setDefesaBase(3 + (getNivel() - 1));
+        this.setVidaMaxima(10 + 10 * getNivel());
+        this.setVidaAtual(10 + 10 * getNivel());
     }
+
+
 
     public int getExperiencia() {
         return experiencia;
     }
+
     public void setExperiencia(int experiencia) {
         this.experiencia = experiencia;
     }
+
     public int getNivel() {
         return nivel;
     }
+
     public void setNivel(int nivel) {
         this.nivel = nivel;
     }
 
-    public Acao<String,Object> jogadorAtacar(){
+    public Acao<String, Object> jogadorAtacar() {
         turno.setT("ATAQUE");
-        turno.setV((getAtaqueBase()*getMultiplicadorAtaque())*getDebuffDano());
+        turno.setV((getAtaqueBase() * getMultiplicadorAtaque()) * getDebuffDano());
         System.out.println(turno.getT());
         setDebuffDano(1f);
         return turno;
     }
 
-    public Acao<String,Object> jogadorDefender(){
+    public Acao<String, Object> jogadorDefender() {
         turno.setT("DEFESA");
-        turno.setV(0.75f-(getNivel()/50));
+        turno.setV(0.75f - (getNivel() / 50));
         System.out.println(turno.getT());
         setDebuffDano(1f);
         return turno;
     }
 
-    public Acao<String,Object> jogadorHabilidade(){
-        if(getInventario().getHabilidadeEquipada().getEfeito().getT() == "PASSIVA") {
+    public Acao<String, Object> jogadorHabilidade() {
+        if (getInventario().getHabilidadeEquipada().getEfeito().getT() == "PASSIVA") {
             System.out.println("A habilidade equipada é passiva, não é necessário ativá-la.");
             return turnoNoCombate();
         }
-        if(getInventario().getHabilidadeEquipada().checarTempoDeRecarga()){
+        if (getInventario().getHabilidadeEquipada().checarTempoDeRecarga()) {
             turno.setV(usarHabilidade());
-        }else{
+        } else {
             return turnoNoCombate();
         }
         turno.setT("HABILIDADE");
@@ -76,10 +81,10 @@ public class Player extends Personagem implements Serializable {
         acaoPropria(turno);
         setDebuffDano(1f);
         return turno;
-
     }
-    public Acao<String,Object> jogadorItem(){
-        if(isItemDisponivel()) {
+
+    public Acao<String, Object> jogadorItem() {
+        if (isItemDisponivel()) {
             turno.setT("ITEM");
             System.out.println(turno.getT());
             if (getContadorTurnos() < 6) {
@@ -91,11 +96,10 @@ public class Player extends Personagem implements Serializable {
             }
             acaoPropria(turno);
             return turno;
-        }else{
+        } else {
             System.out.println("O item ja foi usado nesse combate!");
             return turnodefault;
         }
-
     }
 
 
@@ -109,15 +113,15 @@ public class Player extends Personagem implements Serializable {
 //        Acao<String,Object> turno = new Acao<String,Object>();
 //        System.out.println("Turno do Jogador, selecione 1 para atacar, 2 para defender e 3 para usar habilidade");
 //        //String op =new String("Oi"); //= input.nextLine();
+
+
     @Override
-    public Acao<String,Object> turnoNoCombate(){
-
-
+    public Acao<String, Object> turnoNoCombate() {
         System.out.println("Turno do Jogador, selecione 1 para atacar, 2 para defender, 3 para usar habilidade e 4 para usar item.");
         String op = input.nextLine();
 
 
-        switch(op){
+        switch (op) {
             case "1":
                 return jogadorAtacar();
 
@@ -129,42 +133,25 @@ public class Player extends Personagem implements Serializable {
 
             case "4":
                 return jogadorItem();
+            default: return jogadorAtacar();
 
-//        switch(op){
-//            case "1":
-//                return jogadorAtacar();
-//
-//            case "2":
-//                return jogadorDefender();
-//
-//            case "3":
-//                return jogadorHabilidade();
-//
-//            case "4":
-//                return jogadorItem();
-//
-//            default:
-//                return turnodefault;
-//        }
+        }
+    }
+    private void acaoPropria (Acao < String, Object > turno){
 
-//
-   // }
-
-    private void acaoPropria(Acao<String,Object> turno){
-
-        switch(turno.getT()){
+        switch (turno.getT()) {
             case "HABILIDADE":
-                Acao<String,Object> efeito = getInventario().getHabilidadeEquipada().getEfeito();
-                switch((String)efeito.getT()){
+                Acao<String, Object> efeito = getInventario().getHabilidadeEquipada().getEfeito();
+                switch ((String) efeito.getT()) {
                     case "VAMPIRISMO":
-                        receberCura((float)efeito.getV());
+                        receberCura((float) efeito.getV());
                 }
                 break;
             case "ITEM":
-                if((String)turno.getV() == "RU"){
-                    receberCura((float)getVidaMaxima()/5);
-                }else if((String)turno.getV() == "XEPA"){
-                    receberCura((float)(getVidaMaxima()-getVidaAtual())/2);
+                if ((String) turno.getV() == "RU") {
+                    receberCura((float) getVidaMaxima() / 5);
+                } else if ((String) turno.getV() == "XEPA") {
+                    receberCura((float) (getVidaMaxima() - getVidaAtual()) / 2);
                 }
                 setItemDisponivel(false);
                 break;
@@ -172,7 +159,9 @@ public class Player extends Personagem implements Serializable {
 
     }
 
-    public void iniciarCombate(){
+
+
+    public void iniciarCombate () {
         setVidaAtual(getVidaMaxima());
         setMultiplicadorAtaque(1);
         setMultiplicadorDefesa(1);
@@ -180,120 +169,121 @@ public class Player extends Personagem implements Serializable {
         ativarHabilidadePassiva();
     }
 
-    private Acao<String,Object> usarHabilidade(){
-        Acao<String,Object> efeito =  inventario.getHabilidadeEquipada().getEfeito();
+    private Acao<String, Object> usarHabilidade () {
+        Acao<String, Object> efeito = inventario.getHabilidadeEquipada().getEfeito();
         inventario.getHabilidadeEquipada().ativarRecarga();
-        if(efeito.getT() == "DANO") return efeito;
-        if(efeito.getT() == "VAMPIRISMO") return efeito;
+        if (efeito.getT() == "DANO") return efeito;
+        if (efeito.getT() == "VAMPIRISMO") return efeito;
         //SE O EFEITO FOR PROPRIO, ESSA FUNCAO TEM Q RETORNAR NULO!!!
-    
+
         return null;
     }
 
-    public void ativarHabilidadePassiva(){
+    public void ativarHabilidadePassiva () {
 
-        if(getInventario().getHabilidadeEquipada().getEfeito().getT() == "PASSIVA"){
-            String efeito = (String)getInventario().getHabilidadeEquipada().getEfeito().getV();
+        if (getInventario().getHabilidadeEquipada().getEfeito().getT() == "PASSIVA") {
+            String efeito = (String) getInventario().getHabilidadeEquipada().getEfeito().getV();
 
-            switch(efeito){
+            switch (efeito) {
                 case "CURA":
                     System.out.println("Habilidade Passiva: Cura");
-                    receberCura(getVidaMaxima()/20);
+                    receberCura(getVidaMaxima() / 20);
                     System.out.println("--------------------------------------------------------------------------------------");
                     break;
             }
         }
-        
+
     }
 
-    public void receberExperiencia(int experienca){
-        System.out.println("Jogador recebeu "+ experienca + " pontos de experiência!!!");
+    public void receberExperiencia ( int experienca){
+        System.out.println("Jogador recebeu " + experienca + " pontos de experiência!!!");
         experienca += getExperiencia();
         setExperiencia(experienca);
         subirDeNivel();
     }
 
-    private void subirDeNivel(){
-        if(experiencia >= nivel*10){
+    private void subirDeNivel () {
+        if (experiencia >= nivel * 10) {
             this.setNivel(aumentarNivel());
             System.out.println("Jogador subiu para o nivel " + getNivel() + "!!!");
-            System.out.println("Vida Maxima aumentada para: "+ SubirDeNivelVida());
+            System.out.println("Vida Maxima aumentada para: " + SubirDeNivelVida());
             System.out.println("Ataque aumentado para: " + SubirDeNivelAtaque());
-            System.out.println("Defesa aumentada para: "+ SubirDeNivelDefesa());
-            if(experiencia >= nivel*10) subirDeNivel();
-        }else{
-            System.out.println("Faltam " + (10 - getExperiencia()%10) + " pontos de experiência para subir de nível!");
+            System.out.println("Defesa aumentada para: " + SubirDeNivelDefesa());
+            if (experiencia >= nivel * 10) subirDeNivel();
+        } else {
+            System.out.println("Faltam " + (10 - getExperiencia() % 10) + " pontos de experiência para subir de nível!");
         }
     }
 
-    private int SubirDeNivelAtaque(){
+    private int SubirDeNivelAtaque () {
         int maisAtaque = this.getAtaqueBase();
         maisAtaque++;
         setAtaqueBase(maisAtaque);
         return maisAtaque;
     }
-    private int SubirDeNivelDefesa(){
+    private int SubirDeNivelDefesa () {
         int maisDefesa = this.getDefesaBase();
         maisDefesa++;
         setDefesaBase(maisDefesa);
         return maisDefesa;
     }
-    private int SubirDeNivelVida(){
+    private int SubirDeNivelVida () {
         int maisVida = this.getVidaMaxima();
-        maisVida = 10 + 10*getNivel();
+        maisVida = 10 + 10 * getNivel();
         setVidaMaxima(maisVida);
         return maisVida;
     }
-    private int aumentarNivel(){
-        return this.getNivel()+1;
+    private int aumentarNivel () {
+        return this.getNivel() + 1;
     }
 
-    public void reacaoJogador(Acao<String,Object> acao){
-        switch(acao.getT()){
-            case "ATAQUE": 
-                receberDano((Float)acao.getV());
+    public void reacaoJogador (Acao < String, Object > acao){
+        switch (acao.getT()) {
+            case "ATAQUE":
+                receberDano((Float) acao.getV());
                 break;
             case "DEFESA":
-                setDebuffDano((Float)acao.getV());
+                setDebuffDano((Float) acao.getV());
                 break;
             case "DANO_REAL":
-                setVidaAtual(getVidaAtual() - (int)acao.getV());
+                setVidaAtual(getVidaAtual() - (int) acao.getV());
                 System.out.println("Dano ao jogador: " + acao.getV());
                 break;
         }
-        
+
     }
     @Override
-    public int receberDano(float dano){
+    public int receberDano ( float dano){
         System.out.println("Dano ao jogador: " + super.receberDano(dano));
         return Math.round(dano);
     }
 
-    public void receberMissao(Missao<? extends Habilidade> missao){
+    public void receberMissao (Missao < ? extends Habilidade > missao){
         missoes.adicionarMissao(missao);
     }
-   
-    public Inventario getInventario() {
+
+    public Inventario getInventario () {
         return inventario;
     }
 
-    public void setInventario(Inventario inventario) {
+    public void setInventario (Inventario inventario){
         this.inventario = inventario;
     }
 
-    public MissaoManager getMissoes() {
+    public MissaoManager getMissoes () {
         return missoes;
     }
 
-    public void setMissoes(MissaoManager missoes) {
+    public void setMissoes (MissaoManager missoes){
         this.missoes = missoes;
     }
 
-    public boolean isItemDisponivel() {
+    public boolean isItemDisponivel () {
         return itemDisponivel;
     }
 
-    public void setItemDisponivel(boolean itemDisponivel) {
+    public void setItemDisponivel ( boolean itemDisponivel){
         this.itemDisponivel = itemDisponivel;
     }
 }
+

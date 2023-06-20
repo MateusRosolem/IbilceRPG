@@ -30,13 +30,13 @@ public class FXController {
 
     private Musica musica;
 
-    public void setarMusica(Musica musica){
-        this.musica=musica;
-        musica.musicaMenu();
-    }
 
-    public void setData(Player jogador){
+
+    public void setData(Player jogador, Musica musica){
         this.jogador=jogador;
+        musica = new Musica();
+        this.musica = musica;
+        musica.setMusica1();
     }
 
 
@@ -51,8 +51,7 @@ public class FXController {
         window.show();
 
         FXMapaController cont = mapa.getController();
-        cont.setData(jogador);
-        //cont.setarMusica(musica);
+        cont.setData(jogador,musica);
 
     }
 
@@ -67,7 +66,7 @@ public class FXController {
         window.show();
 
         FXCreditosController cont = creditos.getController();
-        cont.setData(jogador);
+        cont.setData(jogador,musica);
     }
 
     @FXML

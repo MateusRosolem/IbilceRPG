@@ -1,5 +1,6 @@
 package com.ibilcerpg.ibilcerpg.Controllers;
 
+import com.ibilcerpg.ibilcerpg.Design.Musica;
 import com.ibilcerpg.ibilcerpg.Main;
 import com.ibilcerpg.ibilcerpg.Personagens.Player;
 import com.ibilcerpg.ibilcerpg.SuperClasses.Habilidade;
@@ -26,6 +27,8 @@ import java.util.Objects;
 
 public class FXInventarioController {
     private Player jogador;
+    private Musica musica;
+
     @FXML
     public Button voltarButton;
     @FXML
@@ -55,11 +58,15 @@ public class FXInventarioController {
     }
 
 
-    public void setData(Player jogador) {
+    public void setData(Player jogador, Musica musica) {
         this.jogador = jogador;
+        statusPlayer = new TextArea();
         setStatusPlayer();
         jogador.getInventario().printInventario();
         setDescricaoItem("Este é seu inventário");
+
+        musica = new Musica();
+        this.musica=musica;
 
         ObservableList<Label> ob = FXCollections.observableArrayList();
 //        for(Habilidade hab : jogador.getInventario().getHabilidades()){
@@ -103,7 +110,7 @@ public class FXInventarioController {
         window.show();
 
         FXMapaController cont = mapa.getController();
-        cont.setData(jogador);
+        cont.setData(jogador,musica);
     }
 
 

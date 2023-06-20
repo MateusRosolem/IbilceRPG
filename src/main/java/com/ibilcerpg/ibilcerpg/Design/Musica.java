@@ -10,16 +10,24 @@ public class Musica {
     MediaPlayer musicaMenu;
     MediaPlayer musicaCombate;
 
-    public void musicaMenu(){
+
+    public void setMusica1(){
         Media media = new Media(new File("src/main/resources/Menu.mp3").toURI().toString());
         MediaPlayer musicaMenu = new MediaPlayer(media);
         musicaMenu.setVolume(0.5);
         musicaMenu.setAutoPlay(true);
     }
+    public void setMusica2(){
+        Media media = new Media(new File("src/main/resources/Combate.mp3").toURI().toString());
+        MediaPlayer musicaCombate = new MediaPlayer(media);
+        musicaCombate.setVolume(0.5);
+        musicaCombate.setAutoPlay(true);
+    }
 
-
-    public void pararMusica(MediaPlayer musica){
-        musica.pause();
+    public void pararMusica()
+    {
+        if(musicaCombate!=null) musicaCombate.pause();
+        if(musicaMenu!=null) musicaMenu.pause();
     }
 
     public void musicaCombate(){
