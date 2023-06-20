@@ -51,7 +51,7 @@ public class Main extends Application {
 
         int op = -1;
         while (op != 0){
-            System.out.println("1 - Biologo , 2 - Tradutor, 3 - Matematico, 4 - inventario");
+            System.out.println("1 - Biologo , 2 - Tradutor, 3 - Matematico, 4 - Item, 5 - Inventario");
             op = input.nextInt();
             main.opcoes(op,jogador);
         }

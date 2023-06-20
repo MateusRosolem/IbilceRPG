@@ -73,35 +73,55 @@ public class FXCombateController {
     @FXML
     protected void atacarButtonClick(){
         if(verificarTurno()) {
+
+            combate.setAcao(jogador.jogadorAtacar());
+            vidaProgressBarUpdate(vidaProgressBar);
+
             // jogador.ataque();
             // vidaProgressBarUpdate(vidaProgressBar,dano);
             imprimirStatus();
+
         }
 
     }
     @FXML
     protected void defenderButtonClick(){
         if(verificarTurno()) {
+
+            combate.setAcao(jogador.jogadorDefender());
+
            // jogador.defesa();
             imprimirStatus();
+
         }
 
     }
     @FXML
     protected void habilidadeButtonClick(){
         if(verificarTurno()) {
+
+            combate.setAcao(jogador.jogadorHabilidade());
+            vidaProgressBarUpdate(playerVidaProgresBar);
+
             //jogador.habilidade();
             //vidaProgressBarUpdate(playerVidaProgresBar,dano);
             imprimirStatus();
+
         }
     }
     @FXML
     protected void itemButtonClick(){
         if(verificarTurno()) {
+
+            combate.setAcao(jogador.jogadorItem());
+            vidaProgressBarUpdate(playerVidaProgresBar);
+    }
+
             //  jogador.item();
             // vidaProgressBarUpdate(playerVidaProgresBar,);
             imprimirStatus();
         }
+
 
     }
     @FXML

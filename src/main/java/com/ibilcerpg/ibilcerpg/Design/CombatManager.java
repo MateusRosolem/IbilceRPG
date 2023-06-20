@@ -1,6 +1,7 @@
 package com.ibilcerpg.ibilcerpg.Design;
 
 
+import com.ibilcerpg.ibilcerpg.Controllers.FXCombateController;
 import com.ibilcerpg.ibilcerpg.SuperClasses.*;
 import com.ibilcerpg.ibilcerpg.Objetos.*;
 import com.ibilcerpg.ibilcerpg.Personagens.*;
@@ -38,6 +39,7 @@ public class CombatManager {
 
     public void iniciarCombate() {
         jogador.getInventario().getHabilidadeEquipada().reiniciarRecarga();
+        jogador.setItemDisponivel(true);
         if (jogador.getVelocidade() >= adversario.getVelocidade()) {
             turno = true;
         }
@@ -55,6 +57,7 @@ public class CombatManager {
                     acao = jogador.turnoNoCombate();
                     adversario.reacaoInimigo(acao);
                     jogador.getInventario().getHabilidadeEquipada().decrementarRecarga();//diminui o tempo de recarga da habilidada em 1
+                    jogador.incrementarContadorTurnos();
                     turno = false;
                 } else {
                     acao = adversario.turnoNoCombate();
@@ -62,7 +65,7 @@ public class CombatManager {
                     turno = true;
                 }
             }
-            jogador.desativarHabilidadePassiva();
+            jogador.setContadorTurnos(0);
 
             if (jogador.estaVivo()) {
                 System.out.println("--------------------------------------------------------------------------------------");
@@ -83,5 +86,14 @@ public class CombatManager {
 //
 //    }
 
+    }
+
+
+    public Acao<String, Object> getAcao() {
+        return acao;
+    }
+
+    public void setAcao(Acao<String, Object> acao) {
+        this.acao = acao;
     }
 }

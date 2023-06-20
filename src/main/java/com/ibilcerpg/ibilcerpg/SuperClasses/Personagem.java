@@ -18,6 +18,7 @@ public class Personagem implements Serializable {
     private float multiplicadorAtaque;
     private float multiplicadorDefesa;
     private float debuffDano;
+    private int contadorTurnos;
 
     public Personagem(String nome, boolean vivo, int vidaMaxima, int vidaAtual, int ataqueBase, int defesaBase, int velocidade, float multiplicadorAtaque, float multiplicadorDefesa, float debuffDano) {
         this.nome = nome;
@@ -61,6 +62,9 @@ public class Personagem implements Serializable {
         return null;
     }
 
+    public void incrementarContadorTurnos(){
+        setContadorTurnos(getContadorTurnos()+1);
+    }
 
 
 
@@ -124,6 +128,12 @@ public class Personagem implements Serializable {
     }
     public void setDebuffDano(float debuffDano) {
         this.debuffDano = debuffDano;
+    }
+    public int getContadorTurnos() {
+        return contadorTurnos;
+    }
+    public void setContadorTurnos(int contadorTurnos) {
+        this.contadorTurnos = contadorTurnos;
     }
 
 }
