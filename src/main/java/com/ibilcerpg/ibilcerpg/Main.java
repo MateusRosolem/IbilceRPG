@@ -51,7 +51,7 @@ public class Main extends Application {
 
         int op = -1;
         while (op != 0){
-            System.out.println("1 - Biologo , 2 - Tradutor, 3 - Matematico, 4 - Item, 5 - Inventario");
+            System.out.println("1 - Biologo , 2 - Tradutor, 3 - Matematico, 4 - Físico, 5 - Inventario");
             op = input.nextInt();
             main.opcoes(op,jogador);
         }
@@ -61,7 +61,7 @@ public class Main extends Application {
     public void opcoes(int op, Player jogador){
         switch (op){
             case 1:
-                combate = new CombatManager(jogador, new Fisico());
+                combate = new CombatManager(jogador, new Biologo());
                 break;
             case 2 :
                 combate = new CombatManager(jogador, new Traduteiro());
@@ -70,6 +70,9 @@ public class Main extends Application {
                 combate = new CombatManager(jogador, new Matematico());
                 break;
             case 4:
+                combate = new CombatManager(jogador, new Fisico());
+                break;
+            case 5:
                 jogador.getInventario().printInventario();
                 System.out.println("Escolha qual item quer equipar");
                 int i = input.nextInt();

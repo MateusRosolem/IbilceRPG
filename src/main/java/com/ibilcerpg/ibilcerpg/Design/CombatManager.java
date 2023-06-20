@@ -62,6 +62,7 @@ public class CombatManager {
         }
 
         //turno adversario
+            System.out.println("Turno do " + adversario.getNome());
             acao = adversario.turnoNoCombate();
             jogador.reacaoJogador(acao);
             //UI.vidaProgressBarUpdate(UI.playerVidaProgresBar);

@@ -70,27 +70,27 @@ public class FXCombateController {
     @FXML
     protected void atacarButtonClick(){
             combate.setAcao(jogador.jogadorAtacar());
-            combate.novoTurno(this);
+            combate.novoTurno(/*this*/);
     }
     @FXML
     protected void defenderButtonClick(){
         combate.setAcao(jogador.jogadorDefender());
         vidaProgressBarUpdate(playerVidaProgresBar);
-        combate.novoTurno(this);
+        combate.novoTurno(/*this*/);
 
     }
     @FXML
     protected void habilidadeButtonClick(){
             combate.setAcao(jogador.jogadorHabilidade());
             vidaProgressBarUpdate(playerVidaProgresBar);
-            combate.novoTurno(this);
+            combate.novoTurno(/*this*/);
 
     }
     @FXML
     protected void itemButtonClick(){
             combate.setAcao(jogador.jogadorItem());
             vidaProgressBarUpdate(playerVidaProgresBar);
-            combate.novoTurno(this);
+            combate.novoTurno(/*this*/);
 
     }
     @FXML
