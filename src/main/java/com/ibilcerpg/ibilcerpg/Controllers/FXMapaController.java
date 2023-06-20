@@ -14,14 +14,9 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
-import java.io.File;
 import java.io.IOException;
-import java.util.Objects;
-
 
 
 public class FXMapaController {
@@ -54,7 +49,12 @@ public class FXMapaController {
     public Button biologoButton;
     @FXML
     public Button computeiroButton;
-
+    public Button bibliotecariaButton;
+    public Button cozinhieroButton;
+    public Button atleticaButton;
+    public Button bateriaButton;
+    public Button dAFButton;
+    public Button entorpecidaButton;
     Object botaoPressionado;
 
     private Musica musica;
@@ -171,5 +171,24 @@ public class FXMapaController {
 
         FXController cont = menu.getController();
         cont.setData(jogador);
+    }
+
+    public void bibliotecariaButtonClick(ActionEvent event){
+        jogador.receberMissao(Bibliotecaria.darMissao(this));
+    }
+    public void cozinheiroButtonClick(ActionEvent event){
+        jogador.receberMissao(Cozinheiro.darMissao(this));
+    }
+    public void atleticaButtonClick(ActionEvent event){
+        jogador.receberMissao(Atletica.darMissao(this));
+    }
+    public void bateriaButtonClick(ActionEvent event){
+        jogador.receberMissao(Bateria.darMissao(this));
+    }
+    public void DAFButtonClick(ActionEvent event){
+        jogador.receberMissao(DAF.darMissao(this));
+    }
+    public void entorpecidaButtonClick(ActionEvent event){
+        jogador.receberMissao(Entorpecida.darMissao(this));
     }
 }

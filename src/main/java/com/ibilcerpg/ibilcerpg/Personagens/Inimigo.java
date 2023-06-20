@@ -81,7 +81,7 @@ public class Inimigo extends Personagem{
                         case "DANO":
                             receberDano((Float)efeitoHabilidade.getV());
                             break;
-                        case "REDUCAO_DE_DANO":
+                        case "REDUCAO_DE_ATAQUE":
                             setMultiplicadorAtaque((Float)efeitoHabilidade.getV());
                             break;
                         case "VAMPIRISMO":

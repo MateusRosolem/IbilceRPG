@@ -220,8 +220,18 @@ public class Player extends Personagem implements Serializable {
 
             switch(efeito){
                 case "CURA":
-                    System.out.println("Habilidade Passiva: Cura");
+                    System.out.println("Habilidade Passiva: Cura!");
                     receberCura(getVidaMaxima()/20);
+                    System.out.println("--------------------------------------------------------------------------------------");
+                    break;
+                case "AUMENTAR_DANO":
+                    System.out.println("Habilidade Passiva: Aumentar Dano!");
+                    setMultiplicadorAtaque(1.5f);
+                    System.out.println("--------------------------------------------------------------------------------------");
+                    break;
+                case "AUMENTAR_DEFESA":
+                    System.out.println("Habilidade Passiva: Aumentar Defesa!");
+                    setMultiplicadorDefesa(1.5f);
                     System.out.println("--------------------------------------------------------------------------------------");
                     break;
             }

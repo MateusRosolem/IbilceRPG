@@ -44,10 +44,14 @@ public class Main extends Application {
 
         Main main = new Main();
         Player jogador = new Player();
-        Alejandro coordenador = new Alejandro();
-        jogador.receberMissao(coordenador.primeiraMissao);
-        jogador.receberMissao(coordenador.segundaMissao);
-        jogador.receberMissao(coordenador.terceiraMissao);
+//        Alejandro coordenador = new Alejandro();
+//        jogador.receberMissao(coordenador.primeiraMissao);
+//        jogador.receberMissao(coordenador.segundaMissao);
+//        jogador.receberMissao(coordenador.terceiraMissao);
+
+//        jogador.receberMissao(Cozinheiro.darMissao(this));
+//        jogador.receberMissao(Alejandro.darMissao(this));
+//        jogador.receberMissao(Bibliotecaria.darMissao(this));
 
         int op = -1;
         while (op != 0){
