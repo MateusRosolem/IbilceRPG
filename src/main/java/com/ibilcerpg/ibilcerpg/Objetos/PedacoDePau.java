@@ -11,10 +11,10 @@ public class PedacoDePau extends Habilidade{
     public PedacoDePau(){
         setNome("Pedaço de Pau");
         setContadorRecarga(0);
-        setTempoDeRecarga(3);
+        setTempoDeRecarga(4);
         setEfeito(new Acao<String,Object>());
         getEfeito().setT("DANO");
-        getEfeito().setV(15f);
+        getEfeito().setV(null);
     }
     
 }

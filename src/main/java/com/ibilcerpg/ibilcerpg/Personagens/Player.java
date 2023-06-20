@@ -180,7 +180,10 @@ public class Player extends Personagem implements Serializable {
     private Acao<String,Object> usarHabilidade(){
         Acao<String,Object> efeito =  inventario.getHabilidadeEquipada().getEfeito();
         inventario.getHabilidadeEquipada().ativarRecarga();
-        if(efeito.getT() == "DANO") return efeito;
+        if(efeito.getT() == "DANO"){
+            efeito.setV((float)getAtaqueBase()*getMultiplicadorAtaque()*2);
+            return efeito;
+        }
         if(efeito.getT() == "VAMPIRISMO") return efeito;
         //SE O EFEITO FOR PROPRIO, ESSA FUNCAO TEM Q RETORNAR NULO!!!
     

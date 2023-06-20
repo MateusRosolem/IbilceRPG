@@ -53,12 +53,13 @@ public class Main extends Application {
 //        jogador.receberMissao(Alejandro.darMissao(this));
 //        jogador.receberMissao(Bibliotecaria.darMissao(this));
 
-        int op = -1;
-        while (op != 0){
-            System.out.println("1 - Inventario, 2 - Biologo , 3 - Tradutor, 4 - Matematico, 5 - Físico, 6 - Químico , 9 - checar progresso");
-            op = input.nextInt();
-            main.opcoes(op,jogador);
-        }
+
+//        int op = -1;
+//        while (op != 0){
+//            System.out.println("1 - Inventario, 2 - Biologo , 3 - Tradutor, 4 - Matematico, 5 - Físico, 6 - Químico , 9 - checar progresso");
+//            op = input.nextInt();
+//            main.opcoes(op,jogador);
+//        }
 
     }
 
