@@ -50,8 +50,7 @@ public class FXInventarioController {
     public void setStatusPlayer(){
         statusPlayer.setText("Nome:" + jogador.getNome() + "\nExperiencia:" + jogador.getExperiencia()
                 + "\nNivel:" + jogador.getNivel() + "\nAtaque Base:" + jogador.getAtaqueBase() + "\nDefesa Base:" +
-                jogador.getDefesaBase() + "\nVida Atual:" + jogador.getVidaAtual() + "\nVida Maxima:" + jogador.getVidaMaxima()
-                + "\nVelocidade:" + jogador.getVelocidade());
+                jogador.getDefesaBase() + "\nVida Atual:" + jogador.getVidaAtual() + "\nVida Maxima:" + jogador.getVidaMaxima());
     }
 
 

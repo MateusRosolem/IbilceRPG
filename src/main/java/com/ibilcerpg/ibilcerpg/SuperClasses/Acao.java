@@ -7,6 +7,12 @@ import com.ibilcerpg.ibilcerpg.SuperClasses.*;
 
 import java.io.Serializable;
 
+/**
+ * Classe generica que armazena uma acao no combate, tanto do jogador quanto do adversario
+ *
+ * @param <T> normalmente sinaliza uma String que descreve a acao
+ * @param <V> pode sinalizar um valor da acao descrita, outra acao quando o turno é mais complexo ou apenas um efeito de status
+ */
 public class Acao<T,V> implements Serializable {
     private T t;
     private V v;

@@ -6,6 +6,9 @@ import com.ibilcerpg.ibilcerpg.Design.*;
 import com.ibilcerpg.ibilcerpg.SuperClasses.*;
 
 
+/**
+ * Classe pai de todos os adversarios que o jogador enfrentará, tem todos o atributos e metodos exclusivos dos adversarios
+ */
 public class Inimigo extends Personagem{
     private int expRecompensa;
     private int contadorTurnos;
@@ -13,18 +16,26 @@ public class Inimigo extends Personagem{
 
 
     public Inimigo(){
-        super("Inimigo",true,20,20,5,2,
-                5, 1,1,1);
+        super("Inimigo",true,20,20,5,2, 1,1,1);
         this.expRecompensa = 10;
         this.contadorTurnos = 0;
     }
 
+    /**
+     * Além de receber o dano exibe uma mensagem do dano recebido
+     * @param dano recebe o dano dado pelo inimigo para fazer alterações com base na defesa
+     * @return
+     */
     @Override
     public int receberDano(float dano){
         System.out.println("Dano ao adversario: " + super.receberDano(dano));
         return 0;
     }
 
+    /**
+     * Metodo base para realizar o ataque do inimigo no jogador
+     * @return retorna a acao "ATAQUE" e o dano do ataque
+     */
     public Acao<String,Object> inimigoAtacar(){
         Acao<String,Object> turno = new Acao<String,Object>();
         turno.setT("ATAQUE");
@@ -34,6 +45,10 @@ public class Inimigo extends Personagem{
         return turno;
     }
 
+    /**
+     * Metodo base para realizar a defesa do inimigo contra o jogador
+     * @return retorna a acao "DEFESA" e o dano do mitigado pela defesa
+     */
     public Acao<String,Object> inimigoDefender(){
         Acao<String,Object> turno = new Acao<String,Object>();
         turno.setT("DEFESA");
@@ -41,8 +56,12 @@ public class Inimigo extends Personagem{
         setDebuffDano(1);
         System.out.println(turno.getT());
         return turno;
-    } 
+    }
 
+    /**
+     * Metodo que cuida das reacoes do inimigo às acoes do jogador, age de acordo com o tipo de acao
+     * @param acao acao realizada pelo jogador
+     */
     public void reacaoInimigo(Acao<String,Object> acao){
         switch(acao.getT()){
             case "ATAQUE": 
@@ -75,6 +94,7 @@ public class Inimigo extends Personagem{
             
         }
     }
+    //getters e setters
     public int getExpRecompensa() {
         return expRecompensa;
     }
@@ -91,7 +111,4 @@ public class Inimigo extends Personagem{
         this.tag = tag;
     }
 
-    
-
-   
 }
