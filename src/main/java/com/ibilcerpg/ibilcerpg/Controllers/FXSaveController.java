@@ -30,8 +30,9 @@ public class FXSaveController {
     // Save save = new Save();
 
     private Player jogador;
-
     private Save save;
+
+
     @FXML
     public Label labSingleFile;
     @FXML
@@ -40,10 +41,8 @@ public class FXSaveController {
     public Button carregarSaveButton;
     @FXML
     public Button voltarButton;
-
     @FXML
     public Button jogarButton;
-
     @FXML
     private ObservableList<Pane> list = FXCollections.observableArrayList();;
 

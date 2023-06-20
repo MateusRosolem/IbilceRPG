@@ -54,16 +54,27 @@ public class FXInventarioController {
     }
 
 
-    public void setData(Player jogador){
-        this.jogador=jogador;
+    public void setData(Player jogador) {
+        this.jogador = jogador;
         setStatusPlayer();
         jogador.getInventario().printInventario();
         setDescricaoItem("Este é seu inventário");
 
         ObservableList<Label> ob = FXCollections.observableArrayList();
-        //Habilidade hab : jogador.getInventario().getHabilidades()
+//        for(Habilidade hab : jogador.getInventario().getHabilidades()){
+//            Label lb = new Label(hab.getNome() + hab.getTipo() + hab.getEfeito().getT() + hab.getTempoDeRecarga());
+//            lb.setFont(Font.font(16));
+//            lb.setOnMouseClicked(new EventHandler<MouseEvent>() {
+//                @Override
+//                public void handle(MouseEvent mouseEvent) {
+//                    descricaoItem.setText(String.format("Dente de vampiro   Ataque   +5 de vida   3 rodadas"+ finalI));
+//                }
+//            });
+//
+//            ob.add(lb);
+//        }
+
         for(int i=0; i<10; i++) {
-            //ob.add(hab.getNome()+hab.getTipo()+hab.getEfeito().getT()+hab.getTempoDeRecarga());
             Label lb = new Label("Dente de vampiro   Ataque   +5 de vida   3 rodadas"+i);
             lb.setFont(Font.font(16));
             int finalI = i;
