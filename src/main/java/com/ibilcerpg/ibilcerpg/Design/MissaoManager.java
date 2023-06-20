@@ -3,9 +3,11 @@ import com.ibilcerpg.ibilcerpg.SuperClasses.*;
 import com.ibilcerpg.ibilcerpg.Objetos.*;
 import com.ibilcerpg.ibilcerpg.Personagens.*;
 import com.ibilcerpg.ibilcerpg.SuperClasses.*;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class MissaoManager {
+public class MissaoManager implements Serializable {
     ArrayList<Missao<? extends Habilidade>> missoes = new ArrayList<Missao<? extends Habilidade>>();
 
     public void adicionarMissao(Missao<? extends Habilidade> missao){

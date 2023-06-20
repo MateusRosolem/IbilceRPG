@@ -5,13 +5,14 @@ import com.ibilcerpg.ibilcerpg.Objetos.*;
 import com.ibilcerpg.ibilcerpg.Design.*;
 import com.ibilcerpg.ibilcerpg.SuperClasses.*;
 
+import java.io.Serializable;
 import java.util.Scanner;
 
-public class Player extends Personagem{   
+public class Player extends Personagem implements Serializable {
     private int experiencia; // mede o progresso ate subir de nivel
     private int nivel; //muda a forca e defesa base do jogador
     private Inventario inventario;
-    private Scanner input = new Scanner(System.in);
+    //private Scanner input = new Scanner(System.in);
     private MissaoManager missoes = new MissaoManager();
     
     public Player(){
@@ -43,7 +44,7 @@ public class Player extends Personagem{
     public Acao<String,Object> turnoNoCombate(){
         Acao<String,Object> turno = new Acao<String,Object>();
         System.out.println("Turno do Jogador, selecione 1 para atacar, 2 para defender e 3 para usar habilidade");
-        String op = input.nextLine();
+        String op =new String("Oi"); //= input.nextLine();
         switch(op){
             case "1":
                 turno.setT("ATAQUE");

@@ -5,7 +5,9 @@ import com.ibilcerpg.ibilcerpg.Objetos.*;
 import com.ibilcerpg.ibilcerpg.Design.*;
 import com.ibilcerpg.ibilcerpg.SuperClasses.*;
 
-public class Personagem {
+import java.io.Serializable;
+
+public class Personagem implements Serializable {
     private String nome;
     private boolean vivo;
     private int vidaMaxima;

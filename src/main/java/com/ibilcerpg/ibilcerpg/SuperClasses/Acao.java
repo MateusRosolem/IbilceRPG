@@ -4,7 +4,10 @@ import com.ibilcerpg.ibilcerpg.Personagens.*;
 import com.ibilcerpg.ibilcerpg.Objetos.*;
 import com.ibilcerpg.ibilcerpg.Design.*;
 import com.ibilcerpg.ibilcerpg.SuperClasses.*;
-public class Acao<T,V>{
+
+import java.io.Serializable;
+
+public class Acao<T,V> implements Serializable {
     private T t;
     private V v;
 

@@ -4,7 +4,10 @@ import com.ibilcerpg.ibilcerpg.Personagens.*;
 import com.ibilcerpg.ibilcerpg.Objetos.*;
 import com.ibilcerpg.ibilcerpg.Design.*;
 import com.ibilcerpg.ibilcerpg.SuperClasses.*;
-public class Habilidade extends Item {
+
+import java.io.Serializable;
+
+public class Habilidade extends Item implements Serializable {
     private Acao<String,Object> efeito;
     private int tempoDeRecarga;
     private int contadorRecarga;
@@ -32,9 +35,6 @@ public class Habilidade extends Item {
     public Acao<String,Object> getEfeito(){
         return efeito;
     }
-
-    
-
 
     public void setEfeito(Acao<String, Object> efeito) {
         this.efeito = efeito;
