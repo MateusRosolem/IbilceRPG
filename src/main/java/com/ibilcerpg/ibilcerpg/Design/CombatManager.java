@@ -1,13 +1,8 @@
 package com.ibilcerpg.ibilcerpg.Design;
 
 
-import com.ibilcerpg.ibilcerpg.Controllers.FXCombateController;
 import com.ibilcerpg.ibilcerpg.SuperClasses.*;
-import com.ibilcerpg.ibilcerpg.Objetos.*;
 import com.ibilcerpg.ibilcerpg.Personagens.*;
-import com.ibilcerpg.ibilcerpg.SuperClasses.*;
-
-import java.io.IOException;
 
 public class CombatManager<T extends Inimigo>{
     private Player jogador;
@@ -45,6 +40,7 @@ public class CombatManager<T extends Inimigo>{
     public void novoTurno(FXCombateController UI){
         imprimirStatus();
 
+
         //turno jogador
         UI.imprimirTexto("Turno do " + jogador.getNome());
 
@@ -58,6 +54,16 @@ public class CombatManager<T extends Inimigo>{
         UI.imprimirStatus();
         UI.imprimirTexto(UI.caixaDeTexto.getText() + "Vida do jogador: " + jogador.getVidaAtual() + "\nVida do " +
                 "adversario" + adversario.getVidaAtual());
+
+            //turno jogador
+            jogador.ativarEfeitosPassivos();
+            acao = jogador.turnoNoCombate();
+            adversario.reacaoInimigo(acao);
+            //UI.vidaProgressBarUpdate(UI.vidaProgressBar);
+            jogador.getInventario().getHabilidadeEquipada().decrementarRecarga();//diminui o tempo de recarga da habilidada em 1
+            jogador.incrementarContadorTurnos();
+        imprimirStatus();
+
 
         try {
             Thread.sleep(500);
@@ -95,11 +101,13 @@ public class CombatManager<T extends Inimigo>{
             System.out.println("JOGADOR VENCEU!!!");
             jogador.getInventario().adicionarHabilidade(jogador.getMissoes().completarMissao(jogador.getMissoes().atualizarMissoes(adversario)));
             jogador.receberExperiencia(adversario.getExpRecompensa());
+            jogador.checarProgresso(adversario);
         } else {
             System.out.println("Jogador foi eliminado.");
             jogador.setVidaAtual(jogador.getVidaMaxima());
             jogador.setVivo(true);
         }
+        jogador.setEfeitoNegativoPassivo("DEFAULT");
         jogador.setContadorTurnos(0);
     }
 

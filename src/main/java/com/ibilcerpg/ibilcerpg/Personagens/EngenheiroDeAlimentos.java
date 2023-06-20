@@ -15,7 +15,6 @@ public class EngenheiroDeAlimentos extends Inimigo {
 
     @Override
     public Acao<String,Object> turnoNoCombate(){
-        System.out.println("Turno do Engenheiro");
         if(getContadorTurnos()%2 == 0){
             incrementarContadorTurnos();
             return super.inimigoAtacar();

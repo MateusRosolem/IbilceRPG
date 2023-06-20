@@ -7,23 +7,39 @@ import com.ibilcerpg.ibilcerpg.SuperClasses.*;
 
 import java.io.Serializable;
 
+/**
+ * Classe pai de todas as habilidades especiais do jogo, nela tem todos os atributos e metodos usados pelas habilidades filhas (nao e uma habilidade em si)
+ */
 public class Habilidade extends Item implements Serializable {
     private Acao<String,Object> efeito;
     private int tempoDeRecarga;
     private int contadorRecarga;
-    
+
+    /**
+     * Ativa o tempo de recarga da habilidade, chamada toda vez que uma habilidade com tempo de recarga é usada.
+     */
     public void ativarRecarga(){
         setContadorRecarga(tempoDeRecarga+1);
     }
 
+    /**
+     * Reinicia o tempo de recarga, chamada quando o combate se inicia
+     */
     public void reiniciarRecarga(){
         setContadorRecarga(0);
     }
 
+    /**
+     * Decrementa em 1 o tempo de recarga da habilidade se já nao estiver em 0 (habilidade pronta)
+     */
     public void decrementarRecarga(){
         if(getContadorRecarga() > 0) setContadorRecarga(getContadorRecarga()-1);
     }
 
+    /**
+     * Checa o tempo de recarga quando o jogador tenta usar a habilidade
+     * @return retorna true se ela esta pronta e pode ser usada, se nao imprime uma mensagem de quantos turnos faltam para recarregar e retorna falso
+     */
     public boolean checarTempoDeRecarga(){
         if(getContadorRecarga() <= 0){
             return true;
