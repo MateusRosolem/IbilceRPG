@@ -99,6 +99,16 @@ public class Player extends Personagem implements Serializable {
     }
 
 
+    //@Override
+//    public Acao<String,Object> turnoNoCombate(){
+//
+//
+//        System.out.println("Turno do Jogador, selecione 1 para atacar, 2 para defender, 3 para usar habilidade e 4 para usar item.");
+//        //String op = input.nextLine();
+//
+//        Acao<String,Object> turno = new Acao<String,Object>();
+//        System.out.println("Turno do Jogador, selecione 1 para atacar, 2 para defender e 3 para usar habilidade");
+//        //String op =new String("Oi"); //= input.nextLine();
     @Override
     public Acao<String,Object> turnoNoCombate(){
 
@@ -120,12 +130,25 @@ public class Player extends Personagem implements Serializable {
             case "4":
                 return jogadorItem();
 
-            default:
-                return turnodefault;
-        }
+//        switch(op){
+//            case "1":
+//                return jogadorAtacar();
+//
+//            case "2":
+//                return jogadorDefender();
+//
+//            case "3":
+//                return jogadorHabilidade();
+//
+//            case "4":
+//                return jogadorItem();
+//
+//            default:
+//                return turnodefault;
+//        }
 
 //
-    }
+   // }
 
     private void acaoPropria(Acao<String,Object> turno){
 
