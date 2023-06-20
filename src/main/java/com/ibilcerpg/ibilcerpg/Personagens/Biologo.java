@@ -18,7 +18,6 @@ public class Biologo extends Inimigo {
 
     @Override
     public Acao<String,Object> turnoNoCombate(){
-        System.out.println("Turno do Biologo");
         return super.inimigoAtacar();
     }
 }

@@ -13,8 +13,7 @@ public class Inimigo extends Personagem{
 
 
     public Inimigo(){
-        super("Inimigo",true,20,20,5,2,
-                5, 1,1,1);
+        super("Inimigo",true,20,20,5,2, 1,1,1);
         this.expRecompensa = 10;
         this.contadorTurnos = 0;
     }

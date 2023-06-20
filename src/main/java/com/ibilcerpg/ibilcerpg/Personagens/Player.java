@@ -1,9 +1,7 @@
 package com.ibilcerpg.ibilcerpg.Personagens;
 
 import com.ibilcerpg.ibilcerpg.SuperClasses.*;
-import com.ibilcerpg.ibilcerpg.Objetos.*;
 import com.ibilcerpg.ibilcerpg.Design.*;
-import com.ibilcerpg.ibilcerpg.SuperClasses.*;
 
 import java.io.Serializable;
 import java.util.Scanner;
@@ -17,11 +15,12 @@ public class Player extends Personagem implements Serializable {
     private Acao<String,Object> turno = new Acao<String,Object>();
     private Acao<String,Object> turnodefault = new Acao<String,Object>("DEFAULT","DEFAULT");
 
+    private String efeitoNegativoPassivo = "DEFAULT";
+
     private boolean itemDisponivel;
     
     public Player(){
-        super("Jogador",true,0,0,1,1,
-                10, 1,1,1f);
+        super("Jogador",true,0,0,1,1, 1,1,1f);
         this.setNivel(1);
         this.inventario = new Inventario();
         this.setExperiencia(0);
@@ -101,11 +100,8 @@ public class Player extends Personagem implements Serializable {
 
     @Override
     public Acao<String,Object> turnoNoCombate(){
-
-
         System.out.println("Turno do Jogador, selecione 1 para atacar, 2 para defender, 3 para usar habilidade e 4 para usar item.");
         String op = input.nextLine();
-
 
         switch(op){
             case "1":
@@ -154,7 +150,7 @@ public class Player extends Personagem implements Serializable {
         setMultiplicadorAtaque(1);
         setMultiplicadorDefesa(1);
         setVivo(true);
-        ativarHabilidadePassiva();
+        ativarEfeitosPassivos();
     }
 
     private Acao<String,Object> usarHabilidade(){
@@ -167,8 +163,25 @@ public class Player extends Personagem implements Serializable {
         return null;
     }
 
-    public void ativarHabilidadePassiva(){
+    public void ativarEfeitosPassivos(){
+        ativarHabilidadePassiva();
+        ativarEfeitoNegativoPassivo();
+    }
 
+    private void ativarEfeitoNegativoPassivo() {
+        switch(getEfeitoNegativoPassivo()){
+            case "DANO_ACIDO":
+                System.out.println("O ácido corrosivo penetra em sua pele!");
+                reacaoJogador(new Acao<String,Object>("DANO_REAL",(getVidaMaxima()-getVidaAtual())/5));
+                //receberDano(((float)getVidaMaxima()-getVidaAtual())/5);
+                System.out.println("--------------------------------------------------------------------------------------");
+                break;
+            default:
+                return;
+        }
+    }
+
+    private void ativarHabilidadePassiva(){
         if(getInventario().getHabilidadeEquipada().getEfeito().getT() == "PASSIVA"){
             String efeito = (String)getInventario().getHabilidadeEquipada().getEfeito().getV();
 
@@ -180,7 +193,6 @@ public class Player extends Personagem implements Serializable {
                     break;
             }
         }
-        
     }
 
     public void receberExperiencia(int experienca){
@@ -237,6 +249,8 @@ public class Player extends Personagem implements Serializable {
                 setVidaAtual(getVidaAtual() - (int)acao.getV());
                 System.out.println("Dano ao jogador: " + acao.getV());
                 break;
+            case "ACIDO_CORROSIVO":
+                setEfeitoNegativoPassivo((String)acao.getV());
         }
         
     }
@@ -272,5 +286,11 @@ public class Player extends Personagem implements Serializable {
 
     public void setItemDisponivel(boolean itemDisponivel) {
         this.itemDisponivel = itemDisponivel;
+    }
+    public String getEfeitoNegativoPassivo() {
+        return efeitoNegativoPassivo;
+    }
+    public void setEfeitoNegativoPassivo(String efeitoNegativoPassivo) {
+        this.efeitoNegativoPassivo = efeitoNegativoPassivo;
     }
 }
