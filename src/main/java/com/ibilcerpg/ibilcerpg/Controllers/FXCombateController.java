@@ -64,8 +64,7 @@ public class FXCombateController {
         playerStatus = new TextArea();
         playerStatus.setText("Nome:" + jogador.getNome() + "\nExperiencia:" + jogador.getExperiencia()
                 + "\nNivel:" + jogador.getNivel() + "\nAtaque Base:" + jogador.getAtaqueBase() + "\nDefesa Base:" +
-                jogador.getDefesaBase() + "\nVida Atual:" + jogador.getVidaAtual() + "\nVida Maxima:" + jogador.getVidaMaxima()
-                + "\nVelocidade:" + jogador.getVelocidade());
+                jogador.getDefesaBase() + "\nVida Atual:" + jogador.getVidaAtual() + "\nVida Maxima:" + jogador.getVidaMaxima());
     }
 
 
@@ -185,7 +184,7 @@ public class FXCombateController {
     public void terminate(ActionEvent event) throws IOException {
         FXMLLoader mapa = new FXMLLoader(Main.class.getResource("Mapa.fxml"));
         Scene mapaScene = new Scene(mapa.load());
-
+        Musica.pararMusicaCombate();
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
         window.setScene(mapaScene);
         window.setTitle("Mapa");
@@ -193,7 +192,7 @@ public class FXCombateController {
 
         FXMapaController cont = mapa.getController();
         cont.setData(jogador);
-        Musica.tocarMusicaMenu();
+        if(!Musica.estaTocando())Musica.tocarMusicaMenu();
 
 
     }

@@ -73,7 +73,7 @@ public class FXMapaController {
         status.setText("Nome:" + jogador.getNome() + "\nExperiencia:" + jogador.getExperiencia()
                 + "\nNivel:" + jogador.getNivel() + "\nAtaque Base:" + jogador.getAtaqueBase() + "\nDefesa Base:" +
                 jogador.getDefesaBase() + "\nVida Atual:" + jogador.getVidaAtual() + "\nVida Maxima:" + jogador.getVidaMaxima()
-                + "\nVelocidade:" + jogador.getVelocidade());
+                );
     }
 
     public void selectedButton(ActionEvent event){

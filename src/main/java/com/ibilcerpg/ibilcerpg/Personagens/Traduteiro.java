@@ -18,7 +18,6 @@ public class Traduteiro extends Inimigo {
 
     @Override
     public Acao<String,Object> turnoNoCombate(){
-        System.out.println("Turno do Tradutor");
         if(getContadorTurnos()%2 == 0){
             incrementarContadorTurnos();
             return super.inimigoAtacar();

@@ -3,19 +3,18 @@ package com.ibilcerpg.ibilcerpg.Design;
 
 import com.ibilcerpg.ibilcerpg.Controllers.FXCombateController;
 import com.ibilcerpg.ibilcerpg.SuperClasses.*;
-import com.ibilcerpg.ibilcerpg.Objetos.*;
 import com.ibilcerpg.ibilcerpg.Personagens.*;
-import com.ibilcerpg.ibilcerpg.SuperClasses.*;
+import javafx.event.ActionEvent;
 
 import java.io.IOException;
 
-public class CombatManager<T extends Inimigo>{
+public class CombatManager {
     private Player jogador;
-    private T adversario;
+    private Inimigo adversario;
     private boolean turno;
     private Acao<String, Object> acao;
 
-    public CombatManager(Player jogador, T adversario) {
+    public CombatManager(Player jogador, Inimigo adversario) {
         this.jogador = jogador;
         this.adversario = adversario;
         iniciarCombate();
@@ -25,7 +24,7 @@ public class CombatManager<T extends Inimigo>{
         return jogador;
     }
 
-    public T getAdversario() {
+    public Inimigo getAdversario() {
         return adversario;
     }
 
@@ -39,25 +38,20 @@ public class CombatManager<T extends Inimigo>{
 
     public boolean verificarVivos(){
         if(jogador.estaVivo() && adversario.estaVivo()) return true;
-        return false;
+        else return false;
     }
 
     public void novoTurno(FXCombateController UI){
         imprimirStatus();
 
         //turno jogador
-        UI.imprimirTexto("Turno do " + jogador.getNome());
-
-        jogador.ativarHabilidadePassiva();
+        jogador.ativarEfeitosPassivos();
         acao = jogador.turnoNoCombate();
-        UI.imprimirTexto(acao.getT()+"\n");
         adversario.reacaoInimigo(acao);
-        UI.inimigoVidaProgressBarUpdate();
+        //UI.vidaProgressBarUpdate(UI.vidaProgressBar);
         jogador.getInventario().getHabilidadeEquipada().decrementarRecarga();//diminui o tempo de recarga da habilidada em 1
         jogador.incrementarContadorTurnos();
-        UI.imprimirStatus();
-        UI.imprimirTexto(UI.caixaDeTexto.getText() + "Vida do jogador: " + jogador.getVidaAtual() + "\nVida do " +
-                "adversario" + adversario.getVidaAtual());
+        imprimirStatus();
 
         try {
             Thread.sleep(500);
@@ -65,28 +59,16 @@ public class CombatManager<T extends Inimigo>{
             throw new RuntimeException(e);
         }
 
-        if(!verificarVivos()){
-            finalizarCombate(UI);
-            return;
-        }
-        UI.imprimirTexto("Turno do " + adversario.getNome());
         //turno adversario
         System.out.println("Turno do " + adversario.getNome());
         acao = adversario.turnoNoCombate();
         jogador.reacaoJogador(acao);
-        UI.playerVidaProgressBarUpdate();
+        //UI.vidaProgressBarUpdate(UI.playerVidaProgresBar);
 
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-        UI.imprimirTexto("Turno do " + jogador.getNome());
 
-        if(!verificarVivos()){
-            finalizarCombate(UI);
-            return;
-        }
+
+        if(!verificarVivos()) finalizarCombate(UI);
+        return;
     }
 
     private void finalizarCombate(FXCombateController UI){
@@ -95,12 +77,15 @@ public class CombatManager<T extends Inimigo>{
             System.out.println("JOGADOR VENCEU!!!");
             jogador.getInventario().adicionarHabilidade(jogador.getMissoes().completarMissao(jogador.getMissoes().atualizarMissoes(adversario)));
             jogador.receberExperiencia(adversario.getExpRecompensa());
+            jogador.checarProgresso(adversario);
         } else {
             System.out.println("Jogador foi eliminado.");
             jogador.setVidaAtual(jogador.getVidaMaxima());
             jogador.setVivo(true);
         }
+        jogador.setEfeitoNegativoPassivo("DEFAULT");
         jogador.setContadorTurnos(0);
+
     }
 
 

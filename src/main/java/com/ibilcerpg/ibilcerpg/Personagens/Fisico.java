@@ -73,4 +73,6 @@ public class Fisico extends Inimigo {
     public void setCarregando(boolean carregando) {
         Carregando = carregando;
     }
+
+
 }
