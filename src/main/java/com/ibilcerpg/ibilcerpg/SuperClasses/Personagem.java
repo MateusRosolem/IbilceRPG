@@ -1,5 +1,6 @@
 package com.ibilcerpg.ibilcerpg.SuperClasses;
 
+import com.ibilcerpg.ibilcerpg.Controllers.FXCombateController;
 import com.ibilcerpg.ibilcerpg.Personagens.*;
 import com.ibilcerpg.ibilcerpg.Objetos.*;
 import com.ibilcerpg.ibilcerpg.Design.*;
@@ -40,7 +41,7 @@ public class Personagem implements Serializable {
      * @param danoPuro recebe o dano dado pelo inimigo para fazer alterações com base na defesa
      * @return retorna o dano recebido pela entidade para ser apresentado
      */
-    public int receberDano(float danoPuro){
+    public int receberDano(float danoPuro, FXCombateController UI){
         
         float dano = danoPuro - ((Float)(getDefesaBase()*getMultiplicadorDefesa()));
         if(dano < 0 ) dano = 0f;
@@ -54,14 +55,14 @@ public class Personagem implements Serializable {
      * @param cura aumenta a vida atual de acordo com esse valor.
      * @return retorna o valor curado para ser apresentado.
      */
-    public int receberCura(float cura){
+    public int receberCura(float cura, FXCombateController UI){
         if(getVidaAtual() + Math.round(cura) >= getVidaMaxima()){
             setVidaAtual(getVidaMaxima());
-            System.out.println( getNome() + " foi curado em " + Math.round(cura) + " pontos de vida");
+            UI.imprimirTexto( getNome() + " foi curado em " + Math.round(cura) + " pontos de vida");
             return Math.round(cura);
         }else{
             setVidaAtual(getVidaAtual() + Math.round(cura));
-            System.out.println( getNome() + " foi curado em " + Math.round(cura) + " pontos de vida");
+            UI.imprimirTexto( getNome() + " foi curado em " + Math.round(cura) + " pontos de vida");
             return Math.round(cura);
         }
         
@@ -82,7 +83,7 @@ public class Personagem implements Serializable {
      *
      * @return returna null por ser o metodo base
      */
-    public Acao<String,Object> turnoNoCombate(){
+    public Acao<String,Object> turnoNoCombate(FXCombateController UI){
         return null;
     }
 

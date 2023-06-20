@@ -37,7 +37,7 @@ public class FXCombateController {
     @FXML
     public ProgressBar playerVidaProgresBar;
     @FXML
-    public TextArea caixaDeTexto;
+    public TextArea caixaDeTexto = new TextArea();
 
     @FXML
     public Text vidaInimigo;
@@ -54,7 +54,11 @@ public class FXCombateController {
 
     }
     public void imprimirTexto(String texto){
-        caixaDeTexto.setText(texto);
+        caixaDeTexto.setText(caixaDeTexto.getText() + "\n" + texto);
+    }
+
+    public void limparCaixaDeTexto(){
+        caixaDeTexto.setText("");
     }
 
     public boolean verificarTurno(){
@@ -69,41 +73,46 @@ public class FXCombateController {
 
     @FXML
     protected void atacarButtonClick(){
-            combate.setAcao(jogador.jogadorAtacar());
+            limparCaixaDeTexto();
+            combate.setAcao(jogador.jogadorAtacar(this));
             //vidaProgressBarUpdate(vidaProgressBar);
 
             // jogador.ataque();
             // vidaProgressBarUpdate(vidaProgressBar,dano);
-            imprimirStatus();
+            //imprimirStatus();
 
-        }
 
-            combate.novoTurno(/*this*/);
+
+            combate.novoTurno(this);
     }
     @FXML
     protected void defenderButtonClick(){
-        combate.setAcao(jogador.jogadorDefender());
+        limparCaixaDeTexto();
+        combate.setAcao(jogador.jogadorDefender(this));
         vidaProgressBarUpdate(playerVidaProgresBar);
-        combate.novoTurno(/*this*/);
+        combate.novoTurno(this);
 
     }
     @FXML
     protected void habilidadeButtonClick(){
-            combate.setAcao(jogador.jogadorHabilidade());
+            limparCaixaDeTexto();
+            combate.setAcao(jogador.jogadorHabilidade(this));
 
             //vidaProgressBarUpdate(playerVidaProgresBar);
             vidaProgressBarUpdate(playerVidaProgresBar);
-            combate.novoTurno(/*this*/);
+            combate.novoTurno(this);
 
     }
     @FXML
     protected void itemButtonClick(){
-            combate.setAcao(jogador.jogadorItem());
+
+        limparCaixaDeTexto();
+            combate.setAcao(jogador.jogadorItem(this));
 
             //vidaProgressBarUpdate(playerVidaProgresBar);
 
             vidaProgressBarUpdate(playerVidaProgresBar);
-            combate.novoTurno(/*this*/);
+            combate.novoTurno(this);
 
     }
     @FXML
@@ -129,8 +138,8 @@ public class FXCombateController {
 //    }
 
 
-        FXMapaController cont = mapa.getController();
-        cont.setData(jogador);
+//        FXMapaController cont = mapa.getController();
+//        cont.setData(jogador);
     }
 
 

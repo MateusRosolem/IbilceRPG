@@ -1,5 +1,6 @@
 package com.ibilcerpg.ibilcerpg.Personagens;
 
+import com.ibilcerpg.ibilcerpg.Controllers.FXCombateController;
 import com.ibilcerpg.ibilcerpg.SuperClasses.*;
 import com.ibilcerpg.ibilcerpg.Objetos.*;
 import com.ibilcerpg.ibilcerpg.Design.*;
@@ -15,7 +16,7 @@ public class Biologo extends Inimigo {
     }
 
     @Override
-    public Acao<String,Object> turnoNoCombate(){
-        return super.inimigoAtacar();
+    public Acao<String,Object> turnoNoCombate(FXCombateController UI){
+        return super.inimigoAtacar(UI);
     }
 }

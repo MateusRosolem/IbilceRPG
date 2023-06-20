@@ -57,7 +57,7 @@ public class FXInventarioController {
     public void setData(Player jogador) {
         this.jogador = jogador;
         setStatusPlayer();
-        jogador.getInventario().printInventario();
+        jogador.getInventario().printInventario(this);
         setDescricaoItem("Este é seu inventário");
 
         ObservableList<Label> ob = FXCollections.observableArrayList();

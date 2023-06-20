@@ -1,5 +1,6 @@
 package com.ibilcerpg.ibilcerpg.Personagens;
 
+import com.ibilcerpg.ibilcerpg.Controllers.FXCombateController;
 import com.ibilcerpg.ibilcerpg.SuperClasses.*;
 import com.ibilcerpg.ibilcerpg.Objetos.*;
 import com.ibilcerpg.ibilcerpg.Design.*;
@@ -27,8 +28,8 @@ public class Inimigo extends Personagem{
      * @return
      */
     @Override
-    public int receberDano(float dano){
-        System.out.println("Dano ao adversario: " + super.receberDano(dano));
+    public int receberDano(float dano, FXCombateController UI){
+        UI.imprimirTexto("Dano ao adversario: " + super.receberDano(dano,UI));
         return 0;
     }
 
@@ -36,12 +37,12 @@ public class Inimigo extends Personagem{
      * Metodo base para realizar o ataque do inimigo no jogador
      * @return retorna a acao "ATAQUE" e o dano do ataque
      */
-    public Acao<String,Object> inimigoAtacar(){
+    public Acao<String,Object> inimigoAtacar(FXCombateController UI){
         Acao<String,Object> turno = new Acao<String,Object>();
         turno.setT("ATAQUE");
         turno.setV((getAtaqueBase()*getMultiplicadorAtaque())*getDebuffDano());
         setDebuffDano(1);
-        System.out.println(turno.getT());
+        UI.imprimirTexto(turno.getT());
         return turno;
     }
 
@@ -49,12 +50,12 @@ public class Inimigo extends Personagem{
      * Metodo base para realizar a defesa do inimigo contra o jogador
      * @return retorna a acao "DEFESA" e o dano do mitigado pela defesa
      */
-    public Acao<String,Object> inimigoDefender(){
+    public Acao<String,Object> inimigoDefender(FXCombateController UI){
         Acao<String,Object> turno = new Acao<String,Object>();
         turno.setT("DEFESA");
         turno.setV(0.5f);
         setDebuffDano(1);
-        System.out.println(turno.getT());
+        UI.imprimirTexto(turno.getT());
         return turno;
     }
 
@@ -62,10 +63,10 @@ public class Inimigo extends Personagem{
      * Metodo que cuida das reacoes do inimigo às acoes do jogador, age de acordo com o tipo de acao
      * @param acao acao realizada pelo jogador
      */
-    public void reacaoInimigo(Acao<String,Object> acao){
+    public void reacaoInimigo(Acao<String,Object> acao, FXCombateController UI){
         switch(acao.getT()){
             case "ATAQUE": 
-                receberDano((Float)acao.getV());
+                receberDano((Float)acao.getV(),UI);
                 break;
             case "DEFESA":
                 setDebuffDano((Float)acao.getV());
@@ -76,17 +77,17 @@ public class Inimigo extends Personagem{
                     switch(efeitoHabilidade.getT()){
                         case "REDUCAO_DE_DEFESA":
                             setMultiplicadorDefesa((Float)efeitoHabilidade.getV());
-                            System.out.println("Defesa do adversario diminuida pela metade!!!");
+                            UI.imprimirTexto("Defesa do adversario diminuida pela metade!!!");
                             break;
                         case "DANO":
-                            receberDano((Float)efeitoHabilidade.getV());
+                            receberDano((Float)efeitoHabilidade.getV(),UI);
                             break;
                         case "REDUCAO_DE_ATAQUE":
                             setMultiplicadorAtaque((Float)efeitoHabilidade.getV());
-                            System.out.println("Ataque do adversario diminuida pela metade!!!");
+                            UI.imprimirTexto("Ataque do adversario diminuida pela metade!!!");
                             break;
                         case "VAMPIRISMO":
-                            receberDano((Float)efeitoHabilidade.getV());
+                            receberDano((Float)efeitoHabilidade.getV(),UI);
                             break;
                     }
                 }

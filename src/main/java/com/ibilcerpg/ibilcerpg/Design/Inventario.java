@@ -2,6 +2,8 @@ package com.ibilcerpg.ibilcerpg.Design;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+
+import com.ibilcerpg.ibilcerpg.Controllers.FXInventarioController;
 import com.ibilcerpg.ibilcerpg.SuperClasses.*;
 import com.ibilcerpg.ibilcerpg.Objetos.*;
 import com.ibilcerpg.ibilcerpg.Personagens.*;
@@ -32,10 +34,10 @@ public class Inventario implements Serializable {
     /**
      * Printa o inventario inteiro no terminal
      */
-    public void printInventario(){
+    public void printInventario(FXInventarioController UI){
         int i = 1;
         for (Habilidade habilidade: habilidades) {
-            System.out.println(i + ": "+ habilidade.getNome());
+            UI.descricaoItem.setText(i + ": "+ habilidade.getNome());
             i++;
         }
     }
