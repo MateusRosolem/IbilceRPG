@@ -1,5 +1,6 @@
 package com.ibilcerpg.ibilcerpg.Controllers;
 
+import com.ibilcerpg.ibilcerpg.Design.Musica;
 import com.ibilcerpg.ibilcerpg.Main;
 import com.ibilcerpg.ibilcerpg.Personagens.Player;
 import com.ibilcerpg.ibilcerpg.SuperClasses.Habilidade;
@@ -26,6 +27,7 @@ import java.util.Objects;
 
 public class FXInventarioController {
     private Player jogador;
+
     @FXML
     public Button voltarButton;
     @FXML
@@ -56,39 +58,41 @@ public class FXInventarioController {
 
     public void setData(Player jogador) {
         this.jogador = jogador;
+        statusPlayer = new TextArea();
         setStatusPlayer();
         jogador.getInventario().printInventario();
         setDescricaoItem("Este é seu inventário");
 
+
         ObservableList<Label> ob = FXCollections.observableArrayList();
-//        for(Habilidade hab : jogador.getInventario().getHabilidades()){
-//            Label lb = new Label(hab.getNome() + hab.getTipo() + hab.getEfeito().getT() + hab.getTempoDeRecarga());
+        for(Habilidade hab : jogador.getInventario().getHabilidades()){
+            Label lb = new Label(hab.getNome() + hab.getTipo() + hab.getEfeito().getT() + hab.getTempoDeRecarga());
+            lb.setFont(Font.font(16));
+            lb.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+                    descricaoItem.setText(String.format("Dente de vampiro   Ataque   +5 de vida   3 rodadas"));
+                }
+            });
+
+            ob.add(lb);
+        }
+
+//        for(int i=0; i<10; i++) {
+//            Label lb = new Label("Dente de vampiro   Ataque   +5 de vida   3 rodadas"+i);
 //            lb.setFont(Font.font(16));
+//            int finalI = i;
 //            lb.setOnMouseClicked(new EventHandler<MouseEvent>() {
 //                @Override
 //                public void handle(MouseEvent mouseEvent) {
 //                    descricaoItem.setText(String.format("Dente de vampiro   Ataque   +5 de vida   3 rodadas"+ finalI));
 //                }
 //            });
-//
 //            ob.add(lb);
 //        }
-
-        for(int i=0; i<10; i++) {
-            Label lb = new Label("Dente de vampiro   Ataque   +5 de vida   3 rodadas"+i);
-            lb.setFont(Font.font(16));
-            int finalI = i;
-            lb.setOnMouseClicked(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent mouseEvent) {
-                    descricaoItem.setText(String.format("Dente de vampiro   Ataque   +5 de vida   3 rodadas"+ finalI));
-                }
-            });
-            ob.add(lb);
-        }
-
-        listaItens.setItems(ob);
-
+//
+//        listaItens.setItems(ob);
+//
     }
 
     @FXML
@@ -103,6 +107,7 @@ public class FXInventarioController {
 
         FXMapaController cont = mapa.getController();
         cont.setData(jogador);
+        if(!Musica.estaTocando()) Musica.tocarMusicaMenu();
     }
 
 

@@ -1,5 +1,6 @@
 package com.ibilcerpg.ibilcerpg.Controllers;
 
+import com.ibilcerpg.ibilcerpg.Design.Musica;
 import com.ibilcerpg.ibilcerpg.Design.Save;
 import com.ibilcerpg.ibilcerpg.Main;
 import com.ibilcerpg.ibilcerpg.Personagens.Player;
@@ -32,7 +33,6 @@ public class FXSaveController {
     private Player jogador;
     private Save save;
 
-
     @FXML
     public Label labSingleFile;
     @FXML
@@ -49,6 +49,7 @@ public class FXSaveController {
 
     public void setData(Player jogador){
         this.jogador=jogador;
+
     }
 
     @FXML
@@ -90,6 +91,7 @@ public class FXSaveController {
 
         FXController cont = menu.getController();
         cont.setData(jogador);
+        if(!Musica.estaTocando()) Musica.tocarMusicaMenu();
     }
 
     @FXML
@@ -104,6 +106,7 @@ public class FXSaveController {
 
         FXMapaController cont = mapa.getController();
         cont.setData(jogador);
+        if(!Musica.estaTocando()) Musica.tocarMusicaMenu();
 
     }
 

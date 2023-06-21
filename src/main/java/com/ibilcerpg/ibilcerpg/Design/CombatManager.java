@@ -7,32 +7,43 @@ import com.ibilcerpg.ibilcerpg.Personagens.*;
 /**
  * Classe que controla todos os combates, recebe o Jogador e o adversario no construtor
  */
-public class CombatManager {
+public class CombatManager<T extends Inimigo>{
+
+
+
     private Player jogador;
-    private Inimigo adversario;
+    private T adversario;
     private boolean turno;
     private Acao<String, Object> acao;
 
-    public CombatManager(Player jogador, Inimigo adversario) {
+    public CombatManager(Player jogador, T adversario) {
         this.jogador = jogador;
         this.adversario = adversario;
         iniciarCombate();
-        novoTurno();
     }
+    public Player getJogador() {
+        return jogador;
+    }
+
+    public T getAdversario() {
+        return adversario;
+    }
+
+    public boolean getTurno(){ return turno;}
 
     public void imprimirStatus() {
         System.out.println("Vida do jogador: " + jogador.getVidaAtual());
         System.out.println("Vida do adversario: " + adversario.getVidaAtual());
         System.out.println("--------------------------------------------------------------------------------------");
     }
-
     /**
      * Metodo que verifica se algum dos combatentes morreu
      * @return returna true se ainda estao vivos e false se algum deles morreu
      */
     private boolean verificarVivos(){
+
         if(jogador.estaVivo() && adversario.estaVivo()) return true;
-        else return false;
+        return false;
     }
 
     /**
@@ -45,8 +56,23 @@ public class CombatManager {
      * derrutado, e se sim, finaliza o combate, se nao, espera o proximo turno.
      *  //@param UI recebe o elemento da interface do combate,que atualiza as barras de vida e a caixa de texto depois de toda ação
      */
-    public void novoTurno(/*FXCombateController UI*/){
+    public void novoTurno(FXCombateController UI){
         imprimirStatus();
+
+
+        //turno jogador
+        UI.imprimirTexto("Turno do " + jogador.getNome());
+
+        jogador.ativarHabilidadePassiva();
+        acao = jogador.turnoNoCombate();
+        UI.imprimirTexto(acao.getT()+"\n");
+        adversario.reacaoInimigo(acao);
+        UI.inimigoVidaProgressBarUpdate();
+        jogador.getInventario().getHabilidadeEquipada().decrementarRecarga();//diminui o tempo de recarga da habilidada em 1
+        jogador.incrementarContadorTurnos();
+        UI.imprimirStatus();
+        UI.imprimirTexto(UI.caixaDeTexto.getText() + "Vida do jogador: " + jogador.getVidaAtual() + "\nVida do " +
+                "adversario" + adversario.getVidaAtual());
 
             //turno jogador
             jogador.ativarEfeitosPassivos();
@@ -58,23 +84,35 @@ public class CombatManager {
             jogador.incrementarContadorTurnos();
         imprimirStatus();
 
+
         try {
             Thread.sleep(500);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
 
+        if(!verificarVivos()){
+            finalizarCombate(UI);
+            return;
+        }
+        UI.imprimirTexto("Turno do " + adversario.getNome());
         //turno adversario
-            System.out.println("Turno do " + adversario.getNome());
-            acao = adversario.turnoNoCombate();
-            jogador.reacaoJogador(acao);
-            //UI.vidaProgressBarUpdate(UI.vidaProgressBar);
-            //UI.vidaProgressBarUpdate(UI.playerVidaProgresBar);
+        System.out.println("Turno do " + adversario.getNome());
+        acao = adversario.turnoNoCombate();
+        jogador.reacaoJogador(acao);
+        UI.playerVidaProgressBarUpdate();
 
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        UI.imprimirTexto("Turno do " + jogador.getNome());
 
-
-            if(!verificarVivos()) finalizarCombate(/*UI*/);
-            else novoTurno(/*UI*/);
+        if(!verificarVivos()){
+            finalizarCombate(UI);
+            return;
+        }
     }
 
     /**
@@ -85,7 +123,7 @@ public class CombatManager {
      * de qualquer modo o efeito passivo do jogador volta para DEFAULT e seu contador de turnos é resetado, além de voltar
      * para o mapa.
      */
-    private void finalizarCombate(/*FXCombateController */){
+    private void finalizarCombate(FXCombateController UI){
         if (jogador.estaVivo()) {
             System.out.println("--------------------------------------------------------------------------------------");
             System.out.println("JOGADOR VENCEU!!!");
@@ -99,11 +137,6 @@ public class CombatManager {
         }
         jogador.setEfeitoNegativoPassivo("DEFAULT");
         jogador.setContadorTurnos(0);
-//        try {
-//            UI.terminate();
-//        } catch (IOException e) {
-//
-//        }
     }
 
 

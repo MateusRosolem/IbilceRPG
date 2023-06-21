@@ -31,13 +31,13 @@ public class Main extends Application {
         stage.show();
         FXController cont = fxmlLoader.getController();
         cont.setData(jogador);
-        cont.setarMusica(musica);
+        Musica.tocarMusicaMenu();
 
     }
 
 
     public static void main(String[] args){
-        //launch();
+        launch();
 
         Save infos = new Save();
 

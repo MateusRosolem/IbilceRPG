@@ -73,7 +73,10 @@ public class Personagem implements Serializable {
      * @return retorna a variavel vivo depois de atualiza-la ou nao
      */
     public boolean estaVivo(){
-        if(getVidaAtual()<=0) setVivo(false);
+        if(getVidaAtual()<=0) {
+            setVivo(false);
+            return false;
+        }
         return vivo;
     }
 
