@@ -41,7 +41,7 @@ public class Personagem implements Serializable {
      * @param danoPuro recebe o dano dado pelo inimigo para fazer alterações com base na defesa
      * @return retorna o dano recebido pela entidade para ser apresentado
      */
-    public int receberDano(float danoPuro){
+    public int receberDano(float danoPuro, FXCombateController UI){
         
         float dano = danoPuro - ((Float)(getDefesaBase()*getMultiplicadorDefesa()));
         if(dano < 0 ) dano = 0f;
@@ -74,10 +74,7 @@ public class Personagem implements Serializable {
      * @return retorna a variavel vivo depois de atualiza-la ou nao
      */
     public boolean estaVivo(){
-        if(getVidaAtual()<=0) {
-            setVivo(false);
-            return false;
-        }
+        if(getVidaAtual()<=0) setVivo(false);
         return vivo;
     }
 
@@ -86,7 +83,7 @@ public class Personagem implements Serializable {
      *
      * @return returna null por ser o metodo base
      */
-    public Acao<String,Object> turnoNoCombate(){
+    public Acao<String,Object> turnoNoCombate(FXCombateController UI){
         return null;
     }
 

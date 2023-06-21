@@ -14,6 +14,7 @@ public class EngenheiroDeAlimentos extends Inimigo {
         setDefesaBase(3);
     }
 
+    @Override
     public Acao<String,Object> turnoNoCombate(FXCombateController UI){
         if(getContadorTurnos()%2 == 0){
             incrementarContadorTurnos();

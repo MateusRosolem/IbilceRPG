@@ -27,9 +27,9 @@ public class Inimigo extends Personagem{
      * @param dano recebe o dano dado pelo inimigo para fazer alterações com base na defesa
      * @return
      */
-
+    @Override
     public int receberDano(float dano, FXCombateController UI){
-        UI.imprimirTexto("Dano ao adversario: " + super.receberDano(dano));
+        UI.imprimirTexto("Dano ao adversario: " + super.receberDano(dano,UI));
         return 0;
     }
 
@@ -63,10 +63,10 @@ public class Inimigo extends Personagem{
      * Metodo que cuida das reacoes do inimigo às acoes do jogador, age de acordo com o tipo de acao
      * @param acao acao realizada pelo jogador
      */
-    public void reacaoInimigo(Acao<String,Object> acao){
+    public void reacaoInimigo(Acao<String,Object> acao, FXCombateController UI){
         switch(acao.getT()){
             case "ATAQUE": 
-                receberDano((Float)acao.getV());
+                receberDano((Float)acao.getV(),UI);
                 break;
             case "DEFESA":
                 setDebuffDano((Float)acao.getV());
@@ -77,17 +77,17 @@ public class Inimigo extends Personagem{
                     switch(efeitoHabilidade.getT()){
                         case "REDUCAO_DE_DEFESA":
                             setMultiplicadorDefesa((Float)efeitoHabilidade.getV());
-                            System.out.println("Defesa do adversario diminuida pela metade!!!");
+                            UI.imprimirTexto("Defesa do adversario diminuida pela metade!!!");
                             break;
                         case "DANO":
-                            receberDano((Float)efeitoHabilidade.getV());
+                            receberDano((Float)efeitoHabilidade.getV(),UI);
                             break;
                         case "REDUCAO_DE_ATAQUE":
                             setMultiplicadorAtaque((Float)efeitoHabilidade.getV());
-                            System.out.println("Ataque do adversario diminuida pela metade!!!");
+                            UI.imprimirTexto("Ataque do adversario diminuida pela metade!!!");
                             break;
                         case "VAMPIRISMO":
-                            receberDano((Float)efeitoHabilidade.getV());
+                            receberDano((Float)efeitoHabilidade.getV(),UI);
                             break;
                     }
                 }

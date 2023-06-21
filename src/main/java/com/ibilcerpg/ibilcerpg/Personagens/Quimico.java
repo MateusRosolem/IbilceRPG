@@ -21,6 +21,7 @@ public class Quimico extends Inimigo {
 
 
 
+    @Override
     public Acao<String,Object> turnoNoCombate(FXCombateController UI){
         if(getContadorTurnos()%3 == 0){
             incrementarContadorTurnos();

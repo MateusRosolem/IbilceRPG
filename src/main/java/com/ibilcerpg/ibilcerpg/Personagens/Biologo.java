@@ -15,7 +15,7 @@ public class Biologo extends Inimigo {
         setTag("BIOLOGO");
     }
 
-
+    @Override
     public Acao<String,Object> turnoNoCombate(FXCombateController UI){
         return super.inimigoAtacar(UI);
     }

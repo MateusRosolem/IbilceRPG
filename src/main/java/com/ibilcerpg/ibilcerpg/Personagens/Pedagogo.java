@@ -16,10 +16,7 @@ public class Pedagogo extends Inimigo {
         setDefesaBase(15);
     }
 
-
-
-
-
+    @Override
     public Acao<String,Object> turnoNoCombate(FXCombateController UI){
         if(getContadorTurnos()%3 == 0){
             incrementarContadorTurnos();
@@ -28,7 +25,6 @@ public class Pedagogo extends Inimigo {
             incrementarContadorTurnos();
             return super.inimigoDefender(UI);
         }
-
 
     }
 

@@ -9,13 +9,13 @@ public class Fisico extends Inimigo {
     private boolean Carregando;
 
     private Acao<String,Object> AcaoEReacao(FXCombateController UI){
-        if(buffProximoDano != 0 ) System.out.println("Ataque Poderoso!");
+        if(buffProximoDano != 0 ) UI.imprimirTexto("Ataque Poderoso!");
         setCarregando(false);
         return inimigoAtacar(buffProximoDano,UI);
     }
 
     private Acao<String,Object> CarregarAcaoEReacao(FXCombateController UI){
-        UI.imprimirTexto("Fisico não reagiu");
+        UI.imprimirTexto("Fisico não reagiu(Ação e Reação)");
         setCarregando(true);
         return new Acao<String,Object>("DEFAULT","DEFAULT");
     }
@@ -28,7 +28,7 @@ public class Fisico extends Inimigo {
         setDefesaBase(5);
     }
 
-
+    @Override
     public Acao<String,Object> turnoNoCombate(FXCombateController UI){
         if(getContadorTurnos()%4 == 0 || getContadorTurnos()%4 == 1){
             incrementarContadorTurnos();
@@ -43,7 +43,7 @@ public class Fisico extends Inimigo {
         return null;
     }
 
-    public Acao<String,Object> inimigoAtacar(float buff, FXCombateController UI){
+    public Acao<String,Object> inimigoAtacar(float buff,FXCombateController UI){
         Acao<String,Object> turno = new Acao<String,Object>();
         turno.setT("ATAQUE");
         turno.setV(buff);
@@ -54,9 +54,9 @@ public class Fisico extends Inimigo {
     }
 
     @Override
-    public int receberDano(float danoPuro){
+    public int receberDano(float danoPuro, FXCombateController UI){
         if(isCarregando()) setBuffProximoDano(Math.round(danoPuro)*2);
-        return super.receberDano(danoPuro);
+        return super.receberDano(danoPuro,UI);
     }
 
     public float getBuffProximoDano() {

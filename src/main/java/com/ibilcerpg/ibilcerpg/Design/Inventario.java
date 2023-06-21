@@ -2,6 +2,8 @@ package com.ibilcerpg.ibilcerpg.Design;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+
+import com.ibilcerpg.ibilcerpg.Controllers.FXInventarioController;
 import com.ibilcerpg.ibilcerpg.SuperClasses.*;
 import com.ibilcerpg.ibilcerpg.Objetos.*;
 import com.ibilcerpg.ibilcerpg.Personagens.*;
@@ -32,34 +34,27 @@ public class Inventario implements Serializable {
     /**
      * Printa o inventario inteiro no terminal
      */
-    public void printInventario(){
+    public void printInventario(FXInventarioController UI){
         int i = 1;
         for (Habilidade habilidade: habilidades) {
-            System.out.println(i + ": "+ habilidade.getNome());
+            UI.descricaoItem.setText(i + ": "+ habilidade.getNome());
             i++;
         }
     }
-<<<<<<< HEAD
-=======
 
     /**
      * equipa a habilidade que esta na posicao i da lista de habilidades
      * @param i posicao da habilidade desejada
      */
->>>>>>> 6133077182564677aba4e3fc58bbbf9a8728def6
     public void equiparHabilidade(int i){
         if(habilidades != null && i > 0 && i <= habilidades.size()) {
             setHabilidadeEquipada(habilidades.get(i - 1));
         }
     }
 
-<<<<<<< HEAD
-
-=======
     /**
      * @return retorna a habilidade equipada, se nao houver, retorna uma habilidade neutra default
      */
->>>>>>> 6133077182564677aba4e3fc58bbbf9a8728def6
     public Habilidade getHabilidadeEquipada() {
         if(habilidadeEquipada == null){
             return habilidadeDefault;

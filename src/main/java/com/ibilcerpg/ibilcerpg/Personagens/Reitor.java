@@ -18,6 +18,7 @@ public class Reitor extends Inimigo {
 
 
 
+    @Override
     public Acao<String,Object> turnoNoCombate(FXCombateController UI){
         return super.inimigoAtacar(UI);
     }

@@ -140,7 +140,7 @@ public class FXMapaController {
     }
 
     @FXML
-    protected void irButtonClick(ActionEvent event) throws IOException, InterruptedException {
+    protected void irButtonClick(ActionEvent event) throws IOException{
         if(botaoPressionado==null) return;
 
         if(jogador==null) jogador = new Player();
@@ -153,6 +153,10 @@ public class FXMapaController {
             combateGame= new CombatManager(jogador, new <Biologo>Biologo());
         }else if(botaoPressionado.equals(matematicoButton)){
             combateGame= new CombatManager(jogador, new <Matematico>Matematico());
+        }else if(botaoPressionado.equals(quimicoButton)){
+            combateGame= new CombatManager(jogador, new <Quimico>Quimico());
+        }else if(botaoPressionado.equals(fisicoButton)){
+            combateGame= new CombatManager(jogador, new <Fisico>Fisico());
         }
 
         if(!botaoPressionado.equals(computeiroButton)) {

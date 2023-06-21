@@ -6,8 +6,6 @@ import com.ibilcerpg.ibilcerpg.SuperClasses.*;
 import com.ibilcerpg.ibilcerpg.Design.*;
 
 import java.io.Serializable;
-import java.util.Objects;
-import java.util.Scanner;
 
 /**
  * Classe do jogador, nela sao armazenados todos os atributos do jogador (que sao salvos no save) e os metodos do combate
@@ -17,7 +15,6 @@ public class Player extends Personagem implements Serializable {
     private int experiencia; // mede o progresso ate subir de nivel
     private int nivel; //muda a forca e defesa base do jogador
     private Inventario inventario;
-    private Scanner input = new Scanner(System.in);
     private MissaoManager missoes = new MissaoManager();
     private Acao<String,Object> turno = new Acao<String,Object>();
     private Acao<String,Object> turnodefault = new Acao<String,Object>("DEFAULT","DEFAULT");
@@ -27,7 +24,7 @@ public class Player extends Personagem implements Serializable {
     private boolean itemDisponivel;
 
     private boolean[] cursosDerrotados = new boolean[7];
-
+    
     public Player(){
         super("Jogador",true,0,0,1,1, 1,1,1f);
         this.setNivel(1);
@@ -70,14 +67,13 @@ public class Player extends Personagem implements Serializable {
      * @return retorna a acao "HABILIDADE" e seu efeito pela funcao usarHabilidade
      */
     public Acao<String,Object> jogadorHabilidade(FXCombateController UI){
-        if(Objects.equals(getInventario().getHabilidadeEquipada().getEfeito().getT(), "PASSIVA")) {
+        if(getInventario().getHabilidadeEquipada().getEfeito().getT() == "PASSIVA") {
             UI.imprimirTexto("A habilidade equipada é passiva, não é necessário ativá-la.");
-            return turnoNoCombate();
+
         }
         if(getInventario().getHabilidadeEquipada().checarTempoDeRecarga(UI)){
             turno.setV(usarHabilidade());
         }else{
-            return turnoNoCombate();
         }
         turno.setT("HABILIDADE");
         UI.imprimirTexto(turno.getT() + ": " + getInventario().getHabilidadeEquipada().getNome());
@@ -94,7 +90,7 @@ public class Player extends Personagem implements Serializable {
     public Acao<String,Object> jogadorItem(FXCombateController UI){
         if(isItemDisponivel()) {
             turno.setT("ITEM");
-            UI.imprimirTexto((turno.getT()));
+            UI.imprimirTexto(turno.getT());
             if (getContadorTurnos() < 6) {
                 turno.setV("RU");
                 UI.imprimirTexto(turno.getV() + ": cura 20% da vida máxima");
@@ -115,8 +111,27 @@ public class Player extends Personagem implements Serializable {
      * funcao para testar o combate no terminal
      * @return retorna a acao descrita pelo jogador no terminal
      */
-
-
+//    @Override
+//    public Acao<String,Object> turnoNoCombate(){
+//        System.out.println("Turno do Jogador, selecione 1 para atacar, 2 para defender, 3 para usar habilidade e 4 para usar item.");
+//        String op = input.nextLine();
+//
+//        switch(op){
+//            case "1":
+//                return jogadorAtacar();
+//
+//            case "2":
+//                return jogadorDefender();
+//
+//            case "3":
+//                return jogadorHabilidade();
+//
+//            case "4":
+//                return jogadorItem();
+//
+//        }
+//
+//    }
 
     /**
      * Chamada sempre que o jogador pode causar um efeito a si mesmo por meio de uma acao (habilidade ou item) e faz esse efeito
@@ -133,9 +148,9 @@ public class Player extends Personagem implements Serializable {
                 }
                 break;
             case "ITEM":
-                if(Objects.equals((String) turno.getV(), "RU")){
-                    receberCura((float)getVidaMaxima()/5, UI);
-                }else if(Objects.equals((String) turno.getV(), "XEPA")){
+                if((String)turno.getV() == "RU"){
+                    receberCura((float)getVidaMaxima()/5,UI);
+                }else if((String)turno.getV() == "XEPA"){
                     receberCura((float)(getVidaMaxima()-getVidaAtual())/2,UI);
                 }
                 setItemDisponivel(false);
@@ -144,13 +159,13 @@ public class Player extends Personagem implements Serializable {
 
     }
 
-    public void iniciarCombate(FXCombateController UI){
-        setVidaAtual(getVidaMaxima());
-        setMultiplicadorAtaque(1);
-        setMultiplicadorDefesa(1);
-        setVivo(true);
-        ativarEfeitosPassivos(UI);
-    }
+//    public void iniciarCombate(){
+//        setVidaAtual(getVidaMaxima());
+//        setMultiplicadorAtaque(1);
+//        setMultiplicadorDefesa(1);
+//        setVivo(true);
+//        ativarEfeitosPassivos();
+//    }
 
     /**
      * Metodo chamado quando a habilidade e usada em combate pelo jogador, mandada para o adversario e o jogador regairem aos efeitos
@@ -159,18 +174,13 @@ public class Player extends Personagem implements Serializable {
     private Acao<String,Object> usarHabilidade(){
         Acao<String,Object> efeito =  inventario.getHabilidadeEquipada().getEfeito();
         inventario.getHabilidadeEquipada().ativarRecarga();
-
-        if(Objects.equals(efeito.getT(), "DANO")) return efeito;
-        if(Objects.equals(efeito.getT(), "VAMPIRISMO")) return efeito;
-
         if(efeito.getT() == "DANO"){
             efeito.setV((float)getAtaqueBase()*getMultiplicadorAtaque()*2);
             return efeito;
         }
         if(efeito.getT() == "VAMPIRISMO") return efeito;
-
         //SE O EFEITO FOR PROPRIO, ESSA FUNCAO TEM Q RETORNAR NULO!!!
-
+    
         return null;
     }
 
@@ -189,9 +199,7 @@ public class Player extends Personagem implements Serializable {
         switch(getEfeitoNegativoPassivo()){
             case "DANO_ACIDO":
                 UI.imprimirTexto("O ácido corrosivo penetra em sua pele!");
-                reacaoJogador(new Acao<String,Object>("DANO_REAL",(getVidaMaxima()-getVidaAtual())/5));
-                //receberDano(((float)getVidaMaxima()-getVidaAtual())/5);
-                System.out.println("--------------------------------------------------------------------------------------");
+                reacaoJogador(new Acao<String,Object>("DANO_REAL",(getVidaMaxima()-getVidaAtual())/5),UI);
                 break;
             default:
                 return;
@@ -202,25 +210,21 @@ public class Player extends Personagem implements Serializable {
      * Metodo que ativa a habilidade passiva, é chamada todo turno e so faz alguma coisa se o jogador tiver equipado uma habilidade passiva
      */
     private void ativarHabilidadePassiva(FXCombateController UI){
-        if(Objects.equals(getInventario().getHabilidadeEquipada().getEfeito().getT(), "PASSIVA")){
+        if(getInventario().getHabilidadeEquipada().getEfeito().getT() == "PASSIVA"){
             String efeito = (String)getInventario().getHabilidadeEquipada().getEfeito().getV();
 
             switch(efeito){
                 case "CURA":
-
-                    System.out.println("Habilidade Passiva: Cura");
+                    UI.imprimirTexto("Habilidade Passiva: Cura!");
                     receberCura(getVidaMaxima()/20,UI);
-                    System.out.println("--------------------------------------------------------------------------------------");
                     break;
                 case "AUMENTAR_DANO":
-                    System.out.println("Habilidade Passiva: Aumentar Dano!");
+                    UI.imprimirTexto("Habilidade Passiva: Aumentar Dano!");
                     setMultiplicadorAtaque(1.5f);
-                    System.out.println("--------------------------------------------------------------------------------------");
                     break;
                 case "AUMENTAR_DEFESA":
-                    System.out.println("Habilidade Passiva: Aumentar Defesa!");
+                    UI.imprimirTexto("Habilidade Passiva: Aumentar Defesa!");
                     setMultiplicadorDefesa(1.5f);
-                    System.out.println("--------------------------------------------------------------------------------------");
                     break;
             }
         }
@@ -230,26 +234,26 @@ public class Player extends Personagem implements Serializable {
      * Método que aumenta a variavel experiencia do jogador e chama a funcao subirDeNivel, é chamada toda vez que o jogador vence um combate
      * @param experienca experiencia recebida apos terminar um combate
      */
-    public void receberExperiencia(int experienca){
-        System.out.println("Jogador recebeu "+ experienca + " pontos de experiência!!!");
+    public void receberExperiencia(int experienca, FXCombateController UI){
+        UI.imprimirTexto("Jogador recebeu "+ experienca + " pontos de experiência!!!");
         experienca += getExperiencia();
         setExperiencia(experienca);
-        subirDeNivel();
+        subirDeNivel(UI);
     }
 
     /**
      * Metodo que checa se o jogador tem experiencia suficiente para subir de nivel, se sim, aumenta seus atributos base.
      */
-    private void subirDeNivel(){
+    private void subirDeNivel(FXCombateController UI){
         if(experiencia >= nivel*10){
             this.setNivel(aumentarNivel());
-            System.out.println("Jogador subiu para o nivel " + getNivel() + "!!!");
-            System.out.println("Vida Maxima aumentada para: "+ SubirDeNivelVida());
-            System.out.println("Ataque aumentado para: " + SubirDeNivelAtaque());
-            System.out.println("Defesa aumentada para: "+ SubirDeNivelDefesa());
-            if(experiencia >= nivel*10) subirDeNivel();
+            UI.imprimirTexto("Jogador subiu para o nivel " + getNivel() + "!!!");
+            UI.imprimirTexto("Vida Maxima aumentada para: "+ SubirDeNivelVida());
+            UI.imprimirTexto("Ataque aumentado para: " + SubirDeNivelAtaque());
+            UI.imprimirTexto("Defesa aumentada para: "+ SubirDeNivelDefesa());
+            if(experiencia >= nivel*10) subirDeNivel(UI);
         }else{
-            System.out.println("Faltam " + (10 - getExperiencia()%10) + " pontos de experiência para subir de nível!");
+            UI.imprimirTexto("Faltam " + (10 - getExperiencia()%10) + " pontos de experiência para subir de nível!");
         }
     }
 
@@ -298,22 +302,22 @@ public class Player extends Personagem implements Serializable {
      * Metodo chamado todo turno do inimigo, ele recebe a acao do inimigo e reage a ela de maneira apropriada
      * @param acao acao do inimigo para o adversario
      */
-    public void reacaoJogador(Acao<String,Object> acao){
+    public void reacaoJogador(Acao<String,Object> acao, FXCombateController UI){
         switch(acao.getT()){
             case "ATAQUE":
-                receberDano((Float)acao.getV());
+                receberDano((Float)acao.getV(),UI);
                 break;
             case "DEFESA":
                 setDebuffDano((Float)acao.getV());
                 break;
             case "DANO_REAL":
                 setVidaAtual(getVidaAtual() - (int)acao.getV());
-                System.out.println("Dano ao jogador: " + acao.getV());
+                //System.out.println("Dano ao jogador: " + acao.getV());
                 break;
             case "ACIDO_CORROSIVO":
                 setEfeitoNegativoPassivo((String)acao.getV());
         }
-
+        
     }
 
     /**
@@ -321,8 +325,8 @@ public class Player extends Personagem implements Serializable {
      * @return
      */
     @Override
-    public int receberDano(float dano){
-        System.out.println("Dano ao jogador: " + super.receberDano(dano));
+    public int receberDano(float dano, FXCombateController UI){
+        UI.imprimirTexto("Dano ao jogador: " + super.receberDano(dano,UI));
         return Math.round(dano);
     }
 
@@ -359,15 +363,15 @@ public class Player extends Personagem implements Serializable {
      * @return retorna true se o jogador ja derrotou todos os outros cursos, false se nao
      */
     public boolean checarProgresso(){
-        for (boolean derrotado :cursosDerrotados) {
-            if(!derrotado) return false;
-        }
-        return true;
+       for (boolean derrotado :cursosDerrotados) {
+           if(!derrotado) return false;
+       }
+       return true;
     }
 
 
 
-    //getters e setters
+   //getters e setters
     public Inventario getInventario() {
         return inventario;
     }
