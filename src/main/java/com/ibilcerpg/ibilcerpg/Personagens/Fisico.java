@@ -24,7 +24,7 @@ public class Fisico extends Inimigo {
         super();
         setTag("FISICO");
         setNome("Físico");
-        setDefesaBase(2);
+        setDefesaBase(5);
     }
 
     @Override

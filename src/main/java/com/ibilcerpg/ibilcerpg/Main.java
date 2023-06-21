@@ -44,17 +44,22 @@ public class Main extends Application {
 
         Main main = new Main();
         Player jogador = new Player();
-        Alejandro coordenador = new Alejandro();
-        jogador.receberMissao(coordenador.primeiraMissao);
-        jogador.receberMissao(coordenador.segundaMissao);
-        jogador.receberMissao(coordenador.terceiraMissao);
+//        Alejandro coordenador = new Alejandro();
+//        jogador.receberMissao(coordenador.primeiraMissao);
+//        jogador.receberMissao(coordenador.segundaMissao);
+//        jogador.receberMissao(coordenador.terceiraMissao);
 
-        int op = -1;
-        while (op != 0){
-            System.out.println("1 - Inventario, 2 - Biologo , 3 - Tradutor, 4 - Matematico, 5 - Físico, 6 - Químico , 9 - checar progresso");
-            op = input.nextInt();
-            main.opcoes(op,jogador);
-        }
+//        jogador.receberMissao(Cozinheiro.darMissao(this));
+//        jogador.receberMissao(Alejandro.darMissao(this));
+//        jogador.receberMissao(Bibliotecaria.darMissao(this));
+
+
+//        int op = -1;
+//        while (op != 0){
+//            System.out.println("1 - Inventario, 2 - Biologo , 3 - Tradutor, 4 - Matematico, 5 - Físico, 6 - Químico , 9 - checar progresso");
+//            op = input.nextInt();
+//            main.opcoes(op,jogador);
+//        }
 
     }
 
