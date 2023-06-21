@@ -133,4 +133,109 @@
          </Lighting>
       </effect>
    </Button>
+   <Button fx:id="quimicoButton" blendMode="HARD_LIGHT" layoutX="483.0" layoutY="62.0" mnemonicParsing="false" onAction="#selectedButton" prefHeight="45.0" prefWidth="120.0" style="-fx-background-radius: 50; -fx-border-color: orange; -fx-border-radius: 50;" text="Quimico">
+      <font>
+         <Font name="8-bit HUD Regular" size="8.0" />
+      </font>
+      <effect>
+         <Lighting diffuseConstant="1.31" specularConstant="0.87" specularExponent="3.12" surfaceScale="1.41">
+            <bumpInput>
+               <Shadow />
+            </bumpInput>
+            <light>
+               <Light.Distant />
+            </light>
+         </Lighting>
+      </effect>
+   </Button>
+   <Button fx:id="fisicoButton" blendMode="HARD_LIGHT" layoutX="287.0" layoutY="197.0" mnemonicParsing="false" onAction="#selectedButton" prefHeight="45.0" prefWidth="120.0" style="-fx-background-radius: 50; -fx-border-color: brown; -fx-border-radius: 50;" text="FISICO">
+      <font>
+         <Font name="8-bit HUD Regular" size="8.0" />
+      </font>
+      <effect>
+         <Lighting diffuseConstant="1.31" specularConstant="0.87" specularExponent="3.12" surfaceScale="1.41">
+            <bumpInput>
+               <Shadow />
+            </bumpInput>
+            <light>
+               <Light.Distant />
+            </light>
+         </Lighting>
+      </effect>
+   </Button>
+   <Button fx:id="bibliotecariaButton" blendMode="HARD_LIGHT" layoutX="216.0" layoutY="321.0" mnemonicParsing="false" onAction="#bibliotecariaButtonClick" prefHeight="38.0" prefWidth="108.0" style="-fx-background-radius: 50; -fx-border-color: blue; -fx-border-radius: 50; -fx-background-color: GRAY;" text="Biblioteca" textFill="RED">
+      <font>
+         <Font name="8-bit HUD Regular" size="8.0" />
+      </font>
+      <effect>
+         <Lighting diffuseConstant="1.31" specularConstant="0.87" specularExponent="3.12" surfaceScale="1.41">
+            <bumpInput>
+               <Shadow />
+            </bumpInput>
+            <light>
+               <Light.Distant />
+            </light>
+         </Lighting>
+      </effect>
+   </Button>
+   <Button fx:id="cozinheiroButton" blendMode="HARD_LIGHT" layoutX="429.0" layoutY="243.0" mnemonicParsing="false" onAction="#cozinheiroButtonClick" prefHeight="38.0" prefWidth="108.0" style="-fx-background-radius: 50; -fx-border-color: blue; -fx-border-radius: 50; -fx-background-color: GRAY;" text="RU" textFill="RED">
+      <font>
+         <Font name="8-bit HUD Regular" size="8.0" />
+      </font>
+      <effect>
+         <Lighting diffuseConstant="1.31" specularConstant="0.87" specularExponent="3.12" surfaceScale="1.41">
+            <bumpInput>
+               <Shadow />
+            </bumpInput>
+            <light>
+               <Light.Distant />
+            </light>
+         </Lighting>
+      </effect>
+   </Button>
+   <Button fx:id="bateriaButton" blendMode="HARD_LIGHT" layoutX="134.0" layoutY="10.0" mnemonicParsing="false" onAction="#bateriaButtonClick" prefHeight="38.0" prefWidth="108.0" style="-fx-background-radius: 50; -fx-border-color: blue; -fx-border-radius: 50; -fx-background-color: GRAY;" text="BATERIA" textFill="RED">
+      <font>
+         <Font name="8-bit HUD Regular" size="8.0" />
+      </font>
+      <effect>
+         <Lighting diffuseConstant="1.31" specularConstant="0.87" specularExponent="3.12" surfaceScale="1.41">
+            <bumpInput>
+               <Shadow />
+            </bumpInput>
+            <light>
+               <Light.Distant />
+            </light>
+         </Lighting>
+      </effect>
+   </Button>
+   <Button fx:id="atleticaButton" blendMode="HARD_LIGHT" layoutX="293.0" layoutY="88.0" mnemonicParsing="false" onAction="#atleticaButtonClick" prefHeight="38.0" prefWidth="108.0" style="-fx-background-radius: 50; -fx-border-color: blue; -fx-border-radius: 50; -fx-background-color: GRAY;" text="ATLETICA" textFill="RED">
+      <font>
+         <Font name="8-bit HUD Regular" size="8.0" />
+      </font>
+      <effect>
+         <Lighting diffuseConstant="1.31" specularConstant="0.87" specularExponent="3.12" surfaceScale="1.41">
+            <bumpInput>
+               <Shadow />
+            </bumpInput>
+            <light>
+               <Light.Distant />
+            </light>
+         </Lighting>
+      </effect>
+   </Button>
+   <Button fx:id="DAFButton" blendMode="HARD_LIGHT" layoutX="287.0" layoutY="149.0" mnemonicParsing="false" onAction="#DAFButtonClick" prefHeight="38.0" prefWidth="108.0" style="-fx-background-radius: 50; -fx-border-color: blue; -fx-border-radius: 50; -fx-background-color: GRAY;" text="DAF" textFill="RED">
+      <font>
+         <Font name="8-bit HUD Regular" size="8.0" />
+      </font>
+      <effect>
+         <Lighting diffuseConstant="1.31" specularConstant="0.87" specularExponent="3.12" surfaceScale="1.41">
+            <bumpInput>
+               <Shadow />
+            </bumpInput>
+            <light>
+               <Light.Distant />
+            </light>
+         </Lighting>
+      </effect>
+   </Button>
 </AnchorPane>

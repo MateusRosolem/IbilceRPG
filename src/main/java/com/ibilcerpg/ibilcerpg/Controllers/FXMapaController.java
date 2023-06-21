@@ -10,13 +10,13 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+
 
 
 public class FXMapaController {
@@ -38,6 +38,7 @@ public class FXMapaController {
     public Button salvarButton;
     @FXML
     public Button sairButton;
+
     @FXML
     public Button traduteiroButton;
     @FXML
@@ -46,6 +47,10 @@ public class FXMapaController {
     public Button biologoButton;
     @FXML
     public Button computeiroButton;
+    @FXML
+    public Button quimicoButton;
+    @FXML
+    public Button fisicoButton;
     public Button bibliotecariaButton;
     public Button cozinhieroButton;
     public Button atleticaButton;
@@ -73,7 +78,7 @@ public class FXMapaController {
         status.setText("Nome:" + jogador.getNome() + "\nExperiencia:" + jogador.getExperiencia()
                 + "\nNivel:" + jogador.getNivel() + "\nAtaque Base:" + jogador.getAtaqueBase() + "\nDefesa Base:" +
                 jogador.getDefesaBase() + "\nVida Atual:" + jogador.getVidaAtual() + "\nVida Maxima:" + jogador.getVidaMaxima()
-                + "\nVelocidade:" + jogador.getVelocidade());
+                );
     }
 
     public void selectedButton(ActionEvent event){
@@ -89,8 +94,11 @@ public class FXMapaController {
             imprimirTexto("-Seus esforços são tão frágeis quanto as células que você estuda. Serei o vírus que " +
                     "infectará cada pensamento seu, destruindo a sua ciência com uma evolução imparável.");
         else if(botaoPressionado.equals(computeiroButton))
-            imprimirTexto("-Vocês podem lutar com todas as suas armas físicas, mas eu domino o mundo digital. Cada " +
-                    "linha de código que escrevo é um obstáculo intransponível para vocês, presos em um labirinto virtual de vulnerabilidades.");
+            imprimirTexto("FALAAAAAAA");
+        else if(botaoPressionado.equals(quimicoButton))
+            imprimirTexto("Minhas fórmulas letais são como veneno invisível, corroendo corações e almas, trazendo a escuridão que vocês tanto temem");
+        else if(botaoPressionado.equals(fisicoButton))
+            imprimirTexto("Meus punhos são feitos de aço e minha determinação é implacável. Cada golpe que desferir será como um trovão, reduzindo meus adversários a meras sombras da sua antiga grandiosidade.");
     }
 
     public void imprimirTexto(String texto){
@@ -132,7 +140,7 @@ public class FXMapaController {
     }
 
     @FXML
-    protected void irButtonClick(ActionEvent event) throws IOException, InterruptedException {
+    protected void irButtonClick(ActionEvent event) throws IOException{
         if(botaoPressionado==null) return;
 
         if(jogador==null) jogador = new Player();
@@ -140,26 +148,30 @@ public class FXMapaController {
         if( botaoPressionado.equals(traduteiroButton) ){
             combateGame= new CombatManager(jogador, new <Traduteiro>Traduteiro());
         }else if(botaoPressionado.equals(computeiroButton)){
-            combateGame= new CombatManager(jogador, new <Alejandro>Alejandro());
+            //conversa
         }else if(botaoPressionado.equals(biologoButton)){
             combateGame= new CombatManager(jogador, new <Biologo>Biologo());
         }else if(botaoPressionado.equals(matematicoButton)){
             combateGame= new CombatManager(jogador, new <Matematico>Matematico());
+        }else if(botaoPressionado.equals(quimicoButton)){
+            combateGame= new CombatManager(jogador, new <Quimico>Quimico());
+        }else if(botaoPressionado.equals(fisicoButton)){
+            combateGame= new CombatManager(jogador, new <Fisico>Fisico());
         }
 
+        if(!botaoPressionado.equals(computeiroButton)) {
+            FXMLLoader combate = new FXMLLoader(Main.class.getResource("Combate.fxml"));
+            Scene combateScene = new Scene(combate.load());
+            Musica.pararMusicaMenu();
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            window.setScene(combateScene);
+            window.setTitle("Combate");
+            window.show();
 
-        FXMLLoader combate = new FXMLLoader(Main.class.getResource("Combate.fxml"));
-        Scene combateScene = new Scene(combate.load());
-        Musica.pararMusicaMenu();
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(combateScene);
-        window.setTitle("Combate");
-        window.show();
-
-        FXCombateController cont = combate.getController();
-        cont.setData(jogador,combateGame);
-        Musica.tocarMusicaCombate();
-
+            FXCombateController cont = combate.getController();
+            cont.setData(jogador, combateGame);
+            Musica.tocarMusicaCombate();
+        }
 
 
 

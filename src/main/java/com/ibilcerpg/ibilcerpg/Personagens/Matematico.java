@@ -1,5 +1,6 @@
 package com.ibilcerpg.ibilcerpg.Personagens;
 
+import com.ibilcerpg.ibilcerpg.Controllers.FXCombateController;
 import com.ibilcerpg.ibilcerpg.SuperClasses.*;
 import com.ibilcerpg.ibilcerpg.Objetos.*;
 import com.ibilcerpg.ibilcerpg.Design.*;
@@ -24,16 +25,16 @@ public class Matematico extends Inimigo {
     }
 
     @Override
-    public Acao<String,Object> turnoNoCombate(){
-        return inimigoAtacar();
+    public Acao<String,Object> turnoNoCombate(FXCombateController UI){
+        return inimigoAtacar(UI);
     }
 
     @Override
-    public Acao<String,Object> inimigoAtacar(){
+    public Acao<String,Object> inimigoAtacar(FXCombateController UI){
         int dano = proximoDano();
         setAux(danoAnterior);
         setDanoAnterior(dano);
-        System.out.println("ATAQUE");
+        UI.imprimirTexto("ATAQUE");
         return new Acao<String,Object>("DANO_REAL",dano);
     }
 

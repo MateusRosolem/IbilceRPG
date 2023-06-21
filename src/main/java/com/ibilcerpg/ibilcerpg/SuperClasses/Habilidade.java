@@ -1,5 +1,6 @@
 package com.ibilcerpg.ibilcerpg.SuperClasses;
 
+import com.ibilcerpg.ibilcerpg.Controllers.FXCombateController;
 import com.ibilcerpg.ibilcerpg.Personagens.*;
 import com.ibilcerpg.ibilcerpg.Objetos.*;
 import com.ibilcerpg.ibilcerpg.Design.*;
@@ -14,6 +15,17 @@ public class Habilidade extends Item implements Serializable {
     private Acao<String,Object> efeito;
     private int tempoDeRecarga;
     private int contadorRecarga;
+
+    /**
+     * Construtores
+     */
+    public Habilidade(){}
+
+    public Habilidade(Acao<String, Object> efeito, int tempoDeRecarga, int contadorRecarga) {
+        this.efeito = efeito;
+        this.tempoDeRecarga = tempoDeRecarga;
+        this.contadorRecarga = contadorRecarga;
+    }
 
     /**
      * Ativa o tempo de recarga da habilidade, chamada toda vez que uma habilidade com tempo de recarga é usada.
@@ -40,11 +52,11 @@ public class Habilidade extends Item implements Serializable {
      * Checa o tempo de recarga quando o jogador tenta usar a habilidade
      * @return retorna true se ela esta pronta e pode ser usada, se nao imprime uma mensagem de quantos turnos faltam para recarregar e retorna falso
      */
-    public boolean checarTempoDeRecarga(){
+    public boolean checarTempoDeRecarga(FXCombateController UI){
         if(getContadorRecarga() <= 0){
             return true;
         }
-        System.out.println("Ainda faltam " + getContadorRecarga() + " turnos para usar esta habilidade"); 
+        UI.imprimirTexto("Ainda faltam " + getContadorRecarga() + " turnos para usar esta habilidade");
         return false;
     }
 

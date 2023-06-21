@@ -1,5 +1,6 @@
 package com.ibilcerpg.ibilcerpg.Personagens;
 
+import com.ibilcerpg.ibilcerpg.Controllers.FXCombateController;
 import com.ibilcerpg.ibilcerpg.SuperClasses.*;
 import com.ibilcerpg.ibilcerpg.Objetos.*;
 import com.ibilcerpg.ibilcerpg.Design.*;
@@ -19,13 +20,13 @@ public class Traduteiro extends Inimigo {
     }
 
     @Override
-    public Acao<String,Object> turnoNoCombate(){
+    public Acao<String,Object> turnoNoCombate(FXCombateController UI){
         if(getContadorTurnos()%2 == 0){
             incrementarContadorTurnos();
-            return super.inimigoAtacar();
+            return super.inimigoAtacar(UI);
         }else{
             incrementarContadorTurnos();
-            return super.inimigoDefender();
+            return super.inimigoDefender(UI);
         }
         
     }

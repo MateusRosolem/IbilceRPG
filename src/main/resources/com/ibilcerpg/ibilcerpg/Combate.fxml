@@ -82,7 +82,7 @@
          <Insets bottom="10.0" right="10.0" />
       </padding>
     </ButtonBar>
-    <ProgressBar fx:id="vidaProgressBar" blendMode="HARD_LIGHT" layoutX="303.0" layoutY="40.0" prefHeight="18.0" prefWidth="322.0" progress="1.0" />
+    <ProgressBar fx:id="inimigoVidaProgressBar" blendMode="HARD_LIGHT" layoutX="303.0" layoutY="40.0" prefHeight="18.0" prefWidth="322.0" progress="1.0" />
     <TextArea fx:id="caixaDeTexto" focusTraversable="false" layoutX="14.0" layoutY="307.0" mouseTransparent="true" prefHeight="144.0" prefWidth="590.0" style="-fx-control-inner-background:#000000; -fx-font-family: Consolas; -fx-highlight-fill: #ffffff; -fx-highlight-text-fill: #ffffff; -fx-text-fill: #ffffff; ">
       <font>
          <Font size="15.0" />
@@ -96,5 +96,5 @@
          <Font size="14.0" />
       </font>
    </Text>
-   <ProgressBar fx:id="playerVidaProgresBar" blendMode="HARD_LIGHT" layoutX="716.0" layoutY="327.0" prefWidth="200.0" progress="1.0" />
+   <ProgressBar fx:id="playerVidaProgressBar" blendMode="HARD_LIGHT" layoutX="716.0" layoutY="327.0" prefWidth="200.0" progress="1.0" />
 </AnchorPane>
