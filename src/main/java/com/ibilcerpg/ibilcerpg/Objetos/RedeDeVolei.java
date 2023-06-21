@@ -4,16 +4,17 @@ import com.ibilcerpg.ibilcerpg.SuperClasses.Acao;
 import com.ibilcerpg.ibilcerpg.SuperClasses.Habilidade;
 
 /**
- * Habilidade que cura uma pequena quantidade de vida do jogador todo turno
+ * Habilidade que causa dano maior que o ataque
  */
-public class ErvasMedicinais extends Habilidade{
+public class RedeDeVolei extends Habilidade{
 
-    public ErvasMedicinais(){
-        setNome("Ervas Medicinais");
+    public RedeDeVolei(){
+        setNome("Rede de vôlei");
         setContadorRecarga(0);
         setTempoDeRecarga(0);
         setEfeito(new Acao<String,Object>());
-        getEfeito().setT("PASSIVA");
-        getEfeito().setV("CURA");
+        getEfeito().setT("REDUCAO_DE_ATAQUE");
+        getEfeito().setV(0.5f);
     }
+    
 }

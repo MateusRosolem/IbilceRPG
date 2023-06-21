@@ -14,6 +14,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
+
 import java.io.IOException;
 
 
@@ -50,7 +51,12 @@ public class FXMapaController {
     public Button quimicoButton;
     @FXML
     public Button fisicoButton;
-
+    public Button bibliotecariaButton;
+    public Button cozinhieroButton;
+    public Button atleticaButton;
+    public Button bateriaButton;
+    public Button dAFButton;
+    public Button entorpecidaButton;
     Object botaoPressionado;
 
 
@@ -179,5 +185,24 @@ public class FXMapaController {
         FXController cont = menu.getController();
         cont.setData(jogador);
         if(!Musica.estaTocando()) Musica.tocarMusicaMenu();
+    }
+
+    public void bibliotecariaButtonClick(ActionEvent event){
+        jogador.receberMissao(Bibliotecaria.darMissao(this));
+    }
+    public void cozinheiroButtonClick(ActionEvent event){
+        jogador.receberMissao(Cozinheiro.darMissao(this));
+    }
+    public void atleticaButtonClick(ActionEvent event){
+        jogador.receberMissao(Atletica.darMissao(this));
+    }
+    public void bateriaButtonClick(ActionEvent event){
+        jogador.receberMissao(Bateria.darMissao(this));
+    }
+    public void DAFButtonClick(ActionEvent event){
+        jogador.receberMissao(DAF.darMissao(this));
+    }
+    public void entorpecidaButtonClick(ActionEvent event){
+        jogador.receberMissao(Entorpecida.darMissao(this));
     }
 }

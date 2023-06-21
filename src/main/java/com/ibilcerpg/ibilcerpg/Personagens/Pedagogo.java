@@ -10,11 +10,26 @@ public class Pedagogo extends Inimigo {
         super();
         setNome("Pedagogo");
         setTag("PEDAGOGO");
+        setVidaMaxima(70);
+        setVidaAtual(getVidaMaxima());
+        setAtaqueBase(5);
+        setDefesaBase(15);
     }
+
+
 
 
 
     public Acao<String,Object> turnoNoCombate(FXCombateController UI){
-        return super.inimigoAtacar(UI);
+        if(getContadorTurnos()%3 == 0){
+            incrementarContadorTurnos();
+            return super.inimigoAtacar(UI);
+        }else{
+            incrementarContadorTurnos();
+            return super.inimigoDefender(UI);
+        }
+
+
     }
+
 }

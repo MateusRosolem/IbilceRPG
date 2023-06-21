@@ -8,8 +8,12 @@ public class Letreiro extends Inimigo {
 
     public Letreiro(){
         super();
-        setNome("Biologo");
-        setTag("BIOLOGO");
+        setNome("Letreiro");
+        setTag("LETREIRO");
+        setVidaMaxima(50);
+        setAtaqueBase(7);
+        setDefesaBase(5);
+        setVidaAtual(50);
     }
 
 

@@ -159,8 +159,16 @@ public class Player extends Personagem implements Serializable {
     private Acao<String,Object> usarHabilidade(){
         Acao<String,Object> efeito =  inventario.getHabilidadeEquipada().getEfeito();
         inventario.getHabilidadeEquipada().ativarRecarga();
+
         if(Objects.equals(efeito.getT(), "DANO")) return efeito;
         if(Objects.equals(efeito.getT(), "VAMPIRISMO")) return efeito;
+
+        if(efeito.getT() == "DANO"){
+            efeito.setV((float)getAtaqueBase()*getMultiplicadorAtaque()*2);
+            return efeito;
+        }
+        if(efeito.getT() == "VAMPIRISMO") return efeito;
+
         //SE O EFEITO FOR PROPRIO, ESSA FUNCAO TEM Q RETORNAR NULO!!!
 
         return null;
@@ -199,8 +207,19 @@ public class Player extends Personagem implements Serializable {
 
             switch(efeito){
                 case "CURA":
+
                     System.out.println("Habilidade Passiva: Cura");
                     receberCura(getVidaMaxima()/20,UI);
+                    System.out.println("--------------------------------------------------------------------------------------");
+                    break;
+                case "AUMENTAR_DANO":
+                    System.out.println("Habilidade Passiva: Aumentar Dano!");
+                    setMultiplicadorAtaque(1.5f);
+                    System.out.println("--------------------------------------------------------------------------------------");
+                    break;
+                case "AUMENTAR_DEFESA":
+                    System.out.println("Habilidade Passiva: Aumentar Defesa!");
+                    setMultiplicadorDefesa(1.5f);
                     System.out.println("--------------------------------------------------------------------------------------");
                     break;
             }

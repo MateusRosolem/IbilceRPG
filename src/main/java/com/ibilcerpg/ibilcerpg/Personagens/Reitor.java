@@ -8,8 +8,12 @@ public class Reitor extends Inimigo {
 
     public Reitor(){
         super();
-        setNome("Biologo");
-        setTag("BIOLOGO");
+        setNome("Reitor");
+        setTag("REITOR");
+        setAtaqueBase(20);
+        setDefesaBase(20);
+        setVidaMaxima(200);
+        setVidaAtual(getVidaMaxima());
     }
 
 

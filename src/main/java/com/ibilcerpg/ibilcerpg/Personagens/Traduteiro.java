@@ -13,6 +13,8 @@ public class Traduteiro extends Inimigo {
         super();
         setNome("Traduteiro");
         setTag("TRADUTOR");
+        setVidaMaxima(35);
+        setVidaAtual(getVidaMaxima());
         setAtaqueBase(8);
         setDefesaBase(3);
     }
