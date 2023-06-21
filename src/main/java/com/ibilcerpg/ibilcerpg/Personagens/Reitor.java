@@ -1,5 +1,6 @@
 package com.ibilcerpg.ibilcerpg.Personagens;
 
+import com.ibilcerpg.ibilcerpg.Controllers.FXCombateController;
 import com.ibilcerpg.ibilcerpg.SuperClasses.Acao;
 
 
@@ -13,8 +14,7 @@ public class Reitor extends Inimigo {
 
 
 
-    @Override
-    public Acao<String,Object> turnoNoCombate(){
-        return super.inimigoAtacar();
+    public Acao<String,Object> turnoNoCombate(FXCombateController UI){
+        return super.inimigoAtacar(UI);
     }
 }

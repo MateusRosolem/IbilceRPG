@@ -4,7 +4,6 @@ import com.ibilcerpg.ibilcerpg.Design.Musica;
 import com.ibilcerpg.ibilcerpg.Main;
 import com.ibilcerpg.ibilcerpg.Personagens.Player;
 import com.ibilcerpg.ibilcerpg.SuperClasses.Habilidade;
-import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -12,7 +11,6 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -28,12 +26,11 @@ import java.util.Objects;
 public class FXInventarioController {
     private Player jogador;
 
+    private Habilidade habSelecionada;
     @FXML
     public Button voltarButton;
     @FXML
     public Button equiparButton;
-    @FXML
-    public Button desequiparButton;
     @FXML
     public TextArea descricaoItem;
     @FXML
@@ -55,28 +52,45 @@ public class FXInventarioController {
                 jogador.getDefesaBase() + "\nVida Atual:" + jogador.getVidaAtual() + "\nVida Maxima:" + jogador.getVidaMaxima());
     }
 
+    public void equiparButtonClick(){
+        if(habSelecionada!=null)
+            setItensEquipados("Item Equipado:\n" + habSelecionada.getNome() + "\n");
+            jogador.getInventario().setHabilidadeEquipada(habSelecionada);
+    }
+
+
 
     public void setData(Player jogador) {
         this.jogador = jogador;
-        statusPlayer = new TextArea();
         setStatusPlayer();
         jogador.getInventario().printInventario();
         setDescricaoItem("Este é seu inventário");
+        setItensEquipados("Item Equipado:\n");
+        if(!jogador.getInventario().getHabilidades().isEmpty())
+            setItensEquipados(itensEquipados.getText() + jogador.getInventario().getHabilidadeEquipada().getNome());
+
+        habSelecionada = new Habilidade();
+
 
 
         ObservableList<Label> ob = FXCollections.observableArrayList();
+
         for(Habilidade hab : jogador.getInventario().getHabilidades()){
             Label lb = new Label(hab.getNome() + hab.getTipo() + hab.getEfeito().getT() + hab.getTempoDeRecarga());
             lb.setFont(Font.font(16));
             lb.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent mouseEvent) {
-                    descricaoItem.setText(String.format("Dente de vampiro   Ataque   +5 de vida   3 rodadas"));
+                    descricaoItem.setText(String.format(hab.getNome()+ " " + hab.getTipo()+ " " + hab.getEfeito().getT()+ " "
+                            + hab.getTempoDeRecarga()));
+                    habSelecionada = hab;
                 }
             });
 
             ob.add(lb);
         }
+
+
 
 //        for(int i=0; i<10; i++) {
 //            Label lb = new Label("Dente de vampiro   Ataque   +5 de vida   3 rodadas"+i);

@@ -133,4 +133,34 @@
          </Lighting>
       </effect>
    </Button>
+   <Button fx:id="quimicoButton" blendMode="HARD_LIGHT" layoutX="483.0" layoutY="62.0" mnemonicParsing="false" onAction="#selectedButton" prefHeight="45.0" prefWidth="120.0" style="-fx-background-radius: 50; -fx-border-color: orange; -fx-border-radius: 50;" text="Quimico">
+      <font>
+         <Font name="8-bit HUD Regular" size="8.0" />
+      </font>
+      <effect>
+         <Lighting diffuseConstant="1.31" specularConstant="0.87" specularExponent="3.12" surfaceScale="1.41">
+            <bumpInput>
+               <Shadow />
+            </bumpInput>
+            <light>
+               <Light.Distant />
+            </light>
+         </Lighting>
+      </effect>
+   </Button>
+   <Button fx:id="fisicoButton1" blendMode="HARD_LIGHT" layoutX="287.0" layoutY="197.0" mnemonicParsing="false" onAction="#selectedButton" prefHeight="45.0" prefWidth="120.0" style="-fx-background-radius: 50; -fx-border-color: brown; -fx-border-radius: 50;" text="FISICO">
+      <font>
+         <Font name="8-bit HUD Regular" size="8.0" />
+      </font>
+      <effect>
+         <Lighting diffuseConstant="1.31" specularConstant="0.87" specularExponent="3.12" surfaceScale="1.41">
+            <bumpInput>
+               <Shadow />
+            </bumpInput>
+            <light>
+               <Light.Distant />
+            </light>
+         </Lighting>
+      </effect>
+   </Button>
 </AnchorPane>

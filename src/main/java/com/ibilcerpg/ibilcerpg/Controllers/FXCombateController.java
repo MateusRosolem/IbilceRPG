@@ -5,9 +5,7 @@ import com.ibilcerpg.ibilcerpg.Design.CombatManager;
 import com.ibilcerpg.ibilcerpg.Design.Musica;
 import com.ibilcerpg.ibilcerpg.Main;
 import com.ibilcerpg.ibilcerpg.Personagens.Player;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -15,7 +13,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextArea;
-import javafx.scene.media.MediaPlayer;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -66,6 +63,10 @@ public class FXCombateController {
                 + "\nNivel:" + jogador.getNivel() + "\nAtaque Base:" + jogador.getAtaqueBase() + "\nDefesa Base:" +
                 jogador.getDefesaBase() + "\nVida Atual:" + jogador.getVidaAtual() + "\nVida Maxima:" + jogador.getVidaMaxima());
     }
+    public void imprimirStatus(String texto){
+        if(playerStatus==null) playerStatus = new TextArea();
+        playerStatus.setText(playerStatus.getText()+texto);
+    }
 
 
     @FXML
@@ -79,8 +80,8 @@ public class FXCombateController {
                 }
             }
 
-            combate.setAcao(jogador.jogadorAtacar());
-            combate.novoTurno(this);
+            combate.setAcao(jogador.jogadorAtacar(this));
+            combate.novoTurno(this,1);
             imprimirStatus();
         if(!combate.verificarVivos()) {
             try {
@@ -102,8 +103,8 @@ public class FXCombateController {
             }
         }
 
-        combate.setAcao(jogador.jogadorDefender());
-        combate.novoTurno(this);
+        combate.setAcao(jogador.jogadorDefender(this));
+        combate.novoTurno(this, 2);
         imprimirStatus();
         if(!combate.verificarVivos()) {
             try {
@@ -126,16 +127,16 @@ public class FXCombateController {
             }
         }
 
-            combate.setAcao(jogador.jogadorHabilidade());
+            combate.setAcao(jogador.jogadorHabilidade(this));
             if (combate.getJogador().getInventario().getHabilidadeEquipada().getEfeito().getT() == "PASSIVA") {
                 imprimirTexto("A habilidade equipada é passiva, não é necessário ativá-la.");
                 return;
             }
-            if (combate.getJogador().getInventario().getHabilidadeEquipada().checarTempoDeRecarga()) {
+            if (combate.getJogador().getInventario().getHabilidadeEquipada().checarTempoDeRecarga(this)) {
                 imprimirTexto("A habilidade equipada ainda está em tempo de recarga!");
                 return;
             }
-            combate.novoTurno(this);
+            combate.novoTurno(this,3);
             imprimirStatus();
             if(!combate.verificarVivos()) {
             try {
@@ -156,8 +157,8 @@ public class FXCombateController {
                 throw new RuntimeException(e);
             }
         }
-            combate.setAcao(jogador.jogadorItem());
-            combate.novoTurno(this);
+            combate.setAcao(jogador.jogadorItem(this));
+            combate.novoTurno(this,4);
             imprimirStatus();
         if(!combate.verificarVivos()) {
             try {
@@ -171,6 +172,8 @@ public class FXCombateController {
     @FXML
     public void inimigoVidaProgressBarUpdate() {
         if (inimigoVidaProgressBar == null) inimigoVidaProgressBar = new ProgressBar();
+            System.out.println(combate.getAdversario().getVidaAtual());
+            System.out.println(combate.getAdversario().getVidaMaxima());
         inimigoVidaProgressBar.setProgress((double) combate.getAdversario().getVidaAtual() / combate.getAdversario().getVidaMaxima());
         vidaInimigo.setText("VIDA: " + combate.getAdversario().getVidaAtual() + "/" + combate.getAdversario().getVidaMaxima());
     }

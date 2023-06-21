@@ -1,5 +1,6 @@
 package com.ibilcerpg.ibilcerpg.Personagens;
 
+import com.ibilcerpg.ibilcerpg.Controllers.FXCombateController;
 import com.ibilcerpg.ibilcerpg.SuperClasses.Acao;
 
 public class Fisico extends Inimigo {
@@ -7,14 +8,14 @@ public class Fisico extends Inimigo {
 
     private boolean Carregando;
 
-    private Acao<String,Object> AcaoEReacao(){
+    private Acao<String,Object> AcaoEReacao(FXCombateController UI){
         if(buffProximoDano != 0 ) System.out.println("Ataque Poderoso!");
         setCarregando(false);
-        return inimigoAtacar(buffProximoDano);
+        return inimigoAtacar(buffProximoDano,UI);
     }
 
-    private Acao<String,Object> CarregarAcaoEReacao(){
-        System.out.println("Fisico não reagiu");
+    private Acao<String,Object> CarregarAcaoEReacao(FXCombateController UI){
+        UI.imprimirTexto("Fisico não reagiu");
         setCarregando(true);
         return new Acao<String,Object>("DEFAULT","DEFAULT");
     }
@@ -27,28 +28,28 @@ public class Fisico extends Inimigo {
         setDefesaBase(2);
     }
 
-    @Override
-    public Acao<String,Object> turnoNoCombate(){
+
+    public Acao<String,Object> turnoNoCombate(FXCombateController UI){
         if(getContadorTurnos()%4 == 0 || getContadorTurnos()%4 == 1){
             incrementarContadorTurnos();
-            return inimigoAtacar();
+            return inimigoAtacar(UI);
         }else if(getContadorTurnos()%4 == 2){
             incrementarContadorTurnos();
-            return CarregarAcaoEReacao();
+            return CarregarAcaoEReacao(UI);
         }else if(getContadorTurnos()%4 == 3){
             incrementarContadorTurnos();
-            return AcaoEReacao();
+            return AcaoEReacao(UI);
         }
         return null;
     }
 
-    public Acao<String,Object> inimigoAtacar(float buff){
+    public Acao<String,Object> inimigoAtacar(float buff, FXCombateController UI){
         Acao<String,Object> turno = new Acao<String,Object>();
         turno.setT("ATAQUE");
         turno.setV(buff);
         setDebuffDano(1);
         setBuffProximoDano(0);
-        System.out.println(turno.getT());
+        UI.imprimirTexto(turno.getT());
         return turno;
     }
 

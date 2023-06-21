@@ -30,10 +30,10 @@ public class CombatManager {
 
     public boolean getTurno(){ return turno;}
 
-    public void imprimirStatus() {
-        System.out.println("Vida do jogador: " + jogador.getVidaAtual());
-        System.out.println("Vida do adversario: " + adversario.getVidaAtual());
-        System.out.println("--------------------------------------------------------------------------------------");
+    public void imprimirStatus(FXCombateController UI) {
+        UI.imprimirStatus();
+        UI.imprimirStatus( "------------------");
+        UI.imprimirStatus( "Vida do adversario: " + adversario.getVidaAtual());
     }
 
     public boolean verificarVivos(){
@@ -41,17 +41,24 @@ public class CombatManager {
         else return false;
     }
 
-    public void novoTurno(FXCombateController UI){
-        imprimirStatus();
+    public void novoTurno(FXCombateController UI,int acaoTipo){
+        imprimirStatus(UI);
 
         //turno jogador
-        jogador.ativarEfeitosPassivos();
-        acao = jogador.turnoNoCombate();
+        jogador.ativarEfeitosPassivos(UI);
+
+        switch (acaoTipo) {
+            case 1:acao = jogador.jogadorAtacar(UI);break;
+            case 2:acao = jogador.jogadorDefender(UI);break;
+            case 3:acao = jogador.jogadorHabilidade(UI);break;
+            case 4:acao = jogador.jogadorItem(UI);break;
+        }
+
         adversario.reacaoInimigo(acao);
-        //UI.vidaProgressBarUpdate(UI.vidaProgressBar);
+        UI.inimigoVidaProgressBarUpdate();
         jogador.getInventario().getHabilidadeEquipada().decrementarRecarga();//diminui o tempo de recarga da habilidada em 1
         jogador.incrementarContadorTurnos();
-        imprimirStatus();
+        imprimirStatus(UI);
 
         try {
             Thread.sleep(500);
@@ -60,10 +67,10 @@ public class CombatManager {
         }
 
         //turno adversario
-        System.out.println("Turno do " + adversario.getNome());
+        UI.imprimirTexto("Turno do " + adversario.getNome());
         acao = adversario.turnoNoCombate();
         jogador.reacaoJogador(acao);
-        //UI.vidaProgressBarUpdate(UI.playerVidaProgresBar);
+        UI.playerVidaProgressBarUpdate();
 
 
 
@@ -73,13 +80,13 @@ public class CombatManager {
 
     private void finalizarCombate(FXCombateController UI){
         if (jogador.estaVivo()) {
-            System.out.println("--------------------------------------------------------------------------------------");
-            System.out.println("JOGADOR VENCEU!!!");
+            UI.imprimirTexto("--------------------------------------------------------------------------------------\n"+
+                            "JOGADOR VENCEU!!!");
             jogador.getInventario().adicionarHabilidade(jogador.getMissoes().completarMissao(jogador.getMissoes().atualizarMissoes(adversario)));
             jogador.receberExperiencia(adversario.getExpRecompensa());
             jogador.checarProgresso(adversario);
         } else {
-            System.out.println("Jogador foi eliminado.");
+            UI.imprimirTexto("Jogador foi eliminado.");
             jogador.setVidaAtual(jogador.getVidaMaxima());
             jogador.setVivo(true);
         }

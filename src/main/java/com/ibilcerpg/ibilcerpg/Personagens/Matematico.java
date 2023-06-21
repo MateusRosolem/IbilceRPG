@@ -28,7 +28,7 @@ public class Matematico extends Inimigo {
         return inimigoAtacar();
     }
 
-    @Override
+
     public Acao<String,Object> inimigoAtacar(){
         int dano = proximoDano();
         setAux(danoAnterior);

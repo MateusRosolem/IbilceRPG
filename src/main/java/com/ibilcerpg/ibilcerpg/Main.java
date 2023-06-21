@@ -37,13 +37,14 @@ public class Main extends Application {
 
 
     public static void main(String[] args){
+        Player jogador = new Player();
         launch();
 
         Save infos = new Save();
 
 
         Main main = new Main();
-        Player jogador = new Player();
+
         Alejandro coordenador = new Alejandro();
         jogador.receberMissao(coordenador.primeiraMissao);
         jogador.receberMissao(coordenador.segundaMissao);
@@ -51,7 +52,8 @@ public class Main extends Application {
 
         int op = -1;
         while (op != 0){
-            System.out.println("1 - Inventario, 2 - Biologo , 3 - Tradutor, 4 - Matematico, 5 - Físico, 6 - Químico , 9 - checar progresso");
+            //System.out.println("1 - Inventario, 2 - Biologo , 3 - Tradutor, 4 - Matematico, 5 - Físico, 6 - Químico
+            // , 9 - checar progresso");
             op = input.nextInt();
             main.opcoes(op,jogador);
         }
@@ -62,7 +64,7 @@ public class Main extends Application {
         switch (op){
             case 1:
                 jogador.getInventario().printInventario();
-                System.out.println("Escolha qual item quer equipar");
+                //System.out.println("Escolha qual item quer equipar");
                 int i = input.nextInt();
                 jogador.getInventario().equiparHabilidade(i);
                 break;
@@ -85,7 +87,7 @@ public class Main extends Application {
                 System.out.println(jogador.checarProgresso());
                 break;
             case 0:
-                System.out.println("Obrigado por jogar.");
+                //System.out.println("Obrigado por jogar.");
                 System.exit(0);
                 break;
         }

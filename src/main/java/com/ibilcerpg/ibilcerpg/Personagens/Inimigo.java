@@ -1,5 +1,6 @@
 package com.ibilcerpg.ibilcerpg.Personagens;
 
+import com.ibilcerpg.ibilcerpg.Controllers.FXCombateController;
 import com.ibilcerpg.ibilcerpg.SuperClasses.*;
 import com.ibilcerpg.ibilcerpg.Objetos.*;
 import com.ibilcerpg.ibilcerpg.Design.*;
@@ -26,9 +27,9 @@ public class Inimigo extends Personagem{
      * @param dano recebe o dano dado pelo inimigo para fazer alterações com base na defesa
      * @return
      */
-    @Override
-    public int receberDano(float dano){
-        System.out.println("Dano ao adversario: " + super.receberDano(dano));
+
+    public int receberDano(float dano, FXCombateController UI){
+        UI.imprimirTexto("Dano ao adversario: " + super.receberDano(dano));
         return 0;
     }
 
@@ -36,12 +37,12 @@ public class Inimigo extends Personagem{
      * Metodo base para realizar o ataque do inimigo no jogador
      * @return retorna a acao "ATAQUE" e o dano do ataque
      */
-    public Acao<String,Object> inimigoAtacar(){
+    public Acao<String,Object> inimigoAtacar(FXCombateController UI){
         Acao<String,Object> turno = new Acao<String,Object>();
         turno.setT("ATAQUE");
         turno.setV((getAtaqueBase()*getMultiplicadorAtaque())*getDebuffDano());
         setDebuffDano(1);
-        System.out.println(turno.getT());
+        UI.imprimirTexto(turno.getT());
         return turno;
     }
 
@@ -49,12 +50,12 @@ public class Inimigo extends Personagem{
      * Metodo base para realizar a defesa do inimigo contra o jogador
      * @return retorna a acao "DEFESA" e o dano do mitigado pela defesa
      */
-    public Acao<String,Object> inimigoDefender(){
+    public Acao<String,Object> inimigoDefender(FXCombateController UI){
         Acao<String,Object> turno = new Acao<String,Object>();
         turno.setT("DEFESA");
         turno.setV(0.5f);
         setDebuffDano(1);
-        System.out.println(turno.getT());
+        UI.imprimirTexto(turno.getT());
         return turno;
     }
 

@@ -25,12 +25,13 @@ public class Inventario implements Serializable {
             i++;
         }
     }
-
     public void equiparHabilidade(int i){
         if(habilidades != null && i > 0 && i <= habilidades.size()) {
             setHabilidadeEquipada(habilidades.get(i - 1));
         }
     }
+
+
     public Habilidade getHabilidadeEquipada() {
         if(habilidadeEquipada == null){
             return habilidadeDefault;

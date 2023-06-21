@@ -1,5 +1,6 @@
 package com.ibilcerpg.ibilcerpg.Personagens;
 
+import com.ibilcerpg.ibilcerpg.Controllers.FXCombateController;
 import com.ibilcerpg.ibilcerpg.SuperClasses.Acao;
 
 
@@ -20,18 +21,17 @@ public class Quimico extends Inimigo {
 
 
 
-    @Override
-    public Acao<String,Object> turnoNoCombate(){
+    public Acao<String,Object> turnoNoCombate(FXCombateController UI){
         if(getContadorTurnos()%3 == 0){
             incrementarContadorTurnos();
-            return super.inimigoAtacar();
+            return super.inimigoAtacar(UI);
         }else if(getContadorTurnos()%3 == 1){
             incrementarContadorTurnos();
-            return super.inimigoDefender();
+            return super.inimigoDefender(UI);
         }else if(getContadorTurnos()%3 == 2){
                 incrementarContadorTurnos();
                 if(isAcidoUsado()){
-                    return super.inimigoAtacar();
+                    return super.inimigoAtacar(UI);
                 }else return acidoCorrosivo();
         }
         return null;
