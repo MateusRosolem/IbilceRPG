@@ -76,6 +76,7 @@ public class FXInventarioController {
         ObservableList<Label> ob = FXCollections.observableArrayList();
 
         for(Habilidade hab : jogador.getInventario().getHabilidades()){
+            System.out.println(hab);
             Label lb = new Label(hab.getNome() + hab.getTipo() + hab.getEfeito().getT() + hab.getTempoDeRecarga());
             lb.setFont(Font.font(16));
             lb.setOnMouseClicked(new EventHandler<MouseEvent>() {

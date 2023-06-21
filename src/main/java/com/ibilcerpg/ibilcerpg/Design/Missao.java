@@ -1,26 +1,29 @@
 package com.ibilcerpg.ibilcerpg.Design;
+import com.ibilcerpg.ibilcerpg.Controllers.FXCombateController;
 import com.ibilcerpg.ibilcerpg.SuperClasses.*;
 import com.ibilcerpg.ibilcerpg.Objetos.*;
 import com.ibilcerpg.ibilcerpg.Personagens.*;
 import com.ibilcerpg.ibilcerpg.SuperClasses.*;
+
+import java.io.Serializable;
 
 /**
  * Classe da missao, que armazena a quantidade, quais inimigos devem ser derrotados, tambem a quem requisitou a missao e
  * a recompensa
  * @param <R> recompensa da missao quando concluida
  */
-public class Missao<R extends Item> {
+public class Missao<R extends Item> implements Serializable {
 
 
     /**
      * Metodo que verifica se a missao foi concluida, se nao mostra quanto falta para completar
      * @return retorna true se foi concluida, false se nao
      */
-    public boolean done(){
+    public boolean done(FXCombateController UI){
         if((Integer)n<=0){
             return true;
         }else{
-            System.out.println("Ainda falta derrotar " + getN() + " " + getInimigo() + " para completar a missão.");
+            UI.imprimirTexto("Ainda falta derrotar " + getN() + " " + getInimigo() + " para completar a missão.");
         } return false;
     }
 

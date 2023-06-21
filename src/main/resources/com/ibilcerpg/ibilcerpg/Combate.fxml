@@ -85,9 +85,9 @@
     <ProgressBar fx:id="inimigoVidaProgressBar" blendMode="HARD_LIGHT" layoutX="303.0" layoutY="40.0" prefHeight="18.0" prefWidth="322.0" progress="1.0" />
     <TextArea fx:id="caixaDeTexto" focusTraversable="false" layoutX="14.0" layoutY="307.0" mouseTransparent="true" prefHeight="144.0" prefWidth="590.0" style="-fx-control-inner-background:#000000; -fx-font-family: Consolas; -fx-highlight-fill: #ffffff; -fx-highlight-text-fill: #ffffff; -fx-text-fill: #ffffff; ">
       <font>
-         <Font size="15.0" />
+         <Font size="10.0" />
       </font></TextArea>
-    <TextArea fx:id="playersStatus" layoutX="716.0" layoutY="14.0" mouseTransparent="true" prefHeight="294.0" prefWidth="200.0" style="-fx-control-inner-background:#000000; -fx-font-family: Consolas; -fx-highlight-fill: #ffffff; -fx-highlight-text-fill: #ffffff; -fx-text-fill: #ffffff; " wrapText="true">
+    <TextArea fx:id="playerStatus" layoutX="716.0" layoutY="14.0" mouseTransparent="true" prefHeight="294.0" prefWidth="200.0" style="-fx-control-inner-background:#000000; -fx-font-family: Consolas; -fx-highlight-fill: #ffffff; -fx-highlight-text-fill: #ffffff; -fx-text-fill: #ffffff; " wrapText="true">
       <font>
          <Font size="15.0" />
       </font></TextArea>

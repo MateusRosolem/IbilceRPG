@@ -6,7 +6,7 @@ import com.ibilcerpg.ibilcerpg.SuperClasses.Habilidade;
 public class HabilidadeDefault extends Habilidade{
 
     public HabilidadeDefault(){
-        setNome("Default");
+        setNome("Espada Fraca");
         setContadorRecarga(0);
         setTempoDeRecarga(0);
         setEfeito(new Acao<String,Object>());

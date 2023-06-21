@@ -37,7 +37,7 @@ public class MissaoManager implements Serializable {
         for (Missao<? extends Habilidade> missao : missoes) {
             if(missao.getInimigo() == inimigoDerrotado.getTag()){
                 missao.setN(missao.getN()-1);
-                if(missao.done()) {
+                if(missao.done(UI)) {
                     UI.imprimirTexto("A missao: " + missao.getNome() + " foi concluída!");
                     return missao;
                 }
@@ -53,7 +53,7 @@ public class MissaoManager implements Serializable {
      */
     public Habilidade completarMissao(Missao<? extends Habilidade> missaoConcluida,FXCombateController UI){
         if(missaoConcluida != null) {
-            if (missaoConcluida.done()) {
+            if (missaoConcluida.done(UI)) {
                 UI.imprimirTexto("Recompensa resgatada com sucesso! Você recebeu a habilidade " + missaoConcluida.getR().getNome());
                 missaoConcluida.setConcluida(true);
                 return missaoConcluida.getR();

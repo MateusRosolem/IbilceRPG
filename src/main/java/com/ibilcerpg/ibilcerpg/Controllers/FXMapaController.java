@@ -93,12 +93,13 @@ public class FXMapaController {
         else if(botaoPressionado.equals(biologoButton))
             imprimirTexto("-Seus esforços são tão frágeis quanto as células que você estuda. Serei o vírus que " +
                     "infectará cada pensamento seu, destruindo a sua ciência com uma evolução imparável.");
-        else if(botaoPressionado.equals(computeiroButton))
-            imprimirTexto("FALAAAAAAA");
         else if(botaoPressionado.equals(quimicoButton))
             imprimirTexto("Minhas fórmulas letais são como veneno invisível, corroendo corações e almas, trazendo a escuridão que vocês tanto temem");
         else if(botaoPressionado.equals(fisicoButton))
             imprimirTexto("Meus punhos são feitos de aço e minha determinação é implacável. Cada golpe que desferir será como um trovão, reduzindo meus adversários a meras sombras da sua antiga grandiosidade.");
+        else if(botaoPressionado.equals(computeiroButton))
+            imprimirTexto("Tenho uma missao pra vc. Clique em IR para saber mais");
+
     }
 
     public void imprimirTexto(String texto){
@@ -148,7 +149,7 @@ public class FXMapaController {
         if( botaoPressionado.equals(traduteiroButton) ){
             combateGame= new CombatManager(jogador, new <Traduteiro>Traduteiro());
         }else if(botaoPressionado.equals(computeiroButton)){
-            //conversa
+            jogador.receberMissao(Alejandro.darMissao(this));
         }else if(botaoPressionado.equals(biologoButton)){
             combateGame= new CombatManager(jogador, new <Biologo>Biologo());
         }else if(botaoPressionado.equals(matematicoButton)){

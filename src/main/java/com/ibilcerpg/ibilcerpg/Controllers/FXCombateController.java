@@ -46,8 +46,6 @@ public class FXCombateController {
     public void setData(Player jogador, CombatManager combate){
         this.jogador=jogador;
         this.combate=combate;
-        playerStatus = new TextArea();
-
         vidaInimigo.setText("VIDA: " + combate.getAdversario().getVidaMaxima()+"/"+combate.getAdversario().getVidaMaxima());
         imprimirStatus();
 
@@ -69,10 +67,7 @@ public class FXCombateController {
                 + "\nNivel:" + jogador.getNivel() + "\nAtaque Base:" + jogador.getAtaqueBase() + "\nDefesa Base:" +
                 jogador.getDefesaBase() + "\nVida Atual:" + jogador.getVidaAtual() + "\nVida Maxima:" + jogador.getVidaMaxima());
     }
-    public void imprimirStatus(String texto){
-        if(playerStatus==null) playerStatus = new TextArea();
-        playerStatus.setText(playerStatus.getText()+texto);
-    }
+
 
 
     @FXML

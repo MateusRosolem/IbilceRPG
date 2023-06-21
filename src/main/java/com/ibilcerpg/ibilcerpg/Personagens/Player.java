@@ -44,7 +44,7 @@ public class Player extends Personagem implements Serializable {
     public Acao<String,Object> jogadorAtacar(FXCombateController UI){
         turno.setT("ATAQUE");
         turno.setV((getAtaqueBase()*getMultiplicadorAtaque())*getDebuffDano());
-        UI.imprimirTexto(turno.getT());
+        //UI.imprimirTexto(turno.getT());
         setDebuffDano(1f);
         return turno;
     }
